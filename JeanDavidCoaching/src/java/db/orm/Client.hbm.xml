@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Client" table="CLIENT" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codecli" type="java.lang.Integer">
+            <column name="CODECLI" />
+            <generator class="identity" />
+        </id>
+        <property name="nomcli" type="string">
+            <column name="NOMCLI" length="32" />
+        </property>
+        <property name="prenomcli" type="string">
+            <column name="PRENOMCLI" length="50" />
+        </property>
+        <property name="mailcli" type="string">
+            <column name="MAILCLI" length="100" />
+        </property>
+        <property name="telcli" type="string">
+            <column name="TELCLI" length="10" />
+        </property>
+        <property name="datenai" type="date">
+            <column name="DATENAI" length="10" />
+        </property>
+        <property name="genrecli" type="java.lang.Boolean">
+            <column name="GENRECLI" />
+        </property>
+        <property name="mdpcli" type="string">
+            <column name="MDPCLI" length="16" />
+        </property>
+        <property name="objectif" type="string">
+            <column name="OBJECTIF" length="200" />
+        </property>
+        <set name="profilsportifs" table="PROFILSPORTIF" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODECLI" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="db.Profilsportif" />
+        </set>
+        <set name="programmes" table="PROGRAMME" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODECLI" not-null="true" />
+            </key>
+            <one-to-many class="db.Programme" />
+        </set>
+    </class>
+</hibernate-mapping>
