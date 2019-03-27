@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Exercicetype" table="EXERCICETYPE" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codeet" type="java.lang.Integer">
+            <column name="CODEET" />
+            <generator class="identity" />
+        </id>
+        <property name="nomet" type="string">
+            <column name="NOMET" length="32" />
+        </property>
+        <property name="descriptione" type="string">
+            <column name="DESCRIPTIONE" length="200" />
+        </property>
+        <property name="lienmedia" type="string">
+            <column name="LIENMEDIA" length="200" />
+        </property>
+        <property name="tipsrep" type="string">
+            <column name="TIPSREP" length="200" />
+        </property>
+        <property name="tipsexo" type="string">
+            <column name="TIPSEXO" length="200" />
+        </property>
+        <property name="materiel" type="string">
+            <column name="MATERIEL" length="200" />
+        </property>
+        <property name="objectif" type="string">
+            <column name="OBJECTIF" length="200" />
+        </property>
+        <set name="exercices" table="EXERCICE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEET" not-null="true" />
+            </key>
+            <one-to-many class="db.Exercice" />
+        </set>
+        <set name="predefinirexos" table="PREDEFINIREXO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEET" not-null="true" />
+            </key>
+            <one-to-many class="db.Predefinirexo" />
+        </set>
+    </class>
+</hibernate-mapping>
