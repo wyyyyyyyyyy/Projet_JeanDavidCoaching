@@ -48,9 +48,50 @@
                     <td><input id="mediaExo" type="text" size="50" maxlength="50" /></td>
                 </tr>
             </table>
-            <input id="bt_add" type="button" value="Ajouter" disabled="disabled"/>
+            <input id="btn" type="button" value="Ajouter" />
         </div>
-        <a href="">Retourner à la page d'accueil</a>
-        <script type="text/JavaScript" src="js/fctxml.js"></script>
+        <a href="../index.html">Retourner à la page d'accueil</a>
+        <script type="text/JavaScript">
+            /* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function creerExer ()
+{
+    var nom = encodeURIComponent(document.getElementById("nomExo").value);
+    var objectif = encodeURIComponent(document.getElementById("objectifExo").value);
+    var description = encodeURIComponent(document.getElementById("descriptionExo").value);
+    var tipRep = encodeURIComponent(document.getElementById("tipRepExo").value);
+    var tip = encodeURIComponent(document.getElementById("tipExo").value);
+    var materiel = encodeURIComponent(document.getElementById("materielExo").value);
+    var media = encodeURIComponent(document.getElementById("mediaExo").value);      
+    
+    var xhr = new XMLHttpRequest();
+    
+    var url = "ServletCreExo?nom="+nom+"&objectif="+objectif+"&description="+description
+            +"&tipRep="+tipRep+"&tip="+tip+"&materiel="+materiel+"&media="+media;
+    xhr.open("GET",url,true);
+    alert(url);
+
+    alert(nom+objectif+description+tipRep+tip+materiel+media);
+    //alert("hello");
+    
+    xhr.onload = function()
+        {
+            if (xhr.status ===200)
+            {
+                alert("ok");
+            }
+        };
+    xhr.send();
+}    
+    document.addEventListener("DOMContentLoaded", () => {
+	document.getElementById("btn").addEventListener("click",creerExer);
+    });
+
+
+        </script>
     </body>
 </html>
