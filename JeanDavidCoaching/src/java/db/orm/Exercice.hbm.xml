@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Exercice" table="EXERCICE" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codee" type="java.lang.Integer">
+            <column name="CODEE" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="exercicetype" class="db.Exercicetype" fetch="select">
+            <column name="CODEET" not-null="true" />
+        </many-to-one>
+        <many-to-one name="seance" class="db.Seance" fetch="select">
+            <column name="CODES" not-null="true" />
+        </many-to-one>
+        <property name="ordre" type="java.lang.Integer">
+            <column name="ORDRE" />
+        </property>
+        <property name="nbrep" type="java.lang.Integer">
+            <column name="NBREP" />
+        </property>
+        <property name="nbserie" type="java.lang.Integer">
+            <column name="NBSERIE" />
+        </property>
+        <property name="tempsexo" type="java.lang.Integer">
+            <column name="TEMPSEXO" />
+        </property>
+        <property name="tempsreposserie" type="java.lang.Integer">
+            <column name="TEMPSREPOSSERIE" />
+        </property>
+        <property name="tempsreposexo" type="java.lang.Integer">
+            <column name="TEMPSREPOSEXO" />
+        </property>
+        <set name="resultatexos" table="RESULTATEXO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEE" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="db.Resultatexo" />
+        </set>
+    </class>
+</hibernate-mapping>

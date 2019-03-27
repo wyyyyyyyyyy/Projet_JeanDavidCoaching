@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Predefinirseance" table="PREDEFINIRSEANCE" catalog="db_21405117_2" optimistic-lock="version">
+        <composite-id name="id" class="db.PredefinirseanceId">
+            <key-property name="codept" type="int">
+                <column name="CODEPT" />
+            </key-property>
+            <key-property name="codest" type="int">
+                <column name="CODEST" />
+            </key-property>
+            <key-property name="ordreexo" type="int">
+                <column name="ORDREEXO" />
+            </key-property>
+            <key-property name="numsemaine" type="int">
+                <column name="NUMSEMAINE" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="programmetype" class="db.Programmetype" update="false" insert="false" fetch="select">
+            <column name="CODEPT" not-null="true" />
+        </many-to-one>
+        <many-to-one name="seancetype" class="db.Seancetype" update="false" insert="false" fetch="select">
+            <column name="CODEST" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
