@@ -20,7 +20,7 @@ public class TestHibernate {
 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	Transaction t = session.beginTransaction();
         
-        Exercicetype exot1= new Exercicetype("hugo","","","","","","try for test");
+        Exercicetype exot1= new Exercicetype("exoalae","","","","","","try for test");
         session.save(exot1);
         t.commit();
         }
