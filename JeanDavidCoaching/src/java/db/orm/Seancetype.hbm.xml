@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Seancetype" table="SEANCETYPE" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codest" type="java.lang.Integer">
+            <column name="CODEST" />
+            <generator class="identity" />
+        </id>
+        <property name="noms" type="string">
+            <column name="NOMS" length="32" />
+        </property>
+        <property name="descriptions" type="string">
+            <column name="DESCRIPTIONS" length="200" />
+        </property>
+        <set name="seances" table="SEANCE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEST" not-null="true" />
+            </key>
+            <one-to-many class="db.Seance" />
+        </set>
+        <set name="predefinirseances" table="PREDEFINIRSEANCE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEST" not-null="true" />
+            </key>
+            <one-to-many class="db.Predefinirseance" />
+        </set>
+        <set name="predefinirexos" table="PREDEFINIREXO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEST" not-null="true" />
+            </key>
+            <one-to-many class="db.Predefinirexo" />
+        </set>
+    </class>
+</hibernate-mapping>
