@@ -4,9 +4,33 @@
         <servlet-name>ServletRecherche</servlet-name>
         <servlet-class>servlet.ServletRecherche</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>creerSeance</servlet-name>
+        <jsp-file>/jsp/creerSeance.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletEnrgSeanceType</servlet-name>
+        <servlet-class>servlet.ServletEnrgSeanceType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAjouterExoType</servlet-name>
+        <servlet-class>servlet.ServletAjouterExoType</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
         <url-pattern>/ServletRecherche</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerSeance</servlet-name>
+        <url-pattern>/creerSeance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEnrgSeanceType</servlet-name>
+        <url-pattern>/ServletEnrgSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAjouterExoType</servlet-name>
+        <url-pattern>/ServletAjouterExoType</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -37,27 +37,29 @@ public class ServletRecherche extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             /*---Ecriture de la page XML---*/
             out.println("<?xml version=\"1.0\"?>");
             out.println("<liste_exo>");
-            
             /*---Récupérer des paramères---*/
             String nomExo = request.getParameter("nomExo");
             
                 try {
                     List<Exercicetype> l_Exo = Bd.lireExerciceType(nomExo);
-                    for(Exercicetype Exo : l_Exo){
-                        out.println("<nomExo>" + Exo.getNomet() + "</nomExo>");
+                    for(Exercicetype exo : l_Exo){
+                        out.println("<Exercice>");
+                        out.println("<codeExo>" + exo.getCodeet() + "</codeExo>"); 
+                        out.println("<nomExo>"+ exo.getNomet() + "</nomExo>");
+                        out.println("</Exercice>");
                     }
                 }
                 catch(ClassNotFoundException | SQLException ex){
-                     out.println("<nomExo>Erreur - " + ex.getMessage() + "</nomExo>");  
+                     out.println("<Exercice>Erreur - " + ex.getMessage() + "</Exercice>");  
                 }
-                out.println("</liste_exo>");
+            out.println("</liste_exo>");
         }
     }
 

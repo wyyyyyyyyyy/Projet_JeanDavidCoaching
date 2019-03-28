@@ -106,14 +106,44 @@ public class Bd {
         List<Exercicetype> l = (List<Exercicetype>)session.createQuery(
                                     "from Exercicetype "
                                     + "where NomET like '%"+nom+"%'").list();
+        session.close();
         return l;
         
     }
     
-    public static void main(String[] args) throws SQLException, ClassNotFoundException{
-        List<Exercicetype> l = lireExerciceType("b");
-        for(Exercicetype e  : l){
-            System.out.println(e.getNomet());
-        }
+    public static void creerSeanceType(String nomSeance, String desc){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        Seancetype s = new Seancetype(nomSeance,desc);
+        session.save(s);
+        t.commit();
+        session.close();
+    }
+    
+
+    
+    public static void ajouterExoType(String nomSeance, int codeET, int ordre, 
+            int nbrep, int nbserie, int tempsexo, 
+            int tempsreposserie, int tempsreposexo){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Seancetype> listS = session.createQuery("from Seancetype "
+                                        + "where NomS ='" + nomSeance + "'").list();
+        Seancetype seance = listS.get(0);
+        Exercicetype  exo = (Exercicetype)session.get(Exercicetype.class, 1);
+//        Exercicetype  exo= (Exercicetype)session.createQuery("from Exercicetype "
+//                                        + "where codeET ='" + codeET + "'");
+        
+        PredefinirexoId preId =  new PredefinirexoId(codeET, seance.getCodest(), ordre);
+        Predefinirexo pre = new Predefinirexo(preId, exo, seance, nbrep, nbserie, 
+                tempsexo, tempsreposserie,tempsreposexo);
+        session.save(pre);
+        exo.getPredefinirexos().add(pre);
+        seance.getPredefinirexos().add(pre);
+        t.commit();        
+    }
+    
+        public static void main(String[] args) throws SQLException, ClassNotFoundException{
+        ajouterExoType("test2",1,1,10,3,0,30,60);
     }
 }
