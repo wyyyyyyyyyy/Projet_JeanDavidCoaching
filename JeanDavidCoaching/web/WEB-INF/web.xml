@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ListCtrlPrg</servlet-name>
+        <servlet-class>ctrl.ServletListCltPrg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeLineProg</servlet-name>
+        <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletvoirPrgClient</servlet-name>
+        <servlet-class>ctrl.ServletvoirPrgClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletGetEx</servlet-name>
+        <servlet-class>ctrl.ServletGetEx</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListCtrlPrg</servlet-name>
+        <url-pattern>/ListCtrlPrg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeLineProg</servlet-name>
+        <url-pattern>/TimeLineProg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletvoirPrgClient</servlet-name>
+        <url-pattern>/ServletvoirPrgClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletGetEx</servlet-name>
+        <url-pattern>/ServletGetEx</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
