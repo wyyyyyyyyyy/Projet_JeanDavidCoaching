@@ -5,6 +5,7 @@
  */
 package db;
 
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,4 +25,12 @@ public class Bd {
         t.commit();
     }
 
+    public static List listeExType () {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        String hql = "select et.nomet from Exercicetype et";
+        List l_exType = session.createQuery(hql).list();
+        return l_exType;
+    }
 }
