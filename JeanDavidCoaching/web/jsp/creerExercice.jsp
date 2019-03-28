@@ -48,7 +48,7 @@
                     <button id="btn" class="btn btn-success" type="button">Ajouter </button>
                 </div>
             </div>
-            <a href="../index.html">Retourner à la page d'accueil</a>
+            <a href="index.html">Retourner à la page d'accueil</a>
         </div>
         <script type="text/JavaScript" src="js/creerExo.js"></script>
     </body>
