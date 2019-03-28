@@ -33,4 +33,13 @@ public class Bd {
         List l_exType = session.createQuery(hql).list();
         return l_exType;
     }
+    
+    public static List<Exercicetype> ETInfo(String s) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        String hql = "from Exercicetype et where et.nomet='"+s+"'";
+        List<Exercicetype> l_exType = (List<Exercicetype>)session.createQuery(hql).list();
+        return l_exType;
+    }
 }

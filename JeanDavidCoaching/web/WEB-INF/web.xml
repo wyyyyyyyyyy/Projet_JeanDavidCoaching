@@ -8,6 +8,10 @@
         <servlet-name>creerExercice</servlet-name>
         <jsp-file>/jsp/creerExercice.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>ServletExoTypeInfo</servlet-name>
+        <servlet-class>ctrl.ServletExoTypeInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletCreExo</servlet-name>
         <url-pattern>/ServletCreExo</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>creerExercice</servlet-name>
         <url-pattern>/creerExercice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletExoTypeInfo</servlet-name>
+        <url-pattern>/ServletExoTypeInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

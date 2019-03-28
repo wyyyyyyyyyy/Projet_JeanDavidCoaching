@@ -30,7 +30,7 @@ function creerExer ()
                 if (xhr.status ===200)
                 {
                      alert("ok");
-                     var texte="<p>"+nom+"</p>";
+                     var texte="<p class=\"choisir\">"+nom+"</p>";
 
                      //récupère le composant HTML à mettre à jour
                      var elt=document.getElementById("exoCre");
@@ -46,10 +46,38 @@ function creerExer ()
                      document.getElementById("tipExo").value="";
                      document.getElementById("materielExo").value="";
                      document.getElementById("mediaExo").value="";
+                     
+                     var choix = document.querySelectorAll(".choisir");
+                        for (var i=0; i<choix.length; i++)
+                        {
+                            choix[i].addEventListener("click",afficherInfo);
+                        }
                 }
             };
         xhr.send();
     }    
+    
+function afficherInfo ()
+    {
+        var nom = this.firstChild.nodeValue;
+        //alert(nom);
+        var xhr = new XMLHttpRequest();
+        var url = "ServletExoTypeInfo?nom="+nom;
+        xhr.open("GET",url,true);
+        xhr.onload = function()
+            {
+                if (xhr.status ===200)
+                {
+                    var l_ET = xhr.responseXML.getElementsByTagName("ET");
+                    for(var i=0; i<l_ET.length; i++) 
+                        {         
+                            alert(l_ET[i].firstChild.nodeValue);
+                        }
+                        
+                }
+            };
+        xhr.send();
+    }
     
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn").addEventListener("click",creerExer);
