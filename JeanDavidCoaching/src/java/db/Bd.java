@@ -22,7 +22,6 @@ public class Bd {
         Exercicetype exo= new Exercicetype(nom,description,media,tipRep,tip,materiel,objectif);
         session.save(exo);
         t.commit();
-            
-        System.exit(0);
     }
+
 }

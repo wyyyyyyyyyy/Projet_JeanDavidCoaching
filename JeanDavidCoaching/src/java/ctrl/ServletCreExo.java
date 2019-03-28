@@ -8,6 +8,7 @@ package ctrl;
 import db.Bd;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -59,11 +60,17 @@ public class ServletCreExo extends HttpServlet {
             String tip = request.getParameter("tip");
             String materiel = request.getParameter("materiel");
             String media = request.getParameter("media");
-            
-            Bd.creerExType(nom, description, media, tipRep, tip, materiel, objectif);
-            out.println(nom);
+            //out.println(nom+description+media+tipRep+tip+materiel+objectif);
+            try 
+            {
+                Bd.creerExType(nom, description, media, tipRep, tip, materiel, objectif);
+            }
+            catch (ClassNotFoundException | SQLException ex)
+            {
+            out.println("Erreur - " + ex.getMessage());
+            } 
         } catch (Exception ex) {
-            Logger.getLogger(ServletCreExo.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("c'est pas bon");
         }
     }
 
