@@ -24,7 +24,7 @@
         <input id="saisieExo" type="text" placeholder="Saisissez le nom d'exercice"/>
         <div id="listExo"></div>
         
-        <script type="text/JavaScript" src="../js/fctxml.js"></script>
+        <script type="text/JavaScript" src="js/fctxml.js"></script>
         <a href ="ServletRecherche?nomExo=b">Test</a>
     </body>
 </html>

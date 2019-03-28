@@ -4,9 +4,49 @@
         <servlet-name>ServletRecherche</servlet-name>
         <servlet-class>servlet.ServletRecherche</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>creerSeance</servlet-name>
+        <jsp-file>/jsp/creerSeance.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletClient</servlet-name>
+        <servlet-class>servlet.ServletClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <jsp-file>/jsp/affecterProgrammeClient.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <servlet-class>servlet.ServletObjectifs</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectif</servlet-name>
+        <servlet-class>servlet.ServletObjectif</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
         <url-pattern>/ServletRecherche</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerSeance</servlet-name>
+        <url-pattern>/creerSeance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <url-pattern>/affecterProgrammeClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <url-pattern>/ServletObjectifs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectif</servlet-name>
+        <url-pattern>/ServletObjectif</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

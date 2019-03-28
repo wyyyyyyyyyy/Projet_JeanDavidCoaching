@@ -106,14 +106,31 @@ public class Bd {
         List<Exercicetype> l = (List<Exercicetype>)session.createQuery(
                                     "from Exercicetype "
                                     + "where NomET like '%"+nom+"%'").list();
-        return l;
-        
+        return l;     
+    }
+    
+    public static List<Client> lireClient () throws SQLException, ClassNotFoundException
+    {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Client> lclient = (List<Client>)session.createQuery("from Client ").list();
+        return lclient;
+    }
+    
+    public static ArrayList<String> lireObjectifs (String nomClient) throws ClassNotFoundException, SQLException
+    {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        ArrayList<String> lobjectif = (ArrayList<String>)session.createQuery( "select c.objectif "
+                                                                            + "from Client as c "
+                                                                            + "where c.nomcli='" +nomClient+ "'").list();
+        return lobjectif;
     }
     
     public static void main(String[] args) throws SQLException, ClassNotFoundException{
-        List<Exercicetype> l = lireExerciceType("b");
-        for(Exercicetype e  : l){
-            System.out.println(e.getNomet());
+        ArrayList<String> l = lireObjectifs("AAA");
+        for(int i=0; i<l.size(); i++){
+           System.out.println(l.get(i));
         }
     }
 }
