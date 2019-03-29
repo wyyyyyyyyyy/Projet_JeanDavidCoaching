@@ -104,51 +104,6 @@ public class Bd {
         }
     }
     
-    public static HashMap<Integer, String> chercherExercice(String nomExercice) throws ClassNotFoundException, SQLException 
-    {
-        //Création de la connexion à la base de données
-        if (Bd.cx == null)
-            Bd.connexion();
-        
-        //Espace de requête
-        PreparedStatement st;
-        
-        //Requête SQL
-        String sql = "SELECT CODEET,NOMET FROM EXERCICETYPE WHERE NOMET LIKE ?";
-        
-        //Ouverture de l'espace de requête
-        try {
-            st = Bd.cx.prepareStatement(sql);
-        }
-        catch (SQLException ex)
-        {
-            throw new SQLException("lireMot() : Problème d'ouverture de l'espace de requête - " + ex.getMessage());
-        }
-        
-        //Interrogation de la base
-        List<Exercice> listeexo = new ArrayList<Exercice>();
-        
-        try {
-            //Exécution de la requête
-            st.setString(1, "%"+nomExercice+"%");
-            ResultSet rs = st.executeQuery();
-            
-            //Lecture du contenu de ResulSet
-            while (rs.next())
-            {
-                int num = rs.getInt("CODEET");
-                String nom = rs.getString("NOMET");
-                listeexo.add(new Exercice());
-            }
-            
-            //Lecture 
-        }
-        catch(SQLException ex){
-            
-        }
-        return null;
-    }
-    
     public static List<Exercicetype> lireExerciceType(String nom) throws SQLException, ClassNotFoundException{
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
