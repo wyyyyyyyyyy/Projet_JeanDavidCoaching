@@ -13,7 +13,6 @@
     </head>
     <body>
         <h1>Création d'une séance</h1>
-        <!--<form action="/ServletEnrgSeanceType">-->
             Nom:
             <input id="nomSeance" type="text">
             Description :
@@ -22,35 +21,42 @@
             
             
             <div class="exoBox">
-                <input id="saisieExo" type="text" placeholder="Saisissez le nom d'exercice"/>
-                <span class="listExo"></span>
+                <input type="text" placeholder="Saisissez le nom d'exercice"/>
+                <div class="listExo"></div>
                 </br>
 
-                Nombre de répétition d'exercice :                
-                <input id="nbrep" type="number" min="1">
-                </br>
-
-                Temps de chaque exercice :
-                <input id="tempsexo" type="number" min="1">
+                Type d'exercice :
+                <select>
+                    <option>nombre de répétition</option>
+                    <option>temps d'exercice</option>
+                </select>
+                <input type="number" min="1">
                 </br>
 
                 Temps de repos entre série :
-                <input id="tempsreposserie" type="number" step="5" min="0">
+                <input type="number" step="5" min="0">
                 </br>
 
                 Nombre de série :
-                <input id="nbserie" type="number" min="0">
+                <input type="number" min="0">
                 </br>
 
                 Temps de repos entre exercice :
-                <input id="tempsreposexo" type="number" step="5" min="0">
+                <input type="number" step="5" min="0">
                 </br>
             </div>
             <input type="submit" value="Ajouter" id="ajouter">
             <!--<input type="submit" value="Valider" id="valider">-->
-        </form>
         
+        <!-- Scripts -->
         <script type="text/JavaScript" src="js/jsCreerSeance.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/typewriter.js"></script>
+	<script src="js/jquery.onepagenav.js"></script>
+	<script src="js/main.js"></script>
         <a href ="ServletAjouterExoType?nomSeance=test2&codeET=2&ordre=2&nbrep=1&nbserie=1&tempsexo=1&tempsreposserie=1&tempsreposexo=1">Test</a>
     </body>
 </html>

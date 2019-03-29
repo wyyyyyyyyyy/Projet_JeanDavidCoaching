@@ -27,7 +27,10 @@ function creerSeance(){
 
 function rechercheExo(){
     var xhr = new XMLHttpRequest();
-    var nomExo = document.getElementById("saisieExo").value;
+    var exoBox = document.getElementsByClassName("exoBox");
+    var l_champs = exoBox[exoBox.length-1].children;
+    var saisie = l_champs[0];
+    var nomExo = saisie.value;
     if(nomExo!=="" ){
         console.log(nomExo);
         xhr.open("GET","ServletRecherche?nomExo=" + nomExo);
@@ -56,35 +59,51 @@ function rechercheExo(){
 }
 
 function choisirExo(){
-    var champs = document.getElementById("saisieExo");
+    var exoBox = document.getElementsByClassName("exoBox");
+    var l_champs = exoBox[exoBox.length-1].children;
+    var saisie = l_champs[0];
     var list = document.getElementsByClassName("listExo");
     var exo = this.firstChild.nodeValue;
     var id = this.getAttribute("id");
-    champs.value=exo; 
-    list[0].innerHTML = "";
-    list[0].setAttribute("id",id);
+    saisie.value=exo; 
+    list[list.length-1].innerHTML = "";
+    list[list.length-1].setAttribute("id",id);
 }
 
 function ajouterExo(){
     var xhr = new XMLHttpRequest();
     var span = document.getElementsByClassName("listExo");
-    var codeET = span[0].getAttribute("id");
+    var codeET = span[span.length - 1].getAttribute("id");
     var nomSeance = document.getElementById("nomSeance").value;
-    var ordre = document.getElementsByClassName("exoBox").length - 1;
-    var tempsexo = document.getElementById("tempsexo").value;
-    var nbserie = document.getElementById("nbserie").value;
-    var tempsreposexo = document.getElementById("tempsreposexo").value;
-    var tempsreposserie = document.getElementById("tempsreposserie").value;
-    var nbrep = document.getElementById("nbrep").value;
+    var exobox = document.getElementsByClassName("exoBox");
+    var ordre = exobox.length;
+    var detail = exobox[ordre-1].children;
+    alert(detail.length);
+    var nbrep = 0;
+    var tempsexo = 0;
+    if(detail[3].value === "temps d'exercice"){
+        tempsexo = detail[4].value;
+    }
+    else{
+        nbrep = detail[4].value;
+    };
+    var nbserie = detail[8].value;
+    var tempsreposexo = detail[10].value;
+    var tempsreposserie = detail[6].value;
     
+    var txt = "<div class=\"exoBox\">"+ exobox[ordre-1].innerHTML 
+            + "</div>";
     xhr.open("GET","ServletAjouterExoType?nomSeance="+ nomSeance + "&codeET=" + codeET
             + "&ordre=" + ordre + "&nbrep=" + nbrep + "&nbserie=" + nbserie
             + "&tempsexo=" + tempsexo + "&tempsreposserie=" + tempsreposserie
             + "&tempsreposexo=" + tempsreposexo);
     xhr.onload = function(){
         if(xhr.status === 200){
-            
+            alert(txt);
+            document.getElementById("ajouter").insertAdjacentHTML('beforebegin',txt);
         }
+        document.getElementsByClassName("exoBox")[document.getElementsByClassName("exoBox")
+                .length-1].children[0].addEventListener("keyup",rechercheExo);
     }
     xhr.send();
 }
@@ -94,7 +113,8 @@ function supprimerExo(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("saisieExo").addEventListener("keyup",rechercheExo);
+    document.getElementsByClassName("exoBox")[document.getElementsByClassName("exoBox")
+                .length-1].children[0].addEventListener("keyup",rechercheExo);
     document.getElementById("ajouter").addEventListener("click",ajouterExo);
     document.getElementById("creerSeance").addEventListener("click",creerSeance);
 });
