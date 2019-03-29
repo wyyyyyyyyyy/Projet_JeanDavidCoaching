@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 27 mars 2019, 10:51:46
-    Author     : Marck
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,11 +18,11 @@
                 <h1>Création d'exercice</h1>
             </div>
             <div class="row">
-                <div class="col-md-4 order-md-2 mb-4">
+                <div class="col-md-5 order-md-2 mb-4">
                         <h2>Exercices créés : </h2>
                         <div id="exoCre"></div>
                 </div>
-                <div class ="col-md-8 order-md-1">
+                <div class ="col-md-7 order-md-1">
                     <h2>Créer un exercice : </h2>
                     <div class="form-group">
                         <label for="nomExo">Nom :</label>

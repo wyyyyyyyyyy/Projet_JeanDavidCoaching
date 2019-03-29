@@ -6,11 +6,11 @@
     </servlet>
     <servlet>
         <servlet-name>ServletEnrgSeanceType</servlet-name>
-        <servlet-class>servlet.ServletEnrgSeanceType</servlet-class>
+        <servlet-class>ctrl.ServletEnrgSeanceType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletAjouterExoType</servlet-name>
-        <servlet-class>servlet.ServletAjouterExoType</servlet-class>
+        <servlet-class>ctrl.ServletAjouterExoType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletCreExo</servlet-name>
@@ -89,13 +89,9 @@
         <url-pattern>/creerExercice</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    <servlet-name>ServletRecherche</servlet-name>
-    <servlet-class>servlet.ServletRecherche</servlet-class>
 </web-app>
