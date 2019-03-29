@@ -24,7 +24,26 @@
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                         <h2>Exercices créés : </h2>
-                        <div id="exoCre"></div>
+                        <!--<div id="exoCre"></div>-->
+                        <select onchange="selectEvent()" id="lexo"><option>-----</option></select>
+                        <div>
+                            <label for="nomExo2">Nom :</label>
+                                <input id="nomExo2" type="text" class="form-control"/>
+                            <label for="objectifExo2">Objectif :</label>
+                                <input id="objectifExo2" type="text" class="form-control" />
+                            <label for="descriptionExo2">Description :</label>
+                                <textarea id="descriptionExo2" class="form-control"></textarea>
+                            <label for="tipRepExo2">Tips Répétition :</label>
+                                <input id="tipRepExo2" type="text" class="form-control" />
+                            <label for="tipExo2">Tips Exercice :</label>
+                                <input id="tipExo2" type="text" class="form-control" />
+                            <label for="materielExo2">Matériel :</label>
+                                <input id="materielExo2" type="text" class="form-control" />
+                            <label for="mediaExo2">Média descriptif :</label>
+                                <input id="mediaExo2" type="text" class="form-control" />  
+                        </div>
+                        <button id="btnM" class="btn btn-success" type="button">Modifier</button>
+                        <button id="btnS" class="btn btn-success" type="button">Supprimer</button>
                 </div>
                 <div class ="col-md-8 order-md-1">
                     <h2>Créer un exercice : </h2>
@@ -42,10 +61,9 @@
                         <label for="materielExo">Matériel :</label>
                             <input id="materielExo" type="text" class="form-control" />
                         <label for="mediaExo">Média descriptif :</label>
-                            <input id="mediaExo" type="text" class="form-control" />
-                            
+                            <input id="mediaExo" type="text" class="form-control" />                           
                     </div>
-                    <button id="btn" class="btn btn-success" type="button">Ajouter </button>
+                    <button id="btn" class="btn btn-success" type="button">Ajouter</button>
                 </div>
             </div>
             <a href="index.html">Retourner à la page d'accueil</a>

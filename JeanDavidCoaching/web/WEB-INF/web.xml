@@ -28,6 +28,10 @@
         <servlet-name>creerExercice</servlet-name>
         <jsp-file>/jsp/creerExercice.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>ServletListeExo</servlet-name>
+        <servlet-class>ctrl.ServletListeExo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
         <url-pattern>/ServletRecherche</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>creerExercice</servlet-name>
         <url-pattern>/creerExercice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletListeExo</servlet-name>
+        <url-pattern>/ServletListeExo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

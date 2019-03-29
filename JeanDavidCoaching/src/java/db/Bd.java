@@ -61,8 +61,10 @@ public class Bd {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	Transaction t = session.beginTransaction();
         
-        String hql = "select et.nomet from Exercicetype et";
-        List l_exType = session.createQuery(hql).list();
+        String hql = "from Exercicetype et";
+        List<Exercicetype> l_exType = (List<Exercicetype>)session.createQuery(hql).list();
+        t.commit();
+        session.close();
         return l_exType;
     }
     
@@ -71,12 +73,25 @@ public class Bd {
      * @param s
      * @return 
      */
-    public static List<Exercicetype> ETInfo(String s) {
+    public static List<Exercicetype> ETInfoByNom(String nom) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 	Transaction t = session.beginTransaction();
         
-        String hql = "from Exercicetype et where et.nomet='"+s+"'";
+        String hql = "from Exercicetype et where et.nomet='"+nom+"'";
         List<Exercicetype> l_exType = (List<Exercicetype>)session.createQuery(hql).list();
+        t.commit();
+        session.close();
+        return l_exType;
+    }
+    
+    public static List<Exercicetype> ETInfoByID(String id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        String hql = "from Exercicetype et where et.codeet='"+id+"'";
+        List<Exercicetype> l_exType = (List<Exercicetype>)session.createQuery(hql).list();
+        t.commit();
+        session.close();
         return l_exType;
     }
     
