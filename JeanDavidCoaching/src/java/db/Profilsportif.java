@@ -93,8 +93,11 @@ public class Profilsportif  implements java.io.Serializable {
     public void setPoitrine(Integer poitrine) {
         this.poitrine = poitrine;
     }
-    public Boolean getHandicap() {
-        return this.handicap;
+    public String getHandicap() {
+        if(this.handicap == true){
+            return "Oui";
+        }
+        return "Non";
     }
     
     public void setHandicap(Boolean handicap) {

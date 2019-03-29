@@ -20,6 +20,11 @@ public class Seancetype  implements java.io.Serializable {
 
     public Seancetype() {
     }
+    
+    public Seancetype(String noms, String descriptions) {
+       this.noms = noms;
+       this.descriptions = descriptions;
+    }
 
     public Seancetype(String noms, String descriptions, Set seances, Set predefinirseances, Set predefinirexos) {
        this.noms = noms;

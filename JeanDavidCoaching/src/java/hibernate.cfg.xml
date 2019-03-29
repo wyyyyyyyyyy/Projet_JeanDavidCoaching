@@ -43,7 +43,7 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://etu-web2.ut-capitole.fr:3306/db_21405117_2?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_21405117_2</property>
     <property name="hibernate.connection.username">21405117</property>
     <property name="hibernate.connection.password">P00M37</property>
     <!-- Parseur HQL -->
@@ -52,7 +52,6 @@ Contributor(s):
     <!-- Gestion des sessions par Hibernate lui-même. -->
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    
     <mapping resource="db/orm/Resultatexo.hbm.xml"/>
     <mapping resource="db/orm/Coach.hbm.xml"/>
     <mapping resource="db/orm/Predefinirseance.hbm.xml"/>
