@@ -119,8 +119,10 @@ public class Exercicetype  implements java.io.Serializable {
         this.predefinirexos = predefinirexos;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Exercicetype{" + "codeet=" + codeet + ", nomet=" + nomet + ", descriptione=" + descriptione + ", lienmedia=" + lienmedia + ", tipsrep=" + tipsrep + ", tipsexo=" + tipsexo + ", materiel=" + materiel + ", objectif=" + objectif + '}';
+    }
 
 }
 

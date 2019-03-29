@@ -18,10 +18,23 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author hugog
+ * @author 21205992
  */
 public class Bd {
     
+    /**
+     * permet de créer un exercice type.
+     * @param nom
+     * @param description
+     * @param media
+     * @param tipRep
+     * @param tip
+     * @param materiel
+     * @param objectif
+     * @throws Exception 
+     */
+    
+        
     //Données
     //Connexion
     private static Connection cx = null;
@@ -31,6 +44,42 @@ public class Bd {
     private static final String LOGIN = "21405117";
     private static final String PASSWORD = "P00M37";
     
+    public static void creerExType (String nom, String description, String media, String tipRep, String tip, String materiel, String objectif) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        Exercicetype exo= new Exercicetype(nom,description,media,tipRep,tip,materiel,objectif);
+        session.save(exo);
+        t.commit();
+    }
+
+    /**
+     * Permet d'afficher tous les exercices types.
+     * @return 
+     */
+    public static List listeExType () {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        String hql = "select et.nomet from Exercicetype et";
+        List l_exType = session.createQuery(hql).list();
+        return l_exType;
+    }
+    
+    /**
+     * permet de chercher un exercice by nom (plusieurs résultats possibles)
+     * @param s
+     * @return 
+     */
+    public static List<Exercicetype> ETInfo(String s) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	Transaction t = session.beginTransaction();
+        
+        String hql = "from Exercicetype et where et.nomet='"+s+"'";
+        List<Exercicetype> l_exType = (List<Exercicetype>)session.createQuery(hql).list();
+        return l_exType;
+    }
+    
     //Méthodes
     
     //Méthode de connexion avec la base de données
@@ -39,11 +88,11 @@ public class Bd {
         //Chargement du pilote pour la BD
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        }
+    }
         catch (ClassNotFoundException ex)
         {
             throw new ClassNotFoundException("connexion() : Pilote pour se connecter à MySql introuvable - " + ex.getMessage());
-        }
+}
         
         //Ouverture de la connexion
         try {
@@ -53,51 +102,6 @@ public class Bd {
         {
             throw new SQLException("connexion() : Problème de connexion à la base de données - " + ex.getMessage());
         }
-    }
-    
-    public static HashMap<Integer, String> chercherExercice(String nomExercice) throws ClassNotFoundException, SQLException 
-    {
-        //Création de la connexion à la base de données
-        if (Bd.cx == null)
-            Bd.connexion();
-        
-        //Espace de requête
-        PreparedStatement st;
-        
-        //Requête SQL
-        String sql = "SELECT CODEET,NOMET FROM EXERCICETYPE WHERE NOMET LIKE ?";
-        
-        //Ouverture de l'espace de requête
-        try {
-            st = Bd.cx.prepareStatement(sql);
-        }
-        catch (SQLException ex)
-        {
-            throw new SQLException("lireMot() : Problème d'ouverture de l'espace de requête - " + ex.getMessage());
-        }
-        
-        //Interrogation de la base
-        List<Exercice> listeexo = new ArrayList<Exercice>();
-        
-        try {
-            //Exécution de la requête
-            st.setString(1, "%"+nomExercice+"%");
-            ResultSet rs = st.executeQuery();
-            
-            //Lecture du contenu de ResulSet
-            while (rs.next())
-            {
-                int num = rs.getInt("CODEET");
-                String nom = rs.getString("NOMET");
-                listeexo.add(new Exercice());
-            }
-            
-            //Lecture 
-        }
-        catch(SQLException ex){
-            
-        }
-        return null;
     }
     
     public static List<Exercicetype> lireExerciceType(String nom) throws SQLException, ClassNotFoundException{
