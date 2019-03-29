@@ -13,8 +13,16 @@
         <servlet-class>ctrl.ServletvoirPrgClient</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletGetEx</servlet-name>
-        <servlet-class>ctrl.ServletGetEx</servlet-class>
+        <servlet-name>ServletRecherche</servlet-name>
+        <servlet-class>ctrl.ServletRecherche</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>creerSeance</servlet-name>
+        <jsp-file>/jsp/creerSeance.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletListeSeance</servlet-name>
+        <servlet-class>ctrl.ServletListeSeance</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
@@ -29,8 +37,16 @@
         <url-pattern>/ServletvoirPrgClient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletGetEx</servlet-name>
-        <url-pattern>/ServletGetEx</url-pattern>
+        <servlet-name>ServletRecherche</servlet-name>
+        <url-pattern>/ServletRecherche</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerSeance</servlet-name>
+        <url-pattern>/creerSeance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletListeSeance</servlet-name>
+        <url-pattern>/ServletListeSeance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -40,4 +56,6 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+    <servlet-name>ServletRecherche</servlet-name>
+    <servlet-class>servlet.ServletRecherche</servlet-class>
 </web-app>

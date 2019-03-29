@@ -45,6 +45,7 @@ public class ServletListCltPrg extends HttpServlet {
         t.commit();        
         RequestDispatcher rd = request.getRequestDispatcher("TimeLineProg"); //importer requestdispatcher
         rd.forward(request,response); 
+        session.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -8,6 +8,7 @@ package ctrl;
 import db.Client;
 import db.Exercice;
 import db.HibernateUtil;
+import db.Profilsportif;
 import db.Programme;
 import db.Seance;
 import java.io.IOException;
@@ -70,6 +71,23 @@ public class ServletvoirPrgClient extends HttpServlet {
                         
                         request.setAttribute("nomClient", c.getNomcli());
                         request.setAttribute("prenomClient", c.getPrenomcli());
+                        request.setAttribute("codeCli", c.getCodecli());
+                        request.setAttribute("ageCli", c.getAge());
+                        
+                        String sqlx = "from Profilsportif p "
+                                + "where p.client.codecli ="+codec+" ";
+                        List<Profilsportif> lstPS = (List<Profilsportif>)session.createQuery(sqlx).list();
+
+                        for(Profilsportif ps:lstPS){
+                            request.setAttribute("Poids",ps.getPoids());
+                            request.setAttribute("Handicap",ps.getHandicap());
+                            request.setAttribute("Taille",ps.getTaille());
+                            request.setAttribute("Poitrine",ps.getPoitrine());
+                            request.setAttribute("Bras",ps.getBras());
+                            request.setAttribute("Cuisses",ps.getCuisses());
+                            request.setAttribute("Hanches",ps.getHanches());
+                            
+                        }
                     }
                 }
                 System.out.println("test code programme : "+codep);
@@ -87,11 +105,11 @@ public class ServletvoirPrgClient extends HttpServlet {
 
         
         
-        t1.commit(); 
+//        t1.commit(); 
         RequestDispatcher rd = request.getRequestDispatcher("TimeLineProg"); //importer requestdispatcher
         rd.forward(request,response);
         
-        
+        session.close();
         
         
 
