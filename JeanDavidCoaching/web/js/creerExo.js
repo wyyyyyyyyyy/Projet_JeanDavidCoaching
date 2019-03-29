@@ -62,7 +62,7 @@ function afficherInfo ()
         var nom = this.firstChild.nodeValue;
         //alert(nom);
         var xhr = new XMLHttpRequest();
-        var url = "/ServletExoTypeInfo?nom="+nom;
+        var url = "ServletExoTypeInfo?nom="+nom;
         xhr.open("GET",url,true);
         xhr.onload = function()
             {
