@@ -30,15 +30,15 @@ function creerExer()
         if (xhr.status === 200)
         {
             alert("ok");
-            var texte = "<p class=\"choisir\">" + nom + "</p>";
-
-            //récupère le composant HTML à mettre à jour
-            var elt = document.getElementById("exoCre");
-
-            var e_div = document.createElement("div");
-            e_div.innerHTML = texte;
-            elt.insertBefore(e_div, elt.lastElementChild);
-
+//            var texte = "<p class=\"choisir\">" + nom + "</p>";
+//
+//            //récupère le composant HTML à mettre à jour
+//            var elt = document.getElementById("exoCre");
+//
+//            var e_div = document.createElement("div");
+//            e_div.innerHTML = texte;
+//            elt.insertBefore(e_div, elt.lastElementChild);
+//            clean();
             document.getElementById("nomExo").value = "";
             document.getElementById("objectifExo").value = "";
             document.getElementById("descriptionExo").value = "";
@@ -91,7 +91,7 @@ function listeExo()
                 var exercice = rep[i].children;
                 var code = exercice[0].firstChild.nodeValue;
                 var nom = exercice[1].firstChild.nodeValue;
-                txt += "<option class=\"exo\" value=\"" + code + "\">" + nom + "</option>";
+                txt += "<option class=\"exo\" value=\"" + code + "\">" + code + " " + nom + "</option>";
             }
             var elt = document.getElementById("lexo");
             elt.innerHTML = txt;
@@ -106,7 +106,7 @@ function listeExo()
     };
     xhr.send();
 }
-;
+
 
 function selectEvent()
 {
@@ -133,6 +133,9 @@ function selectEvent()
                 var materiel = exercice[6].firstChild.nodeValue;
                 var media = exercice[7].firstChild.nodeValue;
 
+                $("#numExo2").html(code);
+//                document.getElementById("numExo2").style.display="none";
+
                 document.getElementById("nomExo2").value = nom;
                 document.getElementById("objectifExo2").value = objectif;
                 document.getElementById("descriptionExo2").value = description;
@@ -147,16 +150,37 @@ function selectEvent()
 
 }
 
-//function afficherInfo()
-//{
-//    alert("ha222");
-//    var a = this.firstChild.nodeValue;
-//    alert(a);
-//}
+function modifierExer()
+{
+    var id = $("#numExo2").html();
+    alert(id);
+    var nom = encodeURIComponent(document.getElementById("nomExo2").value);
+    var objectif = encodeURIComponent(document.getElementById("objectifExo2").value);
+    var description = encodeURIComponent(document.getElementById("descriptionExo2").value);
+    var tipRep = encodeURIComponent(document.getElementById("tipRepExo2").value);
+    var tip = encodeURIComponent(document.getElementById("tipExo2").value);
+    var materiel = encodeURIComponent(document.getElementById("materielExo2").value);
+    var media = encodeURIComponent(document.getElementById("mediaExo2").value);
+
+    var xhr = new XMLHttpRequest();
+
+    var url = "ServletModExo?nom=" + nom + "&objectif=" + objectif + "&description=" + description
+            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + media;
+    xhr.open("GET", url, true);
+    alert(url);
+}
+
+
+function clean()
+{
+    $("#nomExo").val("");
+}
+
 
 window.addEventListener("load", listeExo, false);
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn").addEventListener("click", creerExer);
-    document.getElementById("btnM").addEventListener("click", listeExo);
+    document.getElementById("lexo").addEventListener("click", listeExo);
+    document.getElementById("btnM").addEventListener("click", modifierExer);
 });
 

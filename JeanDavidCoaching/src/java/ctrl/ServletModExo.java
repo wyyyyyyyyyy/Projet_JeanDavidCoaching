@@ -5,26 +5,18 @@
  */
 package ctrl;
 
-import db.Bd;
-import db.Exercicetype;
-import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
  * @author 21205992
  */
-public class ServletCreExo extends HttpServlet {
+public class ServletModExo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,6 +27,23 @@ public class ServletCreExo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ServletModExo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ServletModExo at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -47,32 +56,7 @@ public class ServletCreExo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/xml;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /*----- Ecriture de la page XML -----*/
-            out.println("<?xml version=\"1.0\"?>");
-
-            /*----- Récupération des paramètres -----*/
-            String nom = request.getParameter("nom");
-            String objectif = request.getParameter("objectif");
-            String description = request.getParameter("description");
-            String tipRep = request.getParameter("tipRep");
-            String tip = request.getParameter("tip");
-            String materiel = request.getParameter("materiel");
-            String media = request.getParameter("media");
-            //out.println(nom+description+media+tipRep+tip+materiel+objectif);
-
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction t = session.beginTransaction();
-
-//          Bd.creerExType(nom, description, media, tipRep, tip, materiel, objectif);
-            Exercicetype exo = new Exercicetype(nom, description, media, tipRep, tip, materiel, objectif);
-            session.save(exo);
-            t.commit();
-            session.close();
-
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -86,7 +70,7 @@ public class ServletCreExo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        processRequest(request, response);
     }
 
     /**

@@ -26,7 +26,9 @@
                         <h2>Exercices créés : </h2>
                         <!--<div id="exoCre"></div>-->
                         <select onchange="selectEvent()" id="lexo"><option>-----</option></select>
-                        <div>
+                        <div id="selected">
+                            <h4>Numéro d'exercice:</h4>
+                            <div id="numExo2"></div>
                             <label for="nomExo2">Nom :</label>
                                 <input id="nomExo2" type="text" class="form-control"/>
                             <label for="objectifExo2">Objectif :</label>

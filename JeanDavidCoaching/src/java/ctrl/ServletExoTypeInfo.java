@@ -7,6 +7,7 @@ package ctrl;
 
 import db.Bd;
 import db.Exercicetype;
+import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,13 +15,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author 21205992
  */
 public class ServletExoTypeInfo extends HttpServlet {
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -37,29 +39,36 @@ public class ServletExoTypeInfo extends HttpServlet {
         /*----- Type de la réponse -----*/
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
-        try (PrintWriter out = response.getWriter()){
+
+        try (PrintWriter out = response.getWriter()) {
             /*----- Ecriture de la page XML -----*/
             out.println("<?xml version=\"1.0\"?>");
             out.println("<liste_exo>");
-            
+
             String code = request.getParameter("codeExo");
-            
-            List<Exercicetype> l_Exo = Bd.ETInfoByID(code);
-                    for(Exercicetype exo : l_Exo){
-                        out.println("<Exercice>");
-                        out.println("<code>" + exo.getCodeet() + "</code>"); 
-                        out.println("<nom>"+ exo.getNomet() + "</nom>");
-                        out.println("<objectif>"+ exo.getObjectif() + "</objectif>");
-                        out.println("<description>"+ exo.getDescriptione() + "</description>");
-                        out.println("<tipsrep>"+ exo.getTipsrep() + "</tipsrep>");
-                        out.println("<tips>"+ exo.getTipsexo() + "</tips>");
-                        out.println("<materiel>"+ exo.getMateriel() + "</materiel>");
-                        out.println("<media>"+ exo.getLienmedia() + "</media>");
-                        out.println("</Exercice>");
-                    }
-            
+
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction t = session.beginTransaction();
+
+            String hql = "from Exercicetype et where et.codeet='" + code + "'";
+            List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
+//            List<Exercicetype> l_Exo = Bd.ETInfoByID(code);
+            for (Exercicetype exo : l_exType) {
+                out.println("<Exercice>");
+                out.println("<code>" + exo.getCodeet() + "</code>");
+                out.println("<nom>" + exo.getNomet() + "</nom>");
+                out.println("<objectif>" + exo.getObjectif() + "</objectif>");
+                out.println("<description>" + exo.getDescriptione() + "</description>");
+                out.println("<tipsrep>" + exo.getTipsrep() + "</tipsrep>");
+                out.println("<tips>" + exo.getTipsexo() + "</tips>");
+                out.println("<materiel>" + exo.getMateriel() + "</materiel>");
+                out.println("<media>" + exo.getLienmedia() + "</media>");
+                out.println("</Exercice>");
+            }
+
             out.println("</liste_exo>");
+            t.commit();
+            session.close();
         }
     }
 
