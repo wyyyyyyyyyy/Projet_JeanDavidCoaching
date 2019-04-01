@@ -46,7 +46,7 @@ function creerExer()
             document.getElementById("tipExo").value = "";
             document.getElementById("materielExo").value = "";
             document.getElementById("mediaExo").value = "";
-
+            listeExo();
 //            var choix = document.querySelectorAll(".choisir");
 //            for (var i = 0; i < choix.length; i++)
 //            {
@@ -181,18 +181,68 @@ function modifierExer()
             document.getElementById("tipExo2").value = "";
             document.getElementById("materielExo2").value = "";
             document.getElementById("mediaExo2").value = "";
-
+            listeExo();
         }
     };
     xhr.send();
 }
 
+function supprimerExer()
+{
+    var id = $("#numExo2").html();
+    alert(id);
+    var xhr = new XMLHttpRequest();
+    var url = "ServletSupExo?id=" + id;
+    xhr.open("GET", url, true);
+    xhr.onload = function ()
+    {
+        if (xhr.status === 200)
+        {
+            alert("ok");
+            $("#numExo2").html("");
+            document.getElementById("nomExo2").value = "";
+            document.getElementById("objectifExo2").value = "";
+            document.getElementById("descriptionExo2").value = "";
+            document.getElementById("tipRepExo2").value = "";
+            document.getElementById("tipExo2").value = "";
+            document.getElementById("materielExo2").value = "";
+            document.getElementById("mediaExo2").value = "";
+            listeExo();
+        }
+    };
+    xhr.send();
+}
+
+function imgPreview(fileDom)
+{
+    if(window.FileReader) {
+        var reader=new FileReader();        
+    }
+    else {
+        alert("non");
+    }
+    
+    var file = fileDom.files[0];
+    var imageType = /^image\//;
+    
+    if(!imageType.test(file.type)) {
+        alert("Ce n'est pas une image");
+        return;
+    }
+    
+    reader.onload = function(e){
+        var img=document.getElementById("preview");
+        img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+    document.getElementById("preview").style.display="";
+}
 
 
 window.addEventListener("load", listeExo, false);
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn").addEventListener("click", creerExer);
-    document.getElementById("lexo").addEventListener("click", listeExo);
     document.getElementById("btnM").addEventListener("click", modifierExer);
+    document.getElementById("btnS").addEventListener("click", supprimerExer);
 });
 

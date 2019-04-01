@@ -43,7 +43,7 @@ public class ServletExoTypeInfo extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /*----- Ecriture de la page XML -----*/
             out.println("<?xml version=\"1.0\"?>");
-            out.println("<liste_exo>");
+            out.print("<liste_exo>");
 
             String code = request.getParameter("codeExo");
 
@@ -54,19 +54,19 @@ public class ServletExoTypeInfo extends HttpServlet {
             List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
 //            List<Exercicetype> l_Exo = Bd.ETInfoByID(code);
             for (Exercicetype exo : l_exType) {
-                out.println("<Exercice>");
-                out.println("<code>" + exo.getCodeet() + "</code>");
-                out.println("<nom>" + exo.getNomet() + "</nom>");
-                out.println("<objectif>" + exo.getObjectif() + "</objectif>");
-                out.println("<description>" + exo.getDescriptione() + "</description>");
-                out.println("<tipsrep>" + exo.getTipsrep() + "</tipsrep>");
-                out.println("<tips>" + exo.getTipsexo() + "</tips>");
-                out.println("<materiel>" + exo.getMateriel() + "</materiel>");
-                out.println("<media>" + exo.getLienmedia() + "</media>");
-                out.println("</Exercice>");
+                out.print("<Exercice>");
+                out.print("<code>" + exo.getCodeet() + "</code>");
+                out.print("<nom>" + exo.getNomet() + "</nom>");
+                out.print("<objectif>" + exo.getObjectif() + "</objectif>");
+                out.print("<description>" + exo.getDescriptione() + "</description>");
+                out.print("<tipsrep>" + exo.getTipsrep() + "</tipsrep>");
+                out.print("<tips>" + exo.getTipsexo() + "</tips>");
+                out.print("<materiel>" + exo.getMateriel() + "</materiel>");
+                out.print("<media>" + exo.getLienmedia() + "</media>");
+                out.print("</Exercice>");
             }
 
-            out.println("</liste_exo>");
+            out.print("</liste_exo>");
             t.commit();
             session.close();
         }

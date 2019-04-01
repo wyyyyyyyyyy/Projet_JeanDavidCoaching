@@ -5,13 +5,13 @@
  */
 package ctrl;
 
-import db.Bd;
+import db.Exercice;
 import db.Exercicetype;
 import db.HibernateUtil;
+import db.Predefinirexo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,8 @@ import org.hibernate.Transaction;
  *
  * @author 21205992
  */
-public class ServletListeExo extends HttpServlet {
+public class ServletSupExo extends HttpServlet {
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -37,33 +38,30 @@ public class ServletListeExo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*----- Type de la réponse -----*/
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-
         try (PrintWriter out = response.getWriter()) {
-
-            /*---Ecriture de la page XML---*/
             out.println("<?xml version=\"1.0\"?>");
-            out.print("<liste_exo>");
-
-            //List<Exercicetype> l_Exo = Bd.listeExType();
+            
+            Integer id = Integer.parseInt(request.getParameter("id"));
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
-            String hql = "from Exercicetype et";
-            List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
-            for (Exercicetype exo : l_exType) {
-                out.print("<Exercice>");
-                out.print("<codeExo>" + exo.getCodeet() + "</codeExo>");
-                out.print("<nomExo>" + exo.getNomet() + "</nomExo>");
-                out.print("</Exercice>");
+            Exercicetype et = (Exercicetype) session.get(Exercicetype.class, id);
+            
+            Set<Exercice> set1=et.getExercices();
+            for(Exercice e : set1){
+                e.setExercicetype(null);
             }
-
-            out.print("</liste_exo>");
+            
+            Set<Predefinirexo> set2=et.getPredefinirexos();
+            for (Predefinirexo p : set2){
+                p.setExercicetype(null);
+            }
+            
+            session.delete(et);
             t.commit();
             session.close();
         }
-
     }
 
     /**
