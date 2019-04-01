@@ -5,13 +5,18 @@
         <group>
             <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/index.html</file>
             <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/Bd.java</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/nbproject/private/private.xml</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/orm/Programme.hbm.xml</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/Seance.java</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/jsp/affecterProgrammeClient.jsp</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/jsp/TimeLineProg.jsp</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/servlet/ServletAffecterProgrammeClient.java</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/Programme.java</file>
             <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/js/fctxml.js</file>
             <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/servlet/ServletClient.java</file>
             <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/Client.java</file>
-            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/jsp/affecterProgrammeClient.jsp</file>
-            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/servlet/ServletRecherche.java</file>
-            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/web/jsp/creerSeance.jsp</file>
-            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/servlet/ServletObjectif.java</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/servlet/ServletProgrammetype.java</file>
+            <file>file:/D:/Program%20Files%20(x86)/neybeans/jdcoaching/Projet_JeanDavidCoaching/JeanDavidCoaching/src/java/db/Programmetype.java</file>
         </group>
     </open-files>
 </project-private>
