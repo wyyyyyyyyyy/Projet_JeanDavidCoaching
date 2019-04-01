@@ -85,7 +85,7 @@ function listeExo()
     xhr.open("GET", "ServletListeExo");
     xhr.onload = function () {
         if (xhr.status === 200) {
-            var rep = xhr.responseXML.getElementsByTagName("liste_exo");
+            var rep = xhr.responseXML.getElementsByTagName("Exercice");
             var txt = "<option></option>";
             for (var i = 0; i < rep.length; i++) {
                 var exercice = rep[i].children;
@@ -120,7 +120,7 @@ function selectEvent()
     {
         if (xhr.status === 200)
         {
-            var rep = xhr.responseXML.getElementsByTagName("liste_exo");
+            var rep = xhr.responseXML.getElementsByTagName("Exercice");
             for (var i = 0; i < rep.length; i++)
             {
                 var exercice = rep[i].children;
@@ -168,20 +168,23 @@ function modifierExer()
             + tip + "&materiel=" + materiel + "&media=" + media;
     xhr.open("GET", url, true);
     alert(url);
-
-    if (xhr.status === 200)
+    xhr.onload = function ()
     {
-        alert("ok");
+        if (xhr.status === 200)
+        {
+            alert("ok");
+            $("#numExo2").html("");
+            document.getElementById("nomExo2").value = "";
+            document.getElementById("objectifExo2").value = "";
+            document.getElementById("descriptionExo2").value = "";
+            document.getElementById("tipRepExo2").value = "";
+            document.getElementById("tipExo2").value = "";
+            document.getElementById("materielExo2").value = "";
+            document.getElementById("mediaExo2").value = "";
 
-        document.getElementById("nomExo2").value = "";
-        document.getElementById("objectifExo2").value = "";
-        document.getElementById("descriptionExo2").value = "";
-        document.getElementById("tipRepExo2").value = "";
-        document.getElementById("tipExo2").value = "";
-        document.getElementById("materielExo2").value = "";
-        document.getElementById("mediaExo2").value = "";
-
-    }
+        }
+    };
+    xhr.send();
 }
 
 

@@ -5,6 +5,7 @@
  */
 package ctrl;
 
+import db.Exercicetype;
 import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,7 +43,7 @@ public class ServletModExo extends HttpServlet {
             out.println("<?xml version=\"1.0\"?>");
 
             /*----- Récupération des paramètres -----*/
-            String id = request.getParameter("id");
+            Integer id = Integer.parseInt(request.getParameter("id"));
             String nom = request.getParameter("nom");
             String objectif = request.getParameter("objectif");
             String description = request.getParameter("description");
@@ -53,14 +54,24 @@ public class ServletModExo extends HttpServlet {
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
+//
+//            String hql = "update Exercicetype et set et.nomet='" + nom
+//                    + "', et.descriptione='" + description + "', et.lienmedia='"
+//                    + media + "', et.tipsrep='" + tipRep + "', et.tipsexo='" 
+//                    + tip + "', et.materiel='" + materiel + "', et.objectif='" 
+//                    + objectif + "' where et.codeet='" + id + "'";
+//            Query queryupdate = session.createQuery(hql);
+//            queryupdate.executeUpdate();
+            Exercicetype et = (Exercicetype) session.get(Exercicetype.class, id);
+            et.setNomet(nom);
+            et.setDescriptione(description);
+            et.setLienmedia(media);
+            et.setTipsrep(tipRep);
+            et.setTipsexo(tip);
+            et.setMateriel(materiel);
+            et.setObjectif(objectif);
 
-            String hql = "update Exercicetype et set et.nomet='" + nom
-                    + "', et.descriptione='" + description + "', et.lienmedia='"
-                    + media + "', et.tipsrep='" + tipRep + "', et.tipsexo='" 
-                    + tip + "', et.materiel='" + materiel + "', et.objectif='" 
-                    + objectif + "' where et.codeet='" + id + "'";
-            Query queryupdate = session.createQuery(hql);
-            queryupdate.executeUpdate();
+            session.update(et);
             t.commit();
             session.close();
         }
