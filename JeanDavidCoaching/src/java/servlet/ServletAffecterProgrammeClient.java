@@ -7,11 +7,14 @@ package servlet;
 
 import db.Bd;
 import db.Client;
+import db.Programme;
+import db.Programmetype;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hugog
  */
-public class ServletObjectif extends HttpServlet {
+public class ServletAffecterProgrammeClient extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +35,7 @@ public class ServletObjectif extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,28 +51,19 @@ public class ServletObjectif extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        int codecli = Integer.valueOf(request.getParameter("codecli"));
+        String codeprogtype = request.getParameter("codeprogrammetype");
+        int codept = Integer.valueOf(codeprogtype);
+        
+        try {
+            Integer codeP = Bd.affecterProgrammeClient(codecli, codept);
+            request.setAttribute("codeprogramme", codeP);
             
-            //Ecriture de la page XML
-            out.println("<?xml version=\"1.0\"?>");
-            out.print("<liste_objectifsclient>");
-            String nomclient = request.getParameter("nomClient");
-            
-           try {
-                ArrayList<String> l_objectif = Bd.lireObjectifs(nomclient);
-                for(int i=0; i<l_objectif.size();i++){
-                    //out.println("<nomClient>" + l_client.get(i).getNomcli() + "</nomClient>");
-                    out.print("<objectifsClient>" + l_objectif.get(i) + "</objectifsClient>");
-                }
-            }
-           catch(ClassNotFoundException | SQLException ex){
-                     //out.println("<nomClient>Erreur - " + ex.getMessage() + "</nomClient>"); 
-                     out.print("<objectifsClient>Erreur - " + ex.getMessage() + "</objectifsClient>");
-                }
-           out.println("</liste_objectifsclient>");
-            
-            
+        } catch (Exception ex) {
+            Logger.getLogger(ServletAffecterProgrammeClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+        RequestDispatcher rd = request.getRequestDispatcher("TimeLineProg");
+            rd.forward(request, response);
     }
 
     /**
@@ -83,7 +77,7 @@ public class ServletObjectif extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
+        
     }
 
     /**

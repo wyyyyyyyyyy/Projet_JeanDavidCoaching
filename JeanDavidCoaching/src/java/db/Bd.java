@@ -150,48 +150,49 @@ public class Bd {
 //    }
     
     
-    public static int affecterProgrammeClient(Integer codecli, Integer codept) throws Exception
+    public static Integer affecterProgrammeClient(int codecli, int codept) throws Exception
     {
-        String sql ="Insert into PROGRAMME(Codept, Codecli) values (?,?)";
-        PreparedStatement st;
-        int nb;
+//        String sql ="Insert into PROGRAMME(Codept, Codecli) values (?,?)";
+//        PreparedStatement st;
+//        int nb;
+//        try {
+//            st = Bd.cx.prepareStatement(sql);          
+//            st.setInt(2, codecli);
+//            st.setInt(1, codept);          
+//            nb = st.executeUpdate();          
+//            st.close();     
+//        }
+//        catch (SQLException sqle){
+//            throw new Exception("Probleme d'enregistrement -"+sqle.getMessage());
+//        }
+//        return nb;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
         
-        try {
-            st = Bd.cx.prepareStatement(sql);
-            
-            st.setInt(2, codecli);
-            st.setInt(1, codept);
-            
-            nb = st.executeUpdate();
-            
-            st.close();     
-        }
-        catch (SQLException sqle){
-            throw new Exception("Probleme d'enregistrement -"+sqle.getMessage());
-        }
-        return nb;
+        List<Client> client = (List<Client>)session.createQuery("from Client "
+                                                    + "where codecli="+codecli+"").list();
+        
+        List<Programmetype> programmetype = (List<Programmetype>)session.createQuery("from Programmetype p where p.codept="+codept+"").list();
+        
+        Programme prog = new Programme(client.get(0), programmetype.get(0));
+        System.out.println(client.get(0).getNomcli());
+        client.get(0).addProgramme(prog);
+        programmetype.get(0).addProgramme(prog);
+        
+        session.save(prog);
+        t.commit();
+        session.close();
+        return prog.getCodep();
     }
     
-    public static void main(String[] args) throws SQLException, ClassNotFoundException{
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception{
 //        List<Programmetype> l = lireProgrammeType();
 //        for(int i=0; i<l.size(); i++){
 //           System.out.println(l.get(i).getNomp());
 //        }
-        
-    /**
-     * Affecter programme à un client
-     */
-    
-    /**
-     * Affecter programme à un client
-     * @param c
-     */
 
-    /**
-     * Affecter programme à un client
-     * @param c
-     * @param p
-     */
+    Integer codeP = Bd.affecterProgrammeClient(2, 2);
+        System.out.println(codeP);
     
         
     }

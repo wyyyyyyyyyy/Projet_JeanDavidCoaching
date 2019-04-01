@@ -7,10 +7,10 @@ package servlet;
 
 import db.Bd;
 import db.Client;
+import db.Programmetype;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hugog
  */
-public class ServletObjectif extends HttpServlet {
+public class ServletProgrammetype extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +32,6 @@ public class ServletObjectif extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -49,26 +47,27 @@ public class ServletObjectif extends HttpServlet {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             //Ecriture de la page XML
             out.println("<?xml version=\"1.0\"?>");
-            out.print("<liste_objectifsclient>");
-            String nomclient = request.getParameter("nomClient");
-            
-           try {
-                ArrayList<String> l_objectif = Bd.lireObjectifs(nomclient);
-                for(int i=0; i<l_objectif.size();i++){
-                    //out.println("<nomClient>" + l_client.get(i).getNomcli() + "</nomClient>");
-                    out.print("<objectifsClient>" + l_objectif.get(i) + "</objectifsClient>");
+            out.println("<liste_programmetype>");
+
+            try {
+                List<Programmetype> l_programmetype = Bd.lireProgrammeType();
+                for (int i = 0; i < l_programmetype.size(); i++) {
+                    out.println("<programmetype>");
+                    out.println("<codeProgrammetype>" + l_programmetype.get(i).getCodept() + "</codeProgrammetype>");
+                    out.println("<nomProgrammetype>" + l_programmetype.get(i).getNomp() + "</nomProgrammetype>");
+                    out.println("</programmetype>");
                 }
+            } catch (ClassNotFoundException | SQLException ex) {
+                out.print("<programmetype>");
+                out.print("<codeProgrammetype>" + ex.getMessage() + "</codeProgrammetype>");
+                out.print("<nomProgrammetype>Erreur - " + ex.getMessage() + "</nomProgrammetype>");
+                out.print("</programmetype>");
             }
-           catch(ClassNotFoundException | SQLException ex){
-                     //out.println("<nomClient>Erreur - " + ex.getMessage() + "</nomClient>"); 
-                     out.print("<objectifsClient>Erreur - " + ex.getMessage() + "</objectifsClient>");
-                }
-           out.println("</liste_objectifsclient>");
-            
-            
+            out.println("</liste_programmetype>");
+
         }
     }
 
@@ -83,7 +82,7 @@ public class ServletObjectif extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
+
     }
 
     /**

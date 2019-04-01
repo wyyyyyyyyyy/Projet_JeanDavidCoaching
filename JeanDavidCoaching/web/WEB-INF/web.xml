@@ -24,6 +24,18 @@
         <servlet-name>ServletObjectif</servlet-name>
         <servlet-class>servlet.ServletObjectif</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <servlet-class>servlet.ServletProgrammetype</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <servlet-class>servlet.ServletAffecterProgrammeClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeLineProg</servlet-name>
+        <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
         <url-pattern>/ServletRecherche</url-pattern>
@@ -47,6 +59,18 @@
     <servlet-mapping>
         <servlet-name>ServletObjectif</servlet-name>
         <url-pattern>/ServletObjectif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <url-pattern>/ServletProgrammetype</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <url-pattern>/ServletAffecterProgrammeClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeLineProg</servlet-name>
+        <url-pattern>/TimeLineProg</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

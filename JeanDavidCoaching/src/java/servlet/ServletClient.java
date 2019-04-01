@@ -32,10 +32,6 @@ public class ServletClient extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
-        
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -51,25 +47,27 @@ public class ServletClient extends HttpServlet {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             //Ecriture de la page XML
             out.println("<?xml version=\"1.0\"?>");
+            
             out.println("<liste_client>");
-            
-           try {
+            try {
                 List<Client> l_client = Bd.lireClient();
-                for(int i=0; i<l_client.size();i++){
+                for (int i = 0; i < l_client.size(); i++) {
+                    
+                    out.println("<client>");
+                    out.println("<codeClient>"+l_client.get(i).getCodecli()+"</codeClient>");
                     out.println("<nomClient>" + l_client.get(i).getNomcli() + "</nomClient>");
-                    //out.println("<objectifsClient>" + l_client.get(i).getObjectif() + "</objectifsClient>");
+                    out.println("</client>");     
                 }
+            } catch (ClassNotFoundException | SQLException ex) {
+                out.println("<client>");
+                out.print("<codeClient>"+ ex.getMessage()+"</codeClient>");
+                out.print("<nomClient>Erreur - " + ex.getMessage() + "</nomClient>");
+                out.println("</client>");
             }
-           catch(ClassNotFoundException | SQLException ex){
-                     out.println("<nomClient>Erreur - " + ex.getMessage() + "</nomClient>"); 
-                     //out.println("<objectifsClient>Erreur - " + ex.getMessage() + "</objectifsClient>");
-                }
-           out.println("</liste_client>");
-            
-            
+            out.println("</liste_client>");
         }
     }
 

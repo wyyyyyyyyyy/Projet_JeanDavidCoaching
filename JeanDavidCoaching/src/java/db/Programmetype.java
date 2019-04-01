@@ -62,6 +62,11 @@ public class Programmetype  implements java.io.Serializable {
     public void setProgrammes(Set programmes) {
         this.programmes = programmes;
     }
+    
+    public void addProgramme(Programme programme)
+    {
+        this.programmes.add(programme);
+    }
 
 
 

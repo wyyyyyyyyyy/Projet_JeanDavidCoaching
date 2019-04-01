@@ -27,6 +27,7 @@ public class Client  implements java.io.Serializable {
     public Client() {
     }
 
+    
     public Client(String nomcli, String prenomcli, String mailcli, String telcli, Date datenai, Boolean genrecli, String mdpcli, String objectif, Set profilsportifs, Set programmes) {
        this.nomcli = nomcli;
        this.prenomcli = prenomcli;
@@ -38,6 +39,18 @@ public class Client  implements java.io.Serializable {
        this.objectif = objectif;
        this.profilsportifs = profilsportifs;
        this.programmes = programmes;
+    }
+    
+    /**
+     * 
+     * @param nomcli
+     * @param prenomCli
+     * @param programmes 
+     */
+    public Client(String nomcli, String prenomcli, Set programmes){
+        this.nomcli = nomcli;
+        this.prenomcli = prenomcli;
+        this.programmes = programmes;
     }
    
     public Integer getCodecli() {
@@ -118,6 +131,10 @@ public class Client  implements java.io.Serializable {
         this.programmes = programmes;
     }
 
+    public void addProgramme(Programme programme)
+    {
+        this.programmes.add(programme);
+    }
 
 
 
