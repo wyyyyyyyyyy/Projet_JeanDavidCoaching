@@ -85,7 +85,7 @@ function listeExo()
     xhr.open("GET", "ServletListeExo");
     xhr.onload = function () {
         if (xhr.status === 200) {
-            var rep = xhr.responseXML.getElementsByTagName("Exercice");
+            var rep = xhr.responseXML.getElementsByTagName("liste_exo");
             var txt = "<option></option>";
             for (var i = 0; i < rep.length; i++) {
                 var exercice = rep[i].children;
@@ -120,7 +120,7 @@ function selectEvent()
     {
         if (xhr.status === 200)
         {
-            var rep = xhr.responseXML.getElementsByTagName("Exercice");
+            var rep = xhr.responseXML.getElementsByTagName("liste_exo");
             for (var i = 0; i < rep.length; i++)
             {
                 var exercice = rep[i].children;
@@ -163,18 +163,27 @@ function modifierExer()
     var media = encodeURIComponent(document.getElementById("mediaExo2").value);
 
     var xhr = new XMLHttpRequest();
-
-    var url = "ServletModExo?nom=" + nom + "&objectif=" + objectif + "&description=" + description
-            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + media;
+    var url = "ServletModExo?id=" + id + "&nom=" + nom + "&objectif=" + objectif
+            + "&description=" + description + "&tipRep=" + tipRep + "&tip="
+            + tip + "&materiel=" + materiel + "&media=" + media;
     xhr.open("GET", url, true);
     alert(url);
+
+    if (xhr.status === 200)
+    {
+        alert("ok");
+
+        document.getElementById("nomExo2").value = "";
+        document.getElementById("objectifExo2").value = "";
+        document.getElementById("descriptionExo2").value = "";
+        document.getElementById("tipRepExo2").value = "";
+        document.getElementById("tipExo2").value = "";
+        document.getElementById("materielExo2").value = "";
+        document.getElementById("mediaExo2").value = "";
+
+    }
 }
 
-
-function clean()
-{
-    $("#nomExo").val("");
-}
 
 
 window.addEventListener("load", listeExo, false);
