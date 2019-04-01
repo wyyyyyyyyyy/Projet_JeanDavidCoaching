@@ -50,7 +50,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ServletClient</servlet-name>
-        <servlet-class>servlet.ServletClient</servlet-class>
+        <servlet-class>ctrl.ServletClient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>affecterProgrammeClient</servlet-name>
@@ -62,15 +62,15 @@
     </servlet>
     <servlet>
         <servlet-name>ServletObjectif</servlet-name>
-        <servlet-class>servlet.ServletObjectif</servlet-class>
+        <servlet-class>ctrl.ServletObjectif</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletProgrammetype</servlet-name>
-        <servlet-class>servlet.ServletProgrammetype</servlet-class>
+        <servlet-class>ctrl.ServletProgrammetype</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletAffecterProgrammeClient</servlet-name>
-        <servlet-class>servlet.ServletAffecterProgrammeClient</servlet-class>
+        <servlet-class>ctrl.ServletAffecterProgrammeClient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TimeLineProg</servlet-name>

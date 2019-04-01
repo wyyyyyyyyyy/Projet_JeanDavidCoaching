@@ -24,7 +24,7 @@
         <br/>
         <input id="bt_affectation" type="submit" value="Affecter"/>
         <a href ="ServletClient">Test</a>
-        <script type="text/JavaScript" src="js/fctxml.js"></script>
+        <script type="text/JavaScript" src="js/affecterProCliJS.js"></script>
         
     </body>
 </html>
