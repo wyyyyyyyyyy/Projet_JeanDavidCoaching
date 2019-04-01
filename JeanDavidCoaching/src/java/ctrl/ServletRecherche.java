@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package ctrl;
 
 import db.Bd;
 import db.Exercicetype;
@@ -31,6 +31,7 @@ public class ServletRecherche extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
