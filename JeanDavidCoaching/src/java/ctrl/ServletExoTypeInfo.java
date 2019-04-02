@@ -41,17 +41,19 @@ public class ServletExoTypeInfo extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
-            /*----- Ecriture de la page XML -----*/
-            out.println("<?xml version=\"1.0\"?>");
-            out.print("<liste_exo>");
-
+            
             String code = request.getParameter("codeExo");
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
-
+            
             String hql = "from Exercicetype et where et.codeet='" + code + "'";
             List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
+            
+            /*----- Ecriture de la page XML -----*/
+            out.println("<?xml version=\"1.0\"?>");
+            out.print("<liste_exo>");           
+            
 //            List<Exercicetype> l_Exo = Bd.ETInfoByID(code);
             for (Exercicetype exo : l_exType) {
                 out.print("<Exercice>");

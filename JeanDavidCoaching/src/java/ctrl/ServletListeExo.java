@@ -42,16 +42,18 @@ public class ServletListeExo extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
+            
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction t = session.beginTransaction();
+            String hql = "from Exercicetype et";
+            List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
 
             /*---Ecriture de la page XML---*/
             out.println("<?xml version=\"1.0\"?>");
             out.print("<liste_exo>");
 
             //List<Exercicetype> l_Exo = Bd.listeExType();
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction t = session.beginTransaction();
-            String hql = "from Exercicetype et";
-            List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
+            
             for (Exercicetype exo : l_exType) {
                 out.print("<Exercice>");
                 out.print("<codeExo>" + exo.getCodeet() + "</codeExo>");

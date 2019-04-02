@@ -58,7 +58,6 @@ public class ServletCreExo extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
 
-//          Bd.creerExType(nom, description, media, tipRep, tip, materiel, objectif);
             Exercicetype exo = new Exercicetype(nom, description, media, tipRep, tip, materiel, objectif);
             session.save(exo);
             t.commit();
