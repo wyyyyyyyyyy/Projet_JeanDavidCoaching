@@ -5,14 +5,13 @@
  */
 package ctrl;
 
-import db.Client;
 import db.HibernateUtil;
+import db.Programmetype;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +22,7 @@ import org.hibernate.Transaction;
  *
  * @author ELITEBOOK
  */
-@WebServlet(name = "ServletListCltPrg", urlPatterns = {"/ServletListCltPrg"})
-public class ServletListCltPrg extends HttpServlet {
+public class ServletvoirListePrgType extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,14 +37,13 @@ public class ServletListCltPrg extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Session session = (Session) HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction t = session.beginTransaction();
-        List<Client> listeClients = (List<Client>) session.createQuery("from Client c order by c.nomcli asc").list();
-        request.setAttribute("listeClients", listeClients);
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("TimeLineProg");
+        Transaction t1 = session.beginTransaction();
+        List<Programmetype> listeProgs = (List<Programmetype>) session.createQuery("from Programmetype pt order by pt.nomp").list();
+        request.setAttribute("listeProgs", listeProgs);
+
+        RequestDispatcher rd = request.getRequestDispatcher("voirProgType");
         rd.forward(request, response);
-//        t.commit();
+//        t1.commit();
         session.close();
     }
 

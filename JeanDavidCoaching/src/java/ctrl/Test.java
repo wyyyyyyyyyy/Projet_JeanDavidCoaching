@@ -5,14 +5,14 @@
  */
 package ctrl;
 
-import db.Client;
 import db.HibernateUtil;
+import db.Resultatexo;
+import db.Seance;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +23,7 @@ import org.hibernate.Transaction;
  *
  * @author ELITEBOOK
  */
-@WebServlet(name = "ServletListCltPrg", urlPatterns = {"/ServletListCltPrg"})
-public class ServletListCltPrg extends HttpServlet {
+public class Test extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +37,38 @@ public class ServletListCltPrg extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Session session = (Session) HibernateUtil.getSessionFactory().getCurrentSession();
+                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
-        List<Client> listeClients = (List<Client>) session.createQuery("from Client c order by c.nomcli asc").list();
-        request.setAttribute("listeClients", listeClients);
-        
-        
-        RequestDispatcher rd = request.getRequestDispatcher("TimeLineProg");
-        rd.forward(request, response);
-//        t.commit();
-        session.close();
+                  String sql_checkDo = "from Resultatexo r "
+                    + "where r.exercice.seance.programme.client.codecli = 1 "
+                    + "order by r.exercice.seance.semaines,r.exercice.seance.ordres,r.exercice.ordre asc ";
+            List<Resultatexo> lstResExo = (List<Resultatexo>) session.createQuery(sql_checkDo).list();
+            ArrayList<Seance> lSS = new ArrayList<Seance>();
+//            ArrayList<Integer> lSmm = ArrayList < Integer > ();
+            if (!lstResExo.isEmpty()) {
+                for (Resultatexo rExo : lstResExo) {
+                    if (lSS.contains(rExo.getExercice().getSeance())) {
+                        lSS.add(rExo.getExercice().getSeance());
+                    }
+                }
+            }
+            if (!lSS.isEmpty()) {
+                for (Seance s : lSS) {
+                    System.out.println("<seance>");
+                    System.out.println("<ordreSeance>" + s.getOrdres() + "</ordreSeance>");
+                    System.out.println("<nomSeance>" + s.getSeancetype().getNoms() + "</nomSeance>");
+                    for (Resultatexo rExo : lstResExo) {
+                        if(rExo.getExercice().equals(s)){
+                        System.out.println("<exercice>");
+                        System.out.println("<ordreExercie>" + rExo.getExercice().getOrdre() + "</ordreExercie>");
+                        System.out.println("<nomExercice>" + rExo.getExercice().getExercicetype().getNomet() + "</nomExercice>");
+                        System.out.println("</exercice>");    
+                        }
+                    }
+                }
+                System.out.println("</seance>");
+            }
+                  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

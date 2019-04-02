@@ -5,53 +5,86 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bootstrap Example</title>
+        <title>Ok</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/cardio.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     </head>
-    <body>
-                    
-
-       
-        <!--liiiist-->   
-            <header id="intro">
-                <form action="ServletvoirPrgClient" method="GET">
-                    <div class="input-group">
-                        <select class="custom-select" name="idClient">
-                            <%
-                                ArrayList<Client> lClients = (ArrayList<Client>) request.getAttribute("listeClients");
-                                for (Client c : lClients) {
-                            %>
-                            <option  value="<%=c.getCodecli()%>">
-                                <%=c.getNomcli()%>
-                            </option>
-                            <%
-                                }
-                            %>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit">Choisir</button>
-                        </div>
-                    </div>
-                </form>
-
-        <!--fin liiiist-->
-        <%  ArrayList<Integer> semaines = new ArrayList<Integer>();
-            if (request.getAttribute("listeSeances") != null) {
-                ArrayList<Seance> lSeances = (ArrayList<Seance>) request.getAttribute("listeSeances");
-                for (Seance sc : lSeances) {
-                    if (!semaines.contains(sc.getSemaines())) {
-                        semaines.add(sc.getSemaines());
-                    }
+    <style>
+        h3{
+            color:darkmagenta;
+        }
+    </style>
+    <%  ArrayList<Integer> semaines = new ArrayList<Integer>();
+        if (request.getAttribute("listeSeances") != null) {
+            ArrayList<Seance> lSeances = (ArrayList<Seance>) request.getAttribute("listeSeances");
+            for (Seance sc : lSeances) {
+                if (!semaines.contains(sc.getSemaines())) {
+                    semaines.add(sc.getSemaines());
                 }
             }
+        }
 
-        %>
+    %>
+    <body>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerSeance">Créer une seance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                    </li> 
+                    <% if (request.getAttribute("nomClient") != null && request.getAttribute("codeCli") != null) {
+                            if (!semaines.isEmpty()) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ServletChronoProg?idClient=<%=request.getAttribute("codeCli")%>">Voir progression de <%=request.getAttribute("prenomClient")%></a>
+                    </li> 
+                    <% }
+                        } %>
+                </ul>
+            </div> 
+        </nav> 
+        <!--liiiist-->   
+
+
+        <form action="ServletvoirPrgClient" method="GET">
+            <div class="input-group">
+                <select class="custom-select" name="idClient">
+                    <%                        ArrayList<Client> lClients = (ArrayList<Client>) request.getAttribute("listeClients");
+                        for (Client c : lClients) {
+                    %>
+                    <option  value="<%=c.getCodecli()%>">
+                        <%=c.getNomcli()%>
+                    </option>
+                    <%
+                        }
+                    %>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" >Choisir</button>
+                </div>
+            </div>
+        </form>
+
+        <!--fin liiiist-->
+
         <div class="container mt-3">
             <%if (request.getAttribute("nomClient") != null) {%>
 
@@ -62,7 +95,7 @@
                         <th scope="col">Age</th>
                         <th scope="col">Poids</th>
                         <th scope="col">Handicap</th>
-                        <th scope="col">Tour de teaille</th>
+                        <th scope="col">Tour de taille</th>
                         <th scope="col">Poitrine</th>
                         <th scope="col">Bras</th>
                         <th scope="col">Cuisses</th>
@@ -103,9 +136,6 @@
 
                 </tbody>
             </table>
-
-
-
             <%}%>
             <ul class="nav nav-tabs">
                 <%    ArrayList<Exercice> lExercices = (ArrayList<Exercice>) request.getAttribute("listeExos");
@@ -123,68 +153,17 @@
                 <%} else {%>
                 <h3> Veuillez choisir un client</h3>
                 <%}
-                        }%>
+                    }%>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
 
-                <div id="sem1" class="container tab-pane active"><br>   
-                    <% if (!semaines.isEmpty()) { %>
-                    <h3>Choisir la semaine</h3>
-                    <%}%>
-                </div>
+                <div id="sem1" class="container tab-pane active"><br></div>   
             </div>
         </div>
     </header>
 </body>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <p>2019 All Rights Reserved On Wheels company</p>
-            </div>
-        </div>
-    </div>
-</footer>
 </html>
-<script type="text/javascript">
-    function affiche(numSem)
-    {
+<script type="text/JavaScript" src="js/programme.js"></script>
 
-        var codecli = document.getElementById("numCli").value;
-//            var numSem = document.getElementById("numSem").value;
-        xhr = new XMLHttpRequest();
-
-        var param = "codecli=" + codecli + "&numSem=" + numSem + "";
-        var url = "ServletListeSeance";
-        go = url + "?" + param;
-        xhr.open("GET", go, true);
-
-        xhr.onload = function () {
-            if (xhr.status === 200)
-            {
-
-                lstSeance = xhr.responseXML.getElementsByTagName("seance");
-                text = "<div=\'row\'> ";
-                for (var i = 0; i < lstSeance.length; i++) {
-                    var seance = lstSeance[i].children;
-                    text += "<button class=\'btn btn-info\'>" + seance[1].firstChild.nodeValue + "</button>";
-                    for (var x = 2; x < seance.length; x++) {
-                        var exo = seance[x].children;
-                        text += "<div>"
-                        text += "<p>" + exo[1].firstChild.nodeValue + "</p>";
-                        text += "</div>";
-                    }
-                    text += "</div>";
-                }
-
-
-                document.getElementById("sem1").innerHTML = text;
-
-            }
-        }
-
-        xhr.send();
-    }
-</script>
