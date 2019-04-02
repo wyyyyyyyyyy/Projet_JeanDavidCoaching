@@ -7,6 +7,7 @@ package ctrl;
 
 import db.Bd;
 import db.Exercicetype;
+import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 
 /**
  *
@@ -62,6 +64,9 @@ public class ServletRecherche extends HttpServlet {
                 }
                 out.println("</liste_exo>");
         }
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.close();
+        session.clear();
     }
 
     @Override

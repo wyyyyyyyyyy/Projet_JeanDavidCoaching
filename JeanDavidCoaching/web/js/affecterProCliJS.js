@@ -1,3 +1,6 @@
+window.onload=l_clients();
+window.onload=l_programmetype();
+
 function l_clients()
 {
 
@@ -102,7 +105,6 @@ function l_programmetype()
                 var nodes = l_programmetype[i].children;
                     txt += "<option value="+nodes[0].firstChild.nodeValue+">" + nodes[1].firstChild.nodeValue + "</option>";
             }
-            alert(txt);
             var eltOption = document.getElementById("nomProgrammetype");
             eltOption.innerHTML = txt;
             document.getElementById("bt_programmetype").disabled = "disabled";
@@ -112,9 +114,9 @@ function l_programmetype()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("bt_clients").addEventListener("click", l_clients);
+    //document.getElementById("bt_clients").addEventListener("click", l_clients);
     document.getElementById("nomClient").addEventListener("click", l_objectifs);
-    document.getElementById("bt_programmetype").addEventListener("click", l_programmetype);
+    //document.getElementById("bt_programmetype").addEventListener("click", l_programmetype);
     document.getElementById("bt_affectation").addEventListener("click",affectation);
 
 });

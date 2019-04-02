@@ -11,7 +11,7 @@ function afficherSeanceType() {
             var lstS = xhr.responseXML.getElementsByTagName("list_ST");
             var childrenlstS = lstS[0].children;
             console.log(childrenlstS.length);
-            var txt = "<option>  </option> ";
+            var txt = "<option value=\"\">---------</option> ";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
                 txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " + childlstS[1].firstChild.nodeValue + "</option>";
@@ -73,7 +73,7 @@ function addDivForAddST() {
     divs.insertAdjacentHTML('afterend', txt);
     // initialise zone
     var nextnode = divs.nextSibling.children[4];
-    nextnode.innerHTML = "<div></div>;"
+    nextnode.innerHTML = "<div></div>";
     activer_btn();
 }
 
@@ -103,6 +103,8 @@ function activer_btn() {
             document.getElementById("btn_addProg").disabled = false;
             // event for find the description of a seance type
             children[1].addEventListener("change", rechercheObjSeanceType);
+            // button for find the seance types
+            children[2].addEventListener("click", afficherSeanceType);            
             // event for button of add a new zone 
             children[5].addEventListener("click", addDivForAddST);
             // event for button of delete a zone 
@@ -219,22 +221,18 @@ function suppMsgErrorNomDes() {
  * use servlet: ServletAddProgType
  * @returns {undefined}
  */
-function addProgType(nom,des,listSemaine,listSeance) {
+function addProgType(nom, des, listSemaine, listSeance) {
     var xhr = new XMLHttpRequest();
     // parametres
     var url = "ServletAddProgType?nom=" + nom + "&des=" + des + "&listSemaine="
             + listSemaine + "&listSeance=" + listSeance;
-    alert(url);
     xhr.open("GET", url, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
-            var msg = xhr.responseXML.getElementsByTagName("message");           
-            var txt = "";
-
-                var childlstMsg = msg[0].children;
-                txt += "<p>Meeessaageeeeeeee: " + childlstMsg[0].firstChild.nodeValue + "</p>";
-          
-            document.getElementById("erreur").innerHTML = txt;
+            var msg = xhr.responseXML.getElementsByTagName("message");
+            var txt = "<div class=\"shadow-none p-4 mb-4 bg-light\">Message: " + msg[0].firstChild.nodeValue + "</div>";
+            txt += "</br><a href=\"index.html\">Retourner à la page d'accueil</a>";
+            document.getElementById("body").innerHTML = txt;
         }
     };
     xhr.send();

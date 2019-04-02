@@ -24,6 +24,22 @@
         <title>Création d'une séance</title>
     </head>
     <body>
+         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerSeance">Créer une séance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <div id="erreur"></div>
         <div class="container">
             <h1>Création d'une séance</h1>

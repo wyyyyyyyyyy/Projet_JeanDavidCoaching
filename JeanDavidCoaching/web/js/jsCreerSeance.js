@@ -193,7 +193,9 @@ function enregistrerSeance() {
             texter += nomSeance + " - codeSeance : " + codeSeance;
             texter += "</strong> a bien été créée</div>";
             document.getElementById("erreur").innerHTML = texter;
-            enregistrerExo(codeSeance);
+            enregistrerExo(codeSeance);            
+            sleep(5000);
+            location.reload();
         }
     };
     xhr.send();
@@ -223,11 +225,15 @@ function enregistrerExo(codeSeance) {
                 + "&tempsreposexo=" + tempsreposexo);
         xhr.onload = function () {
             if (xhr.status === 200) {
-                alert("insert : " + i);
             }
         };
         xhr.send();
     }
+}
+
+function modal(){
+    document.getElementById("modal").innerHTML = "En cours d'enregistrer";
+    document.getElementById("verifier").disabled = "true";
 }
 
 function valider() {
@@ -236,6 +242,8 @@ function valider() {
         this.setAttribute("data-toggle", "modal");
         this.setAttribute("data-target", "#exampleModal");
         document.getElementById("verifier").addEventListener("click", enregistrerSeance);
+        document.getElementById("verifier").addEventListener("click", modal);
+        
     }
 }
 

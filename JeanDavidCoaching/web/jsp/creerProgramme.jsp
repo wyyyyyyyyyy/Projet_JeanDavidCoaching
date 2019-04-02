@@ -17,7 +17,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <title>Creation de Programme</title>
     </head>
-    <body>
+    <body id="body">
         <div id="erreur"></div>
         <h1>Créer un programme : </h1>
             <div id = "zoneALL" class="form-group" >
@@ -45,7 +45,6 @@
             </div>
             <button id="btn_addProg" class="btn btn-outline-warning" type="button">Ajouter Programme </button>
         </div>
-        </br><a href="ServletAddProgType?nom=fdafda&des=fdsafasfafaf&listSemaine=1,1,1&listSeance=1,1,1">ruozhi TEST</a>
         </br><a href="index.html">Retourner à la page d'accueil</a>
         <!-- Scripts -->
         <script type="text/JavaScript" src="js/jsCreerProg.js"></script>

@@ -175,6 +175,76 @@ public class Bd {
         t.commit();
     }
 
+    public static List<Client> lireClient() throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Client> lclient = (List<Client>) session.createQuery("from Client ").list();
+        session.close();
+        return lclient;
+    }
+
+    public static ArrayList<String> lireObjectifs(String nomClient) throws ClassNotFoundException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        ArrayList<String> lobjectif = (ArrayList<String>) session.createQuery("select c.objectif "
+                + "from Client as c "
+                + "where c.nomcli='" + nomClient + "'").list();
+        session.close();
+        return lobjectif;
+    }
+
+    public static List<Programmetype> lireProgrammeType() throws ClassNotFoundException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Programmetype> lprogrammetype = (List<Programmetype>) session.createQuery("from Programmetype ").list();
+        return lprogrammetype;
+    }
+
+//    public static void affecterProgrammeClient(Client client, Coach coach, Programmetype programmetype)
+//    {
+////        Programme programme1 = new Programme(client, coach, programmetype);
+////        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+////        Transaction t = session.beginTransaction();
+////        
+////        session.save(programme1);
+////        session.getTransaction().commit();
+////        session.close();    
+//        
+//    }
+    public static Integer affecterProgrammeClient(int codecli, int codept) throws Exception {
+//        String sql ="Insert into PROGRAMME(Codept, Codecli) values (?,?)";
+//        PreparedStatement st;
+//        int nb;
+//        try {
+//            st = Bd.cx.prepareStatement(sql);          
+//            st.setInt(2, codecli);
+//            st.setInt(1, codept);          
+//            nb = st.executeUpdate();          
+//            st.close();     
+//        }
+//        catch (SQLException sqle){
+//            throw new Exception("Probleme d'enregistrement -"+sqle.getMessage());
+//        }
+//        return nb;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+
+        List<Client> client = (List<Client>) session.createQuery("from Client "
+                + "where codecli=" + codecli + "").list();
+
+        List<Programmetype> programmetype = (List<Programmetype>) session.createQuery("from Programmetype p where p.codept=" + codept + "").list();
+
+        Programme prog = new Programme(client.get(0), programmetype.get(0));
+        System.out.println(client.get(0).getNomcli());
+        client.get(0).addProgramme(prog);
+        programmetype.get(0).addProgramme(prog);
+
+        session.save(prog);
+        t.commit();
+        session.close();
+        return prog.getCodep();
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
     }

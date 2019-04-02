@@ -81,15 +81,16 @@ public class ServletAddProgType extends HttpServlet {
                     int numSem =  Integer.parseInt(listSemaineString[i]);
                     int codest = Integer.parseInt(listSeanceString[i]);
                     Bd.ajouterPredefiniProg(numSem, codest, i, codept);
-                    out.print("<okkkkkk>");
+                    out.print("Vous avec bien créé un nouveau programme");
                 }
             }
             /*----- Fin Hibernate -----*/
 //            out.print("<msg>ok</msg>");
             out.print("</message>");
         }
-
-        //session.close();        
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.close();
+        session.clear();          
     }
 
     /**
