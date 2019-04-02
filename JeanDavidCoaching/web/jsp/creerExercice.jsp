@@ -15,6 +15,23 @@
         <title>JExercice</title>
     </head>
     <body>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerSeance">Créer une séance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <div class="container">
             <div class="py-5 text-center">
                 <h1>Création d'exercice</h1>
@@ -44,10 +61,9 @@
                             </div>
                             <div>
                                 <img id="preview" width="200" style="display:none"/>
-                                <input type="text" id="imgfield" placeholder="preview">
-                                <input type="file" name="file" id="inputfile" accept="image/gif,image/jpg,image/jpeg,image/png" onchange="imgPreview(this)">
+                                <button id="btnP" class="btn btn-outline-warning" type="button" onclick="imgPreview()">Visualiser image</button><br><br>
                             </div>
-                            <button id="btn" class="btn btn-success" type="button">Ajouter</button>
+                            <button id="btn" class="btn btn-outline-warning" type="button">Ajouter</button>
                         </div>
                     </div>
                 </div>
@@ -78,9 +94,13 @@
                                 <input id="materielExo2" type="text" class="form-control" />
                                 <label for="mediaExo2">Média descriptif :</label>
                                 <input id="mediaExo2" type="text" class="form-control" />  
-                            </div>                           
-                            <button id="btnM" class="btn btn-success" type="button">Modifier</button>
-                            <button id="btnS" class="btn btn-success" type="button">Supprimer</button>
+                            </div>                 
+                            <div>
+                                <img id="preview2" width="200" style="display:none"/>
+                                <button id="btnP2" class="btn btn-outline-warning" type="button" onclick="imgPreview2()">Visualiser image</button><br><br>
+                            </div>
+                            <button id="btnM" class="btn btn-outline-warning" type="button">Modifier</button>
+                            <button id="btnS" class="btn btn-outline-warning" type="button">Supprimer</button>
                         </div>
                     </div>
                 </div>

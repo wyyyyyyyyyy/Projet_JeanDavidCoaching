@@ -13,11 +13,13 @@ function creerExer()
     var tip = encodeURIComponent(document.getElementById("tipExo").value);
     var materiel = encodeURIComponent(document.getElementById("materielExo").value);
     var media = encodeURIComponent(document.getElementById("mediaExo").value);
+    var route = "img/"+media;
+
 
     var xhr = new XMLHttpRequest();
 
     var url = "ServletCreExo?nom=" + nom + "&objectif=" + objectif + "&description=" + description
-            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + media;
+            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + route;
     //var test = "ServletCreExo?nom=a&objectif=b&description=c&tipRep=d&tip=e&materiel=f&media=g"
     xhr.open("GET", url, true);
     alert(url);
@@ -46,6 +48,7 @@ function creerExer()
             document.getElementById("tipExo").value = "";
             document.getElementById("materielExo").value = "";
             document.getElementById("mediaExo").value = "";
+            document.getElementById("preview").style.display = "none";
             listeExo();
 //            var choix = document.querySelectorAll(".choisir");
 //            for (var i = 0; i < choix.length; i++)
@@ -143,6 +146,7 @@ function selectEvent()
                 document.getElementById("tipExo2").value = tips;
                 document.getElementById("materielExo2").value = materiel;
                 document.getElementById("mediaExo2").value = media;
+                document.getElementById("preview2").style.display = "none";
             }
         }
     };
@@ -181,6 +185,7 @@ function modifierExer()
             document.getElementById("tipExo2").value = "";
             document.getElementById("materielExo2").value = "";
             document.getElementById("mediaExo2").value = "";
+            document.getElementById("preview2").style.display = "none";
             listeExo();
         }
     };
@@ -206,38 +211,30 @@ function supprimerExer()
             document.getElementById("tipRepExo2").value = "";
             document.getElementById("tipExo2").value = "";
             document.getElementById("materielExo2").value = "";
-            document.getElementById("mediaExo2").value = "";
+            document.getElementById("mediaExo2").value = "";           
+            document.getElementById("preview2").style.display = "none";
             listeExo();
         }
     };
     xhr.send();
 }
 
-function imgPreview(fileDom)
+function imgPreview()
 {
-    if(window.FileReader) {
-        var reader=new FileReader();        
-    }
-    else {
-        alert("non");
-    }
-    
-    var file = fileDom.files[0];
-    var imageType = /^image\//;
-    
-    if(!imageType.test(file.type)) {
-        alert("Ce n'est pas une image");
-        return;
-    }
-    
-    reader.onload = function(e){
-        var img=document.getElementById("preview");
-        img.src=e.target.result;
-    };
-    reader.readAsDataURL(file);
-    document.getElementById("preview").style.display="";
+     var media = document.getElementById("mediaExo").value;
+     var route = "img/"+media;
+     alert(route);
+     document.getElementById("preview").src=route;
+     document.getElementById("preview").style.display = "";
 }
 
+function imgPreview2()
+{
+     var media = document.getElementById("mediaExo2").value;
+     alert(media);
+     document.getElementById("preview2").src=media;
+     document.getElementById("preview2").style.display = "";
+}
 
 window.addEventListener("load", listeExo, false);
 document.addEventListener("DOMContentLoaded", () => {

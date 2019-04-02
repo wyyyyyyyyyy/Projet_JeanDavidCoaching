@@ -52,6 +52,7 @@ public class ServletCreExo extends HttpServlet {
             String tip = request.getParameter("tip");
             String materiel = request.getParameter("materiel");
             String media = request.getParameter("media");
+            
             //out.println(nom+description+media+tipRep+tip+materiel+objectif);
 
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
