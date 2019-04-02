@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 27 mars 2019, 10:51:46
-    Author     : Marck
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

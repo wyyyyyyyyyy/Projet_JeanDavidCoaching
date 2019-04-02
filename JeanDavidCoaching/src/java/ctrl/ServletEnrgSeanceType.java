@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package ctrl;
 
 import db.Bd;
+import db.Exercicetype;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,19 +20,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author liaox
  */
-public class ServletAjouterExoType extends HttpServlet {
+public class ServletEnrgSeanceType extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomSeance = request.getParameter("nomSeance");
-        int codeET = Integer.valueOf(request.getParameter("codeET"));
-        int ordre = Integer.valueOf(request.getParameter("ordre"));
-        int nbrep = Integer.valueOf(request.getParameter("nbrep"));
-        int nbserie = Integer.valueOf(request.getParameter("nbserie"));
-        int tempsexo = Integer.valueOf(request.getParameter("tempsexo"));
-        int tempsreposserie = Integer.valueOf(request.getParameter("tempsreposserie"));
-        int tempsreposexo = Integer.valueOf(request.getParameter("tempsreposexo"));
-        Bd.ajouterExoType(nomSeance, codeET, ordre, nbrep, nbserie, tempsexo, tempsreposserie, tempsreposexo);
+            response.setContentType("text/html;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+            /*---Récupérer des paramères---*/
+            String nomSeance = request.getParameter("nomSeance");
+            String desc = request.getParameter("desc");
+            int codeSeance = Bd.creerSeanceType(nomSeance,desc);
+            out.println(codeSeance);
+        }
+        
     }
 
     /**
