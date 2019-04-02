@@ -12,7 +12,6 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-
             <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -28,6 +27,7 @@
                 </ul>
             </div>
         </nav>
+
         <div class="container">
             <div class="py-5 text-center">
                 <h1>Création d'exercice</h1>

@@ -45,38 +45,6 @@
         <servlet-class>ctrl.ServletListeSeance</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>homeCoach</servlet-name>
-        <jsp-file>/jsp/homeCoach.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>ctrl.Test</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletChronoProg</servlet-name>
-        <servlet-class>ctrl.ServletChronoProg</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>chronoProg</servlet-name>
-        <jsp-file>/jsp/chronoProg.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletvoirListePrgType</servlet-name>
-        <servlet-class>ctrl.ServletvoirListePrgType</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>voirProgType</servlet-name>
-        <jsp-file>/jsp/voirProgType.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletVoirDetailsProgType</servlet-name>
-        <servlet-class>ctrl.ServletVoirDetailsProgType</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletVoirDetailsProgType1</servlet-name>
-        <servlet-class>ctrl.ServletVoirDetailsProgType1</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletAddProgType</servlet-name>
         <servlet-class>ctrl.ServletAddProgType</servlet-class>
     </servlet>
@@ -185,8 +153,32 @@
         <url-pattern>/creerExercice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletRecherche</servlet-name>
-        <url-pattern>/ServletRecherche</url-pattern>
+        <servlet-name>ServletListeExo</servlet-name>
+        <url-pattern>/ServletListeExo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletModExo</servlet-name>
+        <url-pattern>/ServletModExo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletSupExo</servlet-name>
+        <url-pattern>/ServletSupExo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAddProgType</servlet-name>
+        <url-pattern>/ServletAddProgType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFindObjSeanceType</servlet-name>
+        <url-pattern>/ServletFindObjSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFindSeanceType</servlet-name>
+        <url-pattern>/ServletFindSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerProgramme</servlet-name>
+        <url-pattern>/creerProgramme</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
