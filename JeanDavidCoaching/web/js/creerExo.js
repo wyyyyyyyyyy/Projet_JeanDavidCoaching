@@ -13,7 +13,7 @@ function creerExer()
     var tip = encodeURIComponent(document.getElementById("tipExo").value);
     var materiel = encodeURIComponent(document.getElementById("materielExo").value);
     var media = encodeURIComponent(document.getElementById("mediaExo").value);
-    var route = "img/"+media;
+    var route = "img/exo/"+media;
 
 
     var xhr = new XMLHttpRequest();
@@ -222,7 +222,7 @@ function supprimerExer()
 function imgPreview()
 {
      var media = document.getElementById("mediaExo").value;
-     var route = "img/"+media;
+     var route = "img/exo/"+media;
      alert(route);
      document.getElementById("preview").src=route;
      document.getElementById("preview").style.display = "";

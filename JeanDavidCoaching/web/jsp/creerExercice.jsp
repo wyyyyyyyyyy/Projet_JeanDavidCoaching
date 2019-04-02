@@ -61,7 +61,8 @@
                             </div>
                             <div>
                                 <img id="preview" width="200" style="display:none"/>
-                                <button id="btnP" class="btn btn-outline-warning" type="button" onclick="imgPreview()">Visualiser image</button><br><br>
+                                <button id="btnP" class="btn btn-outline-warning" type="button" onclick="imgPreview()">Visualiser image</button>
+                                <hr/>
                             </div>
                             <button id="btn" class="btn btn-outline-warning" type="button">Ajouter</button>
                         </div>
@@ -97,7 +98,8 @@
                             </div>                 
                             <div>
                                 <img id="preview2" width="200" style="display:none"/>
-                                <button id="btnP2" class="btn btn-outline-warning" type="button" onclick="imgPreview2()">Visualiser image</button><br><br>
+                                <button id="btnP2" class="btn btn-outline-warning" type="button" onclick="imgPreview2()">Visualiser image</button>
+                                <hr/>
                             </div>
                             <button id="btnM" class="btn btn-outline-warning" type="button">Modifier</button>
                             <button id="btnS" class="btn btn-outline-warning" type="button">Supprimer</button>
