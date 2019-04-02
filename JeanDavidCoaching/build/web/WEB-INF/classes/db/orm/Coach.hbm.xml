@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Coach" table="COACH" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codec" type="java.lang.Integer">
+            <column name="CODEC" />
+            <generator class="identity" />
+        </id>
+        <property name="nomc" type="string">
+            <column name="NOMC" length="32" />
+        </property>
+        <property name="prenomc" type="string">
+            <column name="PRENOMC" length="50" />
+        </property>
+        <property name="mailc" type="string">
+            <column name="MAILC" length="100" />
+        </property>
+        <property name="mailadmin" type="string">
+            <column name="MAILADMIN" length="100" />
+        </property>
+        <property name="telc" type="string">
+            <column name="TELC" length="10" />
+        </property>
+        <property name="mdpc" type="string">
+            <column name="MDPC" length="16" />
+        </property>
+        <set name="programmes" table="PROGRAMME" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEC" not-null="true" />
+            </key>
+            <one-to-many class="db.Programme" />
+        </set>
+    </class>
+</hibernate-mapping>

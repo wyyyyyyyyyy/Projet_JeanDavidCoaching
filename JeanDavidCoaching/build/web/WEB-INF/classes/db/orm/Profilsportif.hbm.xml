@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Profilsportif" table="PROFILSPORTIF" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codeprofil" type="java.lang.Integer">
+            <column name="CODEPROFIL" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="client" class="db.Client" fetch="select">
+            <column name="CODECLI" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="poids" type="java.lang.Float">
+            <column name="POIDS" precision="3" />
+        </property>
+        <property name="bras" type="java.lang.Integer">
+            <column name="BRAS" />
+        </property>
+        <property name="taille" type="java.lang.Integer">
+            <column name="TAILLE" />
+        </property>
+        <property name="hanches" type="java.lang.Integer">
+            <column name="HANCHES" />
+        </property>
+        <property name="cuisses" type="java.lang.Integer">
+            <column name="CUISSES" />
+        </property>
+        <property name="poitrine" type="java.lang.Integer">
+            <column name="POITRINE" />
+        </property>
+        <property name="handicap" type="java.lang.Boolean">
+            <column name="HANDICAP" />
+        </property>
+    </class>
+</hibernate-mapping>

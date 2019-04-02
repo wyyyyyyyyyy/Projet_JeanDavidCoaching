@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Seance" table="SEANCE" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codes" type="java.lang.Integer">
+            <column name="CODES" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="programme" class="db.Programme" fetch="select">
+            <column name="CODEP" not-null="true" />
+        </many-to-one>
+        <many-to-one name="seancetype" class="db.Seancetype" fetch="select">
+            <column name="CODEST" not-null="true" />
+        </many-to-one>
+        <property name="semaines" type="java.lang.Integer">
+            <column name="SEMAINES" />
+        </property>
+        <property name="ordres" type="java.lang.Integer">
+            <column name="ORDRES" />
+        </property>
+        <set name="resultatseances" table="RESULTATSEANCE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODES" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="db.Resultatseance" />
+        </set>
+        <set name="exercices" table="EXERCICE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODES" not-null="true" />
+            </key>
+            <one-to-many class="db.Exercice" />
+        </set>
+    </class>
+</hibernate-mapping>

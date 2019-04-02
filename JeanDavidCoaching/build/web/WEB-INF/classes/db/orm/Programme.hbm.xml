@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2019 11:38:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Programme" table="PROGRAMME" catalog="db_21405117_2" optimistic-lock="version">
+        <id name="codep" type="java.lang.Integer">
+            <column name="CODEP" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="client" class="db.Client" fetch="select">
+            <column name="CODECLI" not-null="true" />
+        </many-to-one>
+        <many-to-one name="coach" class="db.Coach" fetch="select">
+            <column name="CODEC" not-null="false" />
+        </many-to-one>
+        <many-to-one name="programmetype" class="db.Programmetype" fetch="select">
+            <column name="CODEPT" not-null="true" />
+        </many-to-one>
+        <property name="datedebut" type="date">
+            <column name="DATEDEBUT" length="10" />
+        </property>
+        <set name="seances" table="SEANCE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODEP" not-null="true" />
+            </key>
+            <one-to-many class="db.Seance" />
+        </set>
+    </class>
+</hibernate-mapping>

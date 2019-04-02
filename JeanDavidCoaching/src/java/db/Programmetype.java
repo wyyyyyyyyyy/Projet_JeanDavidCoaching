@@ -26,6 +26,12 @@ public class Programmetype  implements java.io.Serializable {
        this.predefinirseances = predefinirseances;
        this.programmes = programmes;
     }
+    
+    public Programmetype(String nomp, String desp) {
+        this.nomp = nomp;
+        this.descriptionp = desp;
+    }
+
    
     public Integer getCodept() {
         return this.codept;
@@ -61,6 +67,11 @@ public class Programmetype  implements java.io.Serializable {
     
     public void setProgrammes(Set programmes) {
         this.programmes = programmes;
+    }
+    
+    public void addProgramme(Programme programme)
+    {
+        this.programmes.add(programme);
     }
 
 

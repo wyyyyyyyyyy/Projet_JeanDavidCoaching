@@ -12,7 +12,7 @@
             <column name="CODECLI" not-null="true" />
         </many-to-one>
         <many-to-one name="coach" class="db.Coach" fetch="select">
-            <column name="CODEC" not-null="true" />
+            <column name="CODEC" not-null="false" />
         </many-to-one>
         <many-to-one name="programmetype" class="db.Programmetype" fetch="select">
             <column name="CODEPT" not-null="true" />

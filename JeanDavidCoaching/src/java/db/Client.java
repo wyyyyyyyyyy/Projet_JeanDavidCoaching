@@ -2,6 +2,7 @@ package db;
 // Generated 27 mars 2019 11:38:28 by Hibernate Tools 4.3.1
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class Client  implements java.io.Serializable {
     public Client() {
     }
 
+    
     public Client(String nomcli, String prenomcli, String mailcli, String telcli, Date datenai, Boolean genrecli, String mdpcli, String objectif, Set profilsportifs, Set programmes) {
        this.nomcli = nomcli;
        this.prenomcli = prenomcli;
@@ -38,6 +40,18 @@ public class Client  implements java.io.Serializable {
        this.objectif = objectif;
        this.profilsportifs = profilsportifs;
        this.programmes = programmes;
+    }
+    
+    /**
+     * 
+     * @param nomcli
+     * @param prenomCli
+     * @param programmes 
+     */
+    public Client(String nomcli, String prenomcli, Set programmes){
+        this.nomcli = nomcli;
+        this.prenomcli = prenomcli;
+        this.programmes = programmes;
     }
    
     public Integer getCodecli() {
@@ -118,7 +132,15 @@ public class Client  implements java.io.Serializable {
         this.programmes = programmes;
     }
 
+    public void addProgramme(Programme programme)
+    {
+        this.programmes.add(programme);
+    }
 
+    public int getAge(){
+        int year = Calendar.getInstance().get(Calendar.YEAR)-1900;
+        return (int)year-this.datenai.getYear();
+    }
 
 
 }
