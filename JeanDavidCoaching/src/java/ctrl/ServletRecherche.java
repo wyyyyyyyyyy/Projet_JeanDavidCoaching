@@ -37,7 +37,7 @@ public class ServletRecherche extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
@@ -51,7 +51,10 @@ public class ServletRecherche extends HttpServlet {
                 try {
                     List<Exercicetype> l_Exo = Bd.lireExerciceType(nomExo);
                     for(Exercicetype Exo : l_Exo){
+                        out.println("<Exercice>");
+                        out.println("<codeExo>" + Exo.getCodeet() + "</codeExo>");
                         out.println("<nomExo>" + Exo.getNomet() + "</nomExo>");
+                        out.println("</Exercice>");
                     }
                 }
                 catch(ClassNotFoundException | SQLException ex){

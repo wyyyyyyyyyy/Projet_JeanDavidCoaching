@@ -44,6 +44,22 @@
         <servlet-name>ServletListeSeance</servlet-name>
         <servlet-class>ctrl.ServletListeSeance</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAddProgType</servlet-name>
+        <servlet-class>ctrl.ServletAddProgType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletFindObjSeanceType</servlet-name>
+        <servlet-class>ctrl.ServletFindObjSeanceType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletFindSeanceType</servlet-name>
+        <servlet-class>ctrl.ServletFindSeanceType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>creerProgramme</servlet-name>
+        <jsp-file>/jsp/creerProgramme.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
         <url-pattern>/ListCtrlPrg</url-pattern>
@@ -87,6 +103,22 @@
     <servlet-mapping>
         <servlet-name>creerExercice</servlet-name>
         <url-pattern>/creerExercice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAddProgType</servlet-name>
+        <url-pattern>/ServletAddProgType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFindObjSeanceType</servlet-name>
+        <url-pattern>/ServletFindObjSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFindSeanceType</servlet-name>
+        <url-pattern>/ServletFindSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerProgramme</servlet-name>
+        <url-pattern>/creerProgramme</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

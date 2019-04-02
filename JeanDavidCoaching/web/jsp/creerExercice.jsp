@@ -19,8 +19,8 @@
             </div>
             <div class="row">
                 <div class="col-md-5 order-md-2 mb-4">
-                        <h2>Exercices créés : </h2>
-                        <div id="exoCre"></div>
+                    <h2>Exercices créés : </h2>
+                    <div id="exoCre"></div>
                 </div>
                 <div class ="col-md-7 order-md-1">
                     <h2>Créer un exercice : </h2>
@@ -28,18 +28,18 @@
                         <label for="nomExo">Nom :</label>
                         <input id="nomExo" type="text" class="form-control"/>
                         <label for="objectifExo">Objectif :</label>
-                            <input id="objectifExo" type="text" class="form-control" />
+                        <input id="objectifExo" type="text" class="form-control" />
                         <label for="descriptionExo">Description :</label>
-                            <textarea id="descriptionExo" class="form-control"></textarea>
+                        <textarea id="descriptionExo" class="form-control"></textarea>
                         <label for="tipRepExo">Tips Répétition :</label>
-                            <input id="tipRepExo" type="text" class="form-control" />
+                        <input id="tipRepExo" type="text" class="form-control" />
                         <label for="tipExo">Tips Exercice :</label>
-                            <input id="tipExo" type="text" class="form-control" />
+                        <input id="tipExo" type="text" class="form-control" />
                         <label for="materielExo">Matériel :</label>
-                            <input id="materielExo" type="text" class="form-control" />
+                        <input id="materielExo" type="text" class="form-control" />
                         <label for="mediaExo">Média descriptif :</label>
-                            <input id="mediaExo" type="text" class="form-control" />
-                            
+                        <input id="mediaExo" type="text" class="form-control" />
+
                     </div>
                     <button id="btn" class="btn btn-success" type="button">Ajouter </button>
                 </div>

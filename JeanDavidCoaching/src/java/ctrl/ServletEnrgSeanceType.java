@@ -30,10 +30,8 @@ public class ServletEnrgSeanceType extends HttpServlet {
             /*---Récupérer des paramères---*/
             String nomSeance = request.getParameter("nomSeance");
             String desc = request.getParameter("desc");
-            Bd.creerSeanceType(nomSeance,desc);
-            out.println("</br>");
-            out.println("<p>Vous avez créé une séance !</p>");
-            out.println("<p>Ajoute des exercices : </p>");
+            int codeSeance = Bd.creerSeanceType(nomSeance,desc);
+            out.println(codeSeance);
         }
         
     }
