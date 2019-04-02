@@ -22,6 +22,11 @@ public class Programme  implements java.io.Serializable {
     public Programme() {
     }
 
+    public Programme(Client client, Programmetype programmetype)
+    {
+        this.client = client;
+        this.programmetype = programmetype;
+    }
 	
     public Programme(Client client, Coach coach, Programmetype programmetype) {
         this.client = client;

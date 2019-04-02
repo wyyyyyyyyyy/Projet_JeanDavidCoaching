@@ -25,10 +25,6 @@
         <jsp-file>/jsp/creerExercice.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>TimeLineProg</servlet-name>
-        <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>ServletvoirPrgClient</servlet-name>
         <servlet-class>ctrl.ServletvoirPrgClient</servlet-class>
     </servlet>
@@ -65,24 +61,76 @@
         <url-pattern>/ListCtrlPrg</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TimeLineProg</servlet-name>
-        <url-pattern>/TimeLineProg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletvoirPrgClient</servlet-name>
         <url-pattern>/ServletvoirPrgClient</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletClient</servlet-name>
+        <servlet-class>ctrl.ServletClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <jsp-file>/jsp/affecterProgrammeClient.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <servlet-class>servlet.ServletObjectifs</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectif</servlet-name>
+        <servlet-class>ctrl.ServletObjectif</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <servlet-class>ctrl.ServletProgrammetype</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <servlet-class>ctrl.ServletAffecterProgrammeClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TimeLineProg</servlet-name>
+        <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
         <url-pattern>/ServletRecherche</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletListeSeance</servlet-name>
-        <url-pattern>/ServletListeSeance</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>creerSeance</servlet-name>
         <url-pattern>/creerSeance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <url-pattern>/affecterProgrammeClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <url-pattern>/ServletObjectifs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectif</servlet-name>
+        <url-pattern>/ServletObjectif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <url-pattern>/ServletProgrammetype</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <url-pattern>/ServletAffecterProgrammeClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeLineProg</servlet-name>
+        <url-pattern>/TimeLineProg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletListeSeance</servlet-name>
+        <url-pattern>/ServletListeSeance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletEnrgSeanceType</servlet-name>

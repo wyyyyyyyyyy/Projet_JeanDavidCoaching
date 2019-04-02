@@ -147,6 +147,9 @@
         </div>
     </div>
 </footer>
+        <%=request.getAttribute("codeprogramme")%>
+        <h1>Hello World!</h1>
+    </body>
 </html>
 <script type="text/javascript">
     function affiche(numSem)
