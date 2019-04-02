@@ -25,6 +25,10 @@
         <jsp-file>/jsp/creerExercice.jsp</jsp-file>
     </servlet>
     <servlet>
+        <servlet-name>ServletvoirPrgClient</servlet-name>
+        <servlet-class>ctrl.ServletvoirPrgClient</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TimeLineProg</servlet-name>
         <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
     </servlet>
@@ -53,10 +57,6 @@
         <servlet-class>ctrl.ServletChronoProg</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletvoirPrgClient</servlet-name>
-        <servlet-class>ctrl.ServletvoirPrgClient</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>chronoProg</servlet-name>
         <jsp-file>/jsp/chronoProg.jsp</jsp-file>
     </servlet>
@@ -76,25 +76,93 @@
         <servlet-name>ServletVoirDetailsProgType1</servlet-name>
         <servlet-class>ctrl.ServletVoirDetailsProgType1</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAddProgType</servlet-name>
+        <servlet-class>ctrl.ServletAddProgType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletFindObjSeanceType</servlet-name>
+        <servlet-class>ctrl.ServletFindObjSeanceType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletFindSeanceType</servlet-name>
+        <servlet-class>ctrl.ServletFindSeanceType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>creerProgramme</servlet-name>
+        <jsp-file>/jsp/creerProgramme.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
         <url-pattern>/ListCtrlPrg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletvoirPrgClient</servlet-name>
+        <url-pattern>/ServletvoirPrgClient</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletClient</servlet-name>
+        <servlet-class>ctrl.ServletClient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <jsp-file>/jsp/affecterProgrammeClient.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <servlet-class>servlet.ServletObjectifs</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletObjectif</servlet-name>
+        <servlet-class>ctrl.ServletObjectif</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <servlet-class>ctrl.ServletProgrammetype</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <servlet-class>ctrl.ServletAffecterProgrammeClient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletRecherche</servlet-name>
+        <url-pattern>/ServletRecherche</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creerSeance</servlet-name>
+        <url-pattern>/creerSeance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>affecterProgrammeClient</servlet-name>
+        <url-pattern>/affecterProgrammeClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectifs</servlet-name>
+        <url-pattern>/ServletObjectifs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletObjectif</servlet-name>
+        <url-pattern>/ServletObjectif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletProgrammetype</servlet-name>
+        <url-pattern>/ServletProgrammetype</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAffecterProgrammeClient</servlet-name>
+        <url-pattern>/ServletAffecterProgrammeClient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TimeLineProg</servlet-name>
         <url-pattern>/TimeLineProg</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletRecherche</servlet-name>
-        <url-pattern>/ServletRecherche</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletListeSeance</servlet-name>
         <url-pattern>/ServletListeSeance</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>creerSeance</servlet-name>
-        <url-pattern>/creerSeance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletEnrgSeanceType</servlet-name>
@@ -117,40 +185,8 @@
         <url-pattern>/creerExercice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>homeCoach</servlet-name>
-        <url-pattern>/homeCoach</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/Test</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletvoirPrgClient</servlet-name>
-        <url-pattern>/ServletvoirPrgClient</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletChronoProg</servlet-name>
-        <url-pattern>/ServletChronoProg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>chronoProg</servlet-name>
-        <url-pattern>/chronoProg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletvoirListePrgType</servlet-name>
-        <url-pattern>/ServletvoirListePrgType</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>voirProgType</servlet-name>
-        <url-pattern>/voirProgType</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletVoirDetailsProgType</servlet-name>
-        <url-pattern>/ServletVoirDetailsProgType</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletVoirDetailsProgType1</servlet-name>
-        <url-pattern>/ServletVoirDetailsProgType1</url-pattern>
+        <servlet-name>ServletRecherche</servlet-name>
+        <url-pattern>/ServletRecherche</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
@@ -158,6 +194,4 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    <servlet-name>ServletRecherche</servlet-name>
-    <servlet-class>servlet.ServletRecherche</servlet-class>
 </web-app>

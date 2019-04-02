@@ -72,14 +72,7 @@ public class Bd {
      * @param s
      * @return
      */
-    public static List<Exercicetype> ETInfo(String s) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction t = session.beginTransaction();
 
-        String hql = "from Exercicetype et where et.nomet='" + s + "'";
-        List<Exercicetype> l_exType = (List<Exercicetype>) session.createQuery(hql).list();
-        return l_exType;
-    }
 
     //Méthodes
     //Méthode de connexion avec la base de données
@@ -105,33 +98,32 @@ public class Bd {
         List<Exercicetype> l = (List<Exercicetype>) session.createQuery(
                 "from Exercicetype "
                 + "where NomET like '%" + nom + "%'").list();
-        session.close();
+        t.commit();
         return l;
 
     }
 
-    public static void creerSeanceType(String nomSeance, String desc) {
+    public static int creerSeanceType(String nomSeance, String desc) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
         Seancetype s = new Seancetype(nomSeance, desc);
         session.save(s);
         t.commit();
-        session.close();
+        return s.getCodest();
     }
 
-    public static void ajouterExoType(String nomSeance, int codeET, int ordre,
+    public static void ajouterExoType(int codeSeance, int codeET, int ordre,
             int nbrep, int nbserie, int tempsexo,
             int tempsreposserie, int tempsreposexo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
         List<Seancetype> listS = session.createQuery("from Seancetype "
-                + "where NomS ='" + nomSeance + "'").list();
+                + "where CODEST ='" + codeSeance + "'").list();
         Seancetype seance = listS.get(0);
-        Exercicetype exo = (Exercicetype) session.get(Exercicetype.class, 1);
-//        Exercicetype  exo= (Exercicetype)session.createQuery("from Exercicetype "
-//                                        + "where codeET ='" + codeET + "'");
+        Exercicetype exo = (Exercicetype) session.createQuery("from Exercicetype "
+                + "where codeET ='" + codeET + "'").list().get(0);
 
-        PredefinirexoId preId = new PredefinirexoId(codeET, seance.getCodest(), ordre);
+        PredefinirexoId preId = new PredefinirexoId(codeET, codeSeance, ordre);
         Predefinirexo pre = new Predefinirexo(preId, exo, seance, nbrep, nbserie,
                 tempsexo, tempsreposserie, tempsreposexo);
         session.save(pre);
@@ -140,51 +132,115 @@ public class Bd {
         t.commit();
     }
 
-    public static List<Exercice> getListExo(Integer numSem, Integer codecli) {
+    // inserer un nouveau programme type 
+    public static int creerProgType(String nomp, String desp) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        String sql_getLstExo = "from Exercice e "
-                + "where e.seance.semaines = " + numSem + " "
-                + "and e.seance.programme.client.codecli=" + codecli + " "
-                + "order by e.seance.ordres,e.ordre";
-        List<Exercice> lstExo = (List<Exercice>) session.createQuery(sql_getLstExo).list();
+        Transaction t = session.beginTransaction();
+        Programmetype newpt = new Programmetype(nomp, desp);
+        session.save(newpt);
+        t.commit();
+        return newpt.getCodept();
+    }
+
+// inserer les donnes dans la table "PredifinirSeance".    
+    public static void ajouterPredefiniProg(int numsem, int codest, int i, int codept) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+
+        // get object Programme type
+        String sqlProg = "from Programmetype p where p.codept =" + codept + " ";
+        List<Programmetype> l = session.createQuery(sqlProg).list();
+        Programmetype pt = (Programmetype) session.get(Programmetype.class, l.size());
+        // get object Seancetype
+        String sql = "from Seancetype s where s.codest = " + codest + " ";
+        List<Seancetype> listS = session.createQuery(sql).list();
+        Seancetype seancetype = listS.get(0);
+        // create a object PredefinirseanceId
+        int ordre = i + 1;
+        PredefinirseanceId id = new PredefinirseanceId(codept, codest, ordre, numsem);
+        // create a object Predefinirseance
+        Predefinirseance defini = new Predefinirseance(id, pt, seancetype);
+        session.save(defini);
+        // create the relationship
+        pt.getPredefinirseances().add(defini);
+        seancetype.getPredefinirseances().add(defini);
+
+        t.commit();
+    }
+
+    public static List<Client> lireClient() throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Client> lclient = (List<Client>) session.createQuery("from Client ").list();
         session.close();
-        return lstExo;
+        return lclient;
+    }
+
+    public static ArrayList<String> lireObjectifs(String nomClient) throws ClassNotFoundException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        ArrayList<String> lobjectif = (ArrayList<String>) session.createQuery("select c.objectif "
+                + "from Client as c "
+                + "where c.nomcli='" + nomClient + "'").list();
+        session.close();
+        return lobjectif;
+    }
+
+    public static List<Programmetype> lireProgrammeType() throws ClassNotFoundException, SQLException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Programmetype> lprogrammetype = (List<Programmetype>) session.createQuery("from Programmetype ").list();
+        return lprogrammetype;
+    }
+
+//    public static void affecterProgrammeClient(Client client, Coach coach, Programmetype programmetype)
+//    {
+////        Programme programme1 = new Programme(client, coach, programmetype);
+////        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+////        Transaction t = session.beginTransaction();
+////        
+////        session.save(programme1);
+////        session.getTransaction().commit();
+////        session.close();    
+//        
+//    }
+    public static Integer affecterProgrammeClient(int codecli, int codept) throws Exception {
+//        String sql ="Insert into PROGRAMME(Codept, Codecli) values (?,?)";
+//        PreparedStatement st;
+//        int nb;
+//        try {
+//            st = Bd.cx.prepareStatement(sql);          
+//            st.setInt(2, codecli);
+//            st.setInt(1, codept);          
+//            nb = st.executeUpdate();          
+//            st.close();     
+//        }
+//        catch (SQLException sqle){
+//            throw new Exception("Probleme d'enregistrement -"+sqle.getMessage());
+//        }
+//        return nb;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+
+        List<Client> client = (List<Client>) session.createQuery("from Client "
+                + "where codecli=" + codecli + "").list();
+
+        List<Programmetype> programmetype = (List<Programmetype>) session.createQuery("from Programmetype p where p.codept=" + codept + "").list();
+
+        Programme prog = new Programme(client.get(0), programmetype.get(0));
+        System.out.println(client.get(0).getNomcli());
+        client.get(0).addProgramme(prog);
+        programmetype.get(0).addProgramme(prog);
+
+        session.save(prog);
+        t.commit();
+        session.close();
+        return prog.getCodep();
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-                   Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction t = session.beginTransaction();
-                  String sql_checkDo = "from Resultatexo r "
-                    + "where r.exercice.seance.programme.client.codecli = 1 "
-                    + "order by r.exercice.seance.semaines,r.exercice.seance.ordres,r.exercice.ordre asc ";
-            List<Resultatexo> lstResExo = (List<Resultatexo>) session.createQuery(sql_checkDo).list();
-            ArrayList<Seance> lSS = new ArrayList<Seance>();
-//            ArrayList<Integer> lSmm = ArrayList < Integer > ();
-            if (!lstResExo.isEmpty()) {
-                for (Resultatexo rExo : lstResExo) {
-                    if (lSS.contains(rExo.getExercice().getSeance())) {
-                        lSS.add(rExo.getExercice().getSeance());
-                    }
-                }
-            }
-            if (!lSS.isEmpty()) {
-                for (Seance s : lSS) {
-                    System.out.println("<seance>");
-                    System.out.println("<ordreSeance>" + s.getOrdres() + "</ordreSeance>");
-                    System.out.println("<nomSeance>" + s.getSeancetype().getNoms() + "</nomSeance>");
-                    for (Resultatexo rExo : lstResExo) {
-                        if(rExo.getExercice().equals(s)){
-                        System.out.println("<exercice>");
-                        System.out.println("<ordreExercie>" + rExo.getExercice().getOrdre() + "</ordreExercie>");
-                        System.out.println("<nomExercice>" + rExo.getExercice().getExercicetype().getNomet() + "</nomExercice>");
-                        System.out.println("</exercice>");    
-                        }
-                    }
-                }
-                System.out.println("</seance>");
-            }
+        ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
     }
-    
-    
-
 }
+
+

@@ -6,12 +6,14 @@
 package ctrl;
 
 import db.Bd;
+import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
 
 /**
  *
@@ -21,7 +23,7 @@ public class ServletAjouterExoType extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nomSeance = request.getParameter("nomSeance");
+        int codeSeance = Integer.valueOf(request.getParameter("codeSeance"));
         int codeET = Integer.valueOf(request.getParameter("codeET"));
         int ordre = Integer.valueOf(request.getParameter("ordre"));
         int nbrep = Integer.valueOf(request.getParameter("nbrep"));
@@ -29,7 +31,10 @@ public class ServletAjouterExoType extends HttpServlet {
         int tempsexo = Integer.valueOf(request.getParameter("tempsexo"));
         int tempsreposserie = Integer.valueOf(request.getParameter("tempsreposserie"));
         int tempsreposexo = Integer.valueOf(request.getParameter("tempsreposexo"));
-        Bd.ajouterExoType(nomSeance, codeET, ordre, nbrep, nbserie, tempsexo, tempsreposserie, tempsreposexo);
+        Bd.ajouterExoType(codeSeance, codeET, ordre, nbrep, nbserie, tempsexo, tempsreposserie, tempsreposexo);
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.close();
+        session.clear();
     }
 
     /**

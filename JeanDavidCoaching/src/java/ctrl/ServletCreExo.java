@@ -6,6 +6,8 @@
 package ctrl;
 
 import db.Bd;
+import db.Exercicetype;
+import db.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,23 +17,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author 21205992
  */
 public class ServletCreExo extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,8 +40,7 @@ public class ServletCreExo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter())
-	{
+        try (PrintWriter out = response.getWriter()) {
             /*----- Ecriture de la page XML -----*/
             out.println("<?xml version=\"1.0\"?>");
 
@@ -60,17 +52,17 @@ public class ServletCreExo extends HttpServlet {
             String tip = request.getParameter("tip");
             String materiel = request.getParameter("materiel");
             String media = request.getParameter("media");
+            
             //out.println(nom+description+media+tipRep+tip+materiel+objectif);
-            try 
-            {
-                Bd.creerExType(nom, description, media, tipRep, tip, materiel, objectif);
-            }
-            catch (ClassNotFoundException | SQLException ex)
-            {
-            out.println("Erreur - " + ex.getMessage());
-            } 
-        } catch (Exception ex) {
-            System.out.println("c'est pas bon");
+
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction t = session.beginTransaction();
+
+            Exercicetype exo = new Exercicetype(nom, description, media, tipRep, tip, materiel, objectif);
+            session.save(exo);
+            t.commit();
+            session.close();
+
         }
     }
 
