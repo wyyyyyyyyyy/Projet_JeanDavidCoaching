@@ -100,6 +100,10 @@
         <servlet-name>voirSeanceType</servlet-name>
         <jsp-file>/jsp/voirSeanceType.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>ServletFindETbySTCode</servlet-name>
+        <servlet-class>ctrl.ServletFindETbySTCode</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
         <url-pattern>/ListCtrlPrg</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>voirSeanceType</servlet-name>
         <url-pattern>/voirSeanceType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFindETbySTCode</servlet-name>
+        <url-pattern>/ServletFindETbySTCode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
