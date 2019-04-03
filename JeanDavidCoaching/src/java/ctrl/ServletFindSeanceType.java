@@ -50,12 +50,14 @@ public class ServletFindSeanceType extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        /*----- Hibernate -----*/
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction t = session.beginTransaction();
+
         try (PrintWriter out = response.getWriter()) {
             out.println("<?xml version=\"1.0\"?>");
             out.print("<list_ST>");
+
+            /*----- Hibernate -----*/
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction t = session.beginTransaction();
             String sql = "from Seancetype ";
             List<Seancetype> lstS = (List<Seancetype>) session.createQuery(sql).list();
 
@@ -66,9 +68,10 @@ public class ServletFindSeanceType extends HttpServlet {
                 out.println("<nom>" + s.getNoms() + "</nom>");
                 out.print("</seanceType>");
             }
+            t.commit();
             out.print("</list_ST>");
         }
-        t.commit();
+
         //session.close();
     }
 
