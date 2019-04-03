@@ -24,7 +24,7 @@ function rechercheExo() {
                     txt += "<li class=\"exo\" id=\"" + code + "\">" + nom + "</li>";
                 }
                 l_champs[2].innerHTML = txt;
-
+                l_champs[2].style.display = "block";
                 var list = document.getElementsByClassName("exo");
                 console.log(list.length);
                 for (var i = 0; i < list.length; i++) {
@@ -35,6 +35,7 @@ function rechercheExo() {
         xhr.send();
     } else {
         l_champs[2].innerHTML = "";
+        l_champs[2].style.display = "none";
         l_champs[2].removeAttribute("id");
     }
 }
@@ -121,7 +122,7 @@ function verifier() {
         } else if (desc === "" && nomSeance !== "") {
             document.getElementById("erreur").innerHTML = "<div class=\'alert alert-danger alert-dismissible\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;</button><strong>Attention! Champ desciption est vide</strong></div>";
         } else {
-            document.getElementById("erreur").innerHTML = "<div class=\'alert alert-danger alert-dismissible\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;</button><strong>Attention! Les le nom et la déscription de séance sont obligatoires</strong></div>";
+            document.getElementById("erreur").innerHTML = "<div class=\'alert alert-danger alert-dismissible\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;</button><strong>Attention! Le nom et la déscription de séance sont obligatoires</strong></div>";
         }
 
         if (codeET !== null && listExo === 0 && nomET !== "") {
@@ -174,7 +175,6 @@ function verifier() {
             resultat = false;
         }
     }
-    alert(resultat);
     return resultat;
 }
 
