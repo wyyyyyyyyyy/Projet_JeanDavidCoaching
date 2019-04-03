@@ -49,6 +49,7 @@ function choisirExo() {
     var id = this.getAttribute("id");
     saisie.value = exo;
     list.innerHTML = "";
+    list.style.display = "none";
     list.setAttribute("id", id);
 }
 
