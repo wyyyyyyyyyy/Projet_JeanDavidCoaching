@@ -73,18 +73,18 @@ public class ServletCheckNameProgType extends HttpServlet {
             /*----- Hibernate Session -----*/
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
-            String sql = "from Programmetype p where p.nomp=\"" + nom+"\"";
-            List<Programmetype> l = (List<Programmetype>) session.createQuery(sql).list();
-            t.commit();
-            System.exit(0);
-
+            String sql = "from Programmetype p where p.nomp=\"" + nom + "\"";
+            List<Programmetype> l = session.createQuery(sql).list();
             if (l.isEmpty()) {
-                out.print("ok");
+                out.print("existe");
+            }else{
+                 out.print("no");
             }
             out.print("</message>");
+            t.commit();
+//            System.exit(0);
         }
 
-        
     }
 
     /**

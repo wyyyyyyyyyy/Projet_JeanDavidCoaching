@@ -15,14 +15,36 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>Creation de Programme</title>
+        <title>Création de Programme</title>
     </head>
     <body>
-        <div  id="body" class="container">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerProgramme">Créer un programme</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerSeance">Créer une séance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>        
+        <div  class="container">
             <div id="msgCreateOK"></div>
-            <h1>Créer un programme : </h1>
+            <div class="py-5 text-center">
+                <h1>Créer un programme : </h1>
+            </div>
             <div id = "zoneALL" class="form-group" >
-                <%--Zone for add the name --%> 
+
+                <!--Zone for add the name --> 
                 <label for="nomProg"><strong>Nom :</strong></label>
                 <div id="msgErrorNom"></div>
                 <input id="nomProg" type="text" placeholder="Saisissez le nom de programme" class="form-control"/></br>
@@ -34,7 +56,7 @@
                 </br>
 
                 <p><strong>Ajoutez les séances :</strong><p/>            
-                <%--Zone for add the seance --%>                      
+                <!--Zone for add the seance -->                      
                 <div class="shadow-none p-4 mb-4 bg-light">                   
                     Numero de semaine :
                     <input type="number" min="1" /> 
@@ -46,12 +68,13 @@
                     <input type="button" class="btn btn-outline-warning"  value="Ajouter une séance"/>
                     <input type="button" class="btn btn-outline-danger"  value="Supprimer cette séance"/>
                 </div>                       
-                <%-- Fin Zone for add the seance --%>                
+                <!-- Fin Zone for add the seance -->                
             </div>
             <button id="btn_addProg" class="btn btn-outline-warning" type="button">Ajouter Programme </button>
             </br></br><a href="index.html">Retourner à la page d'accueil</a>
         </div>
-        <%--confirmation box --%> 
+
+        <!--confirmation box --> 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -61,14 +84,23 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                        <div class="modal-body" id="zonetext"></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" id="verifier">Valider</button>
-                        </div>
+                    <div class="modal-body" id="zonetext"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary" id="verifier">Valider</button>
+                    </div>
                 </div>
             </div>
-        </div>            
+        </div>   
+
+        <!-- Small modal -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                   Message: Vous avec bien créé un nouveau programme.
+                </div>
+            </div>
+        </div>
         <!-- Scripts -->
         <script type="text/JavaScript" src="js/jsCreerProg.js"></script>
 
