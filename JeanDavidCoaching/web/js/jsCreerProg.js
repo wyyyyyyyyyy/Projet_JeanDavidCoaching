@@ -183,6 +183,7 @@ function confirmerCreerProgType() {
     var ordre = divs.length;
     var listSemaine = [];
     var listSeance = [];
+//    var listSeanceNom =[];
 
     // Check: nom prog type 
     if (nom.value === "" || nom.value === null) {
@@ -223,6 +224,7 @@ function confirmerCreerProgType() {
         } else {
             listSemaine.push(children[0].value);
             listSeance.push(children[1].value);
+//            listSeanceNom.push(children[1].innerHTML);
         }
     }
 
@@ -230,32 +232,21 @@ function confirmerCreerProgType() {
         txt += "<p>NumSem: " + listSemaine[x] + "</P>";
         txt += "<p>OrdreSeance " + (x + 1);
         txt += "    CodeSeance: " + listSeance[x] + "</P>";
+//        txt += "    NomSeance: " + listSeanceNom[x] + "</P>";
     }
 
     // Display a confirmation box
     if (champSeanceOK === true && champNomDesOK === true) {
+        // afficher modal
         document.getElementById("zonetext").innerHTML = txt;
         this.setAttribute("data-toggle", "modal");
         this.setAttribute("data-target", "#exampleModal");
+        
         // when click valider
-//        $(document).on("click","#verifier",function(){  
         $("#verifier").on("click", function () {
-//            this.setAttribute("data-dismiss", "#exampleModal");
-
-//            document.getElementById("verifier").disabled = "true";
             document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
             document.getElementById("verifier").disabled = true;
             addProgType(nom.value, des.value, listSemaine, listSeance);
-
-
-//            this.setAttribute("data-dismiss", "#exampleModal");
-
-//            if (msgOK === true) {
-//                var txt = "<div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: " +
-//                        "Vous avec bien créé un nouveau programme.</h2></div>";
-//                document.getElementById("msgCreateOK").innerHTML = txt;
-//            }
-
         });
     }
     activer_btn();
@@ -269,9 +260,7 @@ function sleep(numberMillis) {
         now = new Date();
         if (now.getTime() > exitTime)
             return;
-
     }
-
 }
 
 /*
