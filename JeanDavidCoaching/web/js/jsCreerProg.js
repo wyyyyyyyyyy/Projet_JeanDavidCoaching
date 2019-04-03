@@ -63,8 +63,7 @@ function afficherSeanceType() {
             var txt = "<option value=\"\">---------</option> ";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
-                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\" "+
-                        "id=\"" + childlstS[0].firstChild.nodeValue + "\""+"> " 
+                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " 
                         + childlstS[1].firstChild.nodeValue + "</option>";
             }
             div.children[1].innerHTML = txt;
