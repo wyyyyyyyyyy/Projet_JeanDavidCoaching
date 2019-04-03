@@ -63,7 +63,9 @@ function afficherSeanceType() {
             var txt = "<option value=\"\">---------</option> ";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
-                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " + childlstS[1].firstChild.nodeValue + "</option>";
+                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\" "+
+                        "id=\"" + childlstS[0].firstChild.nodeValue + "\""+"> " 
+                        + childlstS[1].firstChild.nodeValue + "</option>";
             }
             div.children[1].innerHTML = txt;
         }
@@ -183,7 +185,7 @@ function confirmerCreerProgType() {
     var ordre = divs.length;
     var listSemaine = [];
     var listSeance = [];
-//    var listSeanceNom =[];
+    var listSeanceNom =[];
 
     // Check: nom prog type 
     if (nom.value === "" || nom.value === null) {
@@ -224,15 +226,15 @@ function confirmerCreerProgType() {
         } else {
             listSemaine.push(children[0].value);
             listSeance.push(children[1].value);
-//            listSeanceNom.push(children[1].innerHTML);
+            var elt = document.getElementById(children[1].value).innerHTML;
+            listSeanceNom.push(elt);
         }
     }
 
     for (var x = 0; x < listSemaine.length; x++) {
         txt += "<p>NumSem: " + listSemaine[x] + "</P>";
         txt += "<p>OrdreSeance " + (x + 1);
-        txt += "    CodeSeance: " + listSeance[x] + "</P>";
-//        txt += "    NomSeance: " + listSeanceNom[x] + "</P>";
+        txt += "; NomSeance: " + listSeanceNom[x] + "</P>";
     }
 
     // Display a confirmation box
