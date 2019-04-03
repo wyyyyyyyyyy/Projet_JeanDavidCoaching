@@ -9,6 +9,7 @@
  * @returns {undefined}
  */
 function checkNom() {
+    var nomExiste = false;
     /*--initialisation--*/
     // zone: message of check nom existe; message of champ empty
     var eltDivMsgCheck = document.getElementById("checkNomMsg");
@@ -18,33 +19,35 @@ function checkNom() {
     document.getElementById("btn_addProg").disabled = false;
 
     // verifier le nom de programme type saisie
-    var xhr = new XMLHttpRequest();
     var name = encodeURIComponent(document.getElementById("nomProg").value);
-    xhr.open("GET", "ServletCheckNameProgType?nom=" + name, true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            var msg = xhr.responseXML.getElementById("msg").firstChild.nodeValue;
-            alert(msg);
+    if (name !== "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "ServletCheckNameProgType?nom=" + name, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var msg = xhr.responseXML.getElementById("msg").childNodes[0].nodeValue;
 
-            // affichier les messages
-            var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
-                    "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
-                    "</button>Nom déjà existe.</div>";
-            var correctMsg = "<div class=\'alert alert-success alert-dismissible\'>" +
-                    "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
-                    "</button>Nouveau Nom.</div>";
-            if (msg === "" || msg === null) {
-                eltDivMsgCheck.innerHTML = correctMsg;
-                document.getElementById("btn_addProg").disabled = false;
-            } else {
-                eltDivMsgCheck.innerHTML = errorMsg;
-                document.getElementById("btn_addProg").disabled = true;
+                // affichier les messages
+                var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nom déjà existe.</div>";
+                var correctMsg = "<div class=\'alert alert-success alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nouveau Nom.</div>";
+
+                if (msg === "existe") {
+                    eltDivMsgCheck.innerHTML = correctMsg;
+                    document.getElementById("btn_addProg").disabled = false;
+                    nomExiste = true;
+                } else {
+                    eltDivMsgCheck.innerHTML = errorMsg;
+                    document.getElementById("btn_addProg").disabled = true;
+                }
             }
-
-
         }
+        xhr.send();
+        return nomExiste;
     }
-    xhr.send();
 }
 
 /*
@@ -240,26 +243,38 @@ function confirmerCreerProgType() {
         // when click valider
 //        $(document).on("click","#verifier",function(){  
         $("#verifier").on("click", function () {
-            this.setAttribute("data-dismiss", "#exampleModal");
-            document.getElementById("zonetext").innerHTML = "En cours d'enregistrer";
-            document.getElementById("verifier").disabled = "true";
+//            this.setAttribute("data-dismiss", "#exampleModal");
+
+//            document.getElementById("verifier").disabled = "true";
+            document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
+            document.getElementById("verifier").disabled = true;
             addProgType(nom.value, des.value, listSemaine, listSeance);
-            this.setAttribute("data-dismiss", "#exampleModal");
-            sleep(5000);
-            location.reload();
+
+
+//            this.setAttribute("data-dismiss", "#exampleModal");
+
+//            if (msgOK === true) {
+//                var txt = "<div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: " +
+//                        "Vous avec bien créé un nouveau programme.</h2></div>";
+//                document.getElementById("msgCreateOK").innerHTML = txt;
+//            }
+
         });
     }
     activer_btn();
 }
 
 function sleep(numberMillis) {
+
     var now = new Date();
     var exitTime = now.getTime() + numberMillis;
     while (true) {
         now = new Date();
         if (now.getTime() > exitTime)
             return;
+
     }
+
 }
 
 /*
@@ -270,14 +285,6 @@ function suppMsgErrorForSeance() {
     var child = this.children;
     child[7].remove();
     activer_btn();
-}
-
-/*
- * delete the error message when user click the champ.
- * @returns {undefined}
- */
-function suppMsgErrorNomDes() {
-
 }
 
 /*
@@ -295,14 +302,13 @@ function addProgType(nom, des, listSemaine, listSeance) {
         if (xhr.status === 200) {
             var msg = xhr.responseXML.getElementsByTagName("message");
             if (msg[0].firstChild.nodeValue !== "") {
-                var txt = "</br></br><div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: ";
-                txt += "Vous avec bien créé un nouveau programme.</h2></div>";
-                txt += "</br><a href=\"index.html\">Retourner à la page d'accueil</a>";
-                document.getElementById("body").innerHTML = txt;
+                sleep(1000);
+                location.reload(true);
             }
         }
     };
     xhr.send();
+
 }
 
 /*
