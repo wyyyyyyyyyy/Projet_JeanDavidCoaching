@@ -59,7 +59,7 @@
                         <div class="modal-body" id="zonetext"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-primary" id="verifier">Valider</button>
+                            <button type="button" class="btn btn-outline-warning" id="verifier">Valider</button>
                         </div>
                 </div>
             </div>
