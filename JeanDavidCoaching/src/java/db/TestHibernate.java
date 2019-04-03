@@ -35,17 +35,17 @@ public class TestHibernate {
 //        
 //        System.exit(0);
         
-            Integer id = 50;
-            String nom = "a";
-            String objectif = "a";
-            String description = "a";
-            String tipRep = "a";
-            String tip = "a";
-            String materiel = "a";
-            String media = "a";
-            
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            Transaction t = session.beginTransaction();
+//            Integer id = 50;
+//            String nom = "a";
+//            String objectif = "a";
+//            String description = "a";
+//            String tipRep = "a";
+//            String tip = "a";
+//            String materiel = "a";
+//            String media = "a";
+//            
+//            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//            Transaction t = session.beginTransaction();
 
 //            String hql = "update Exercicetype et set et.nomet='" + nom
 //                    + "', et.descriptione='" + description + "', et.lienmedia='"
@@ -55,19 +55,23 @@ public class TestHibernate {
 //            Query queryupdate = session.createQuery(hql);
 //            queryupdate.executeUpdate();
         
-            Exercicetype et = (Exercicetype) session.get(Exercicetype.class, id);
-            et.setNomet(nom);
-            et.setDescriptione(description);
-            et.setLienmedia(media);
-            et.setTipsrep(tipRep);
-            et.setTipsexo(tip);
-            et.setMateriel(materiel);
-            et.setObjectif(objectif);
-            
-            session.update(et);
-            t.commit();
-            session.close();
-        
+//            Exercicetype et = (Exercicetype) session.get(Exercicetype.class, id);
+//            et.setNomet(nom);
+//            et.setDescriptione(description);
+//            et.setLienmedia(media);
+//            et.setTipsrep(tipRep);
+//            et.setTipsexo(tip);
+//            et.setMateriel(materiel);
+//            et.setObjectif(objectif);
+//            
+//            session.update(et);
+
+
+
+
+//            t.commit();
+//            session.close();
+//        System.exit(0);
         
         }
     
