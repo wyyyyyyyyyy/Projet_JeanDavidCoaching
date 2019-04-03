@@ -9,7 +9,6 @@
  * @returns {undefined}
  */
 function checkNom() {
-    var nomExiste = false;
     /*--initialisation--*/
     // zone: message of check nom existe; message of champ empty
     var eltDivMsgCheck = document.getElementById("checkNomMsg");
@@ -38,7 +37,6 @@ function checkNom() {
                 if (msg === "existe") {
                     eltDivMsgCheck.innerHTML = correctMsg;
                     document.getElementById("btn_addProg").disabled = false;
-                    nomExiste = true;
                 } else {
                     eltDivMsgCheck.innerHTML = errorMsg;
                     document.getElementById("btn_addProg").disabled = true;
@@ -46,7 +44,6 @@ function checkNom() {
             }
         }
         xhr.send();
-        return nomExiste;
     }
 }
 
