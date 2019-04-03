@@ -88,6 +88,10 @@
         <servlet-name>chronoProg</servlet-name>
         <jsp-file>/jsp/chronoProg.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheckNameProgType</servlet-name>
+        <servlet-class>ctrl.ServletCheckNameProgType</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
         <url-pattern>/ListCtrlPrg</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>chronoProg</servlet-name>
         <url-pattern>/chronoProg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCheckNameProgType</servlet-name>
+        <url-pattern>/ServletCheckNameProgType</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
