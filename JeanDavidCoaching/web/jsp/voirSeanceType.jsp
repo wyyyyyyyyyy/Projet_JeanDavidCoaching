@@ -45,6 +45,9 @@
         <!--Zone for choose a seance type-->
             <div class="input-group">
                 <select id="zoneST" class="custom-select"></select>       
+                <button id ="btn_findST" class="btn btn-warning" type="button">
+                    Choisir une séance
+                </button>
             </div> 
         <!--END Zone for choose a seance type-->
  
