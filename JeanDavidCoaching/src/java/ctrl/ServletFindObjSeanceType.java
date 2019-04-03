@@ -36,23 +36,23 @@ public class ServletFindObjSeanceType extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/xml;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        /*----- Hibernate -----*/
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction t = session.beginTransaction();
-        try (PrintWriter out = response.getWriter()){
+
+        try (PrintWriter out = response.getWriter()) {
             out.println("<?xml version=\"1.0\"?>");
             int codest = Integer.parseInt(request.getParameter("codest"));
-            
-            String sql="from Seancetype s where s.codest =" +codest+" ";
-            List<Seancetype> lstS = (List<Seancetype>)session.createQuery(sql).list();
-            
-            /*----- Ecriture de la page XML -----*/            
+            /*----- Hibernate -----*/
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction t = session.beginTransaction();
+            String sql = "from Seancetype s where s.codest =" + codest + " ";
+            List<Seancetype> lstS = (List<Seancetype>) session.createQuery(sql).list();
+
+            /*----- Ecriture de la page XML -----*/
             out.print("<objST>");
-            out.println("<description>" + lstS.get(0).getDescriptions()+ "</description>");
+            out.println("<description>" + lstS.get(0).getDescriptions() + "</description>");
             out.print("</objST>");
-            
+            t.commit();
         }
-        t.commit();
+
         //session.close();
     }
 
