@@ -54,7 +54,7 @@
 
             <div class="shadow-none p-4 mb-4 bg-light">
                 <div class="exoBox">
-                    <input type="text" placeholder="Saisissez le nom d'exercice" minlength="250px"/>
+                    <input type="text" placeholder="Saisissez le nom d'exercice"/>
                     <div class="champs_erreur"></div>
                     <ul class="listexo">
                     </ul>
