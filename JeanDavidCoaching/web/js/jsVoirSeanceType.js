@@ -17,8 +17,7 @@ function afficherSeanceType() {
             var txt = "<option value=\"head\">----------</option>";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
-                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue +
-                        "\" id=\"" + childlstS[0].firstChild.nodeValue + "\"> "
+                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> "
                         + childlstS[1].firstChild.nodeValue + "</option>";
             }
             document.getElementById("zoneST").innerHTML = txt;
@@ -36,8 +35,8 @@ function afficherSeanceType() {
 function rechercheObjSeanceType() {
     /*-- get code of the seance type --*/
     var codeST = document.getElementById("zoneST").value;
-    var nomST = document.getElementById(codeST).innerHTML;
-    alert(codeST);
+    var nomST = this.options[this.selectedIndex].text;
+
     /*-- controle the display of zone "affiche le nom et la description de seance type"--*/
     var divAffiche = document.getElementById("zoneInfoST");
     if (codeST !== "head") {
@@ -58,39 +57,29 @@ function rechercheObjSeanceType() {
             }
         };
         xhr.send();
-    }else {
+    } else {
         divAffiche.innerHTML = "<div class=\"container\"><div class=\"py-5 text-center\">" +
-                "<h1>Choisir un client</h1></div></div>";
+                                            "<h1>Choisir un client</h1></div></div>";
     }
 }
 
 
 /*
  * find the information of a exercice type by a seance type's code.
+ * use servlet: ServletFindETbySTCode.
  * @returns {information of a exercice type}
  */
 function afficheExoType() {
 
 }
 
-//function sleep(numberMillis) {
-//
-//    var now = new Date();
-//    var exitTime = now.getTime() + numberMillis;
-//    while (true) {
-//        now = new Date();
-//        if (now.getTime() > exitTime)
-//            return;
-//    }
-//}
 
 /*afficheExoType
  * function for add events .
  */
 document.addEventListener("DOMContentLoaded", () => {
     // initialisation 
-    afficherSeanceType();
-    rechercheObjSeanceType();
+    document.getElementById("btn_findST").addEventListener("click", afficherSeanceType);
     // event for find the description of a seance type
     document.getElementById("zoneST").addEventListener("change", rechercheObjSeanceType);
 });
