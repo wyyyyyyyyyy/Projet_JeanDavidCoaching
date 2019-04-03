@@ -19,12 +19,17 @@
     </head>
     <body>
         <div  id="body" class="container">
-            <div id="erreur"></div>
+            <div id="msgCreateOK"></div>
             <h1>Créer un programme : </h1>
             <div id = "zoneALL" class="form-group" >
+                <%--Zone for add the name --%> 
                 <label for="nomProg"><strong>Nom :</strong></label>
+                <div id="msgErrorNom"></div>
                 <input id="nomProg" type="text" placeholder="Saisissez le nom de programme" class="form-control"/></br>
+                <div id="checkNomMsg"></div>
+                <%--Zone for add the description --%> 
                 <label for="descriptionProg"><strong>Description :</strong></label>
+                <div id="msgErrorDes"></div>
                 <textarea id="descriptionProg" placeholder="Saisissez la description de programme:objectif, profils......" class="form-control"></textarea>
                 </br>
 
@@ -59,7 +64,7 @@
                         <div class="modal-body" id="zonetext"></div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-outline-warning" id="verifier">Valider</button>
+                            <button type="button" class="btn btn-primary" id="verifier">Valider</button>
                         </div>
                 </div>
             </div>
