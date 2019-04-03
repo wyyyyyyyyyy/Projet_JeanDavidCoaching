@@ -26,7 +26,7 @@
         <title>Création d'une séance</title>
     </head>
     <body>
-         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -48,6 +48,7 @@
             <div class="champs_seance">
                 Nom:
                 <input id="nomSeance" class="form-control" type="text">
+                <div id="msgCheckNom"></div>
                 Description :
                 <input id="desc" class="form-control" type="text">
             </div>
