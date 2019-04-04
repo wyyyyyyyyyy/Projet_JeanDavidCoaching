@@ -1,4 +1,56 @@
 /*
+ *   Document   : creerProgramme
+ *    Author     : yiyang
+ */
+
+/*
+ * check if coach add the same name.
+ * use servlet: ServletCheckNameProgType.
+ * @returns {undefined}
+ */
+function checkNom() {
+    var nomExiste = false;
+    /*--initialisation--*/
+    // zone: message of check nom existe; message of champ empty
+    var eltDivMsgCheck = document.getElementById("checkNomMsg");
+    var eltmsgErrorNom = document.getElementById("msgErrorNom");
+    eltDivMsgCheck.innerHTML = "";
+    eltmsgErrorNom.innerHTML = "";
+    document.getElementById("btn_addProg").disabled = false;
+
+    // verifier le nom de programme type saisie
+    var name = encodeURIComponent(document.getElementById("nomProg").value);
+    if (name !== "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "ServletCheckNameProgType?nom=" + name, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var msg = xhr.responseXML.getElementById("msg").childNodes[0].nodeValue;
+
+                // affichier les messages
+                var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nom déjà existe.</div>";
+                var correctMsg = "<div class=\'alert alert-success alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nouveau Nom.</div>";
+
+                if (msg === "existe") {
+                    eltDivMsgCheck.innerHTML = correctMsg;
+                    document.getElementById("btn_addProg").disabled = false;
+                    nomExiste = true;
+                } else {
+                    eltDivMsgCheck.innerHTML = errorMsg;
+                    document.getElementById("btn_addProg").disabled = true;
+                }
+            }
+        }
+        xhr.send();
+        return nomExiste;
+    }
+}
+
+/*
  * use servlet: ServletFindSeanceType.
  * @returns {list of senace type}
  */
@@ -111,11 +163,9 @@ function activer_btn() {
             // verifier que le nombre de div n'egale pas 0
             if (ordre === 1) {
                 children[6].disabled = true;
-//                children[2].disabled = false;
             } else {
                 children[6].disabled = false;
                 children[6].addEventListener("click", suppDivForAddST);
-//                children[2].disabled = true;
             }
         }
     }
@@ -139,11 +189,11 @@ function confirmerCreerProgType() {
 
     // Check: nom prog type 
     if (nom.value === "" || nom.value === null) {
-        var errorNom = "<div id =\'sem" + i + "\' class=\'alert alert-danger alert-dismissible\'>" +
+        var errorNom = "<div class=\'alert alert-danger alert-dismissible\'>" +
                 "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
                 "</button><strong>Attention! Champ " +
                 "Nom de programme est vide</strong></div>";
-        nom.insertAdjacentHTML("beforebegin", errorNom);
+        document.getElementById("msgErrorNom").innerHTML = errorNom;
         document.getElementById("btn_addProg").disabled = true;
         champNomDesOK = false;
     } else {
@@ -151,11 +201,11 @@ function confirmerCreerProgType() {
     }
     // Check: description prog type
     if (des.value === "" || des.value === null) {
-        var errorDes = "<div id =\'sem" + i + "\' class=\'alert alert-danger alert-dismissible\'>" +
+        var errorDes = "<div class=\'alert alert-danger alert-dismissible\'>" +
                 "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
                 "</button><strong>Attention! Champ " +
                 "Description de programme est vide</strong></div>";
-        des.insertAdjacentHTML("beforebegin", errorDes);
+        document.getElementById("msgErrorDes").innerHTML = errorDes;
         document.getElementById("btn_addProg").disabled = true;
         champNomDesOK = false;
     } else {
@@ -193,26 +243,38 @@ function confirmerCreerProgType() {
         // when click valider
 //        $(document).on("click","#verifier",function(){  
         $("#verifier").on("click", function () {
-            this.setAttribute("data-dismiss", "#exampleModal");
-            document.getElementById("zonetext").innerHTML = "En cours d'enregistrer";
-            document.getElementById("verifier").disabled = "true";
+//            this.setAttribute("data-dismiss", "#exampleModal");
+
+//            document.getElementById("verifier").disabled = "true";
+            document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
+            document.getElementById("verifier").disabled = true;
             addProgType(nom.value, des.value, listSemaine, listSeance);
-            this.setAttribute("data-dismiss", "#exampleModal");
-            sleep(5000);
-            location.reload();
+
+
+//            this.setAttribute("data-dismiss", "#exampleModal");
+
+//            if (msgOK === true) {
+//                var txt = "<div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: " +
+//                        "Vous avec bien créé un nouveau programme.</h2></div>";
+//                document.getElementById("msgCreateOK").innerHTML = txt;
+//            }
+
         });
     }
     activer_btn();
 }
 
 function sleep(numberMillis) {
+
     var now = new Date();
     var exitTime = now.getTime() + numberMillis;
     while (true) {
         now = new Date();
         if (now.getTime() > exitTime)
             return;
+
     }
+
 }
 
 /*
@@ -223,14 +285,6 @@ function suppMsgErrorForSeance() {
     var child = this.children;
     child[7].remove();
     activer_btn();
-}
-
-/*
- * delete the error message when user click the champ.
- * @returns {undefined}
- */
-function suppMsgErrorNomDes() {
-
 }
 
 /*
@@ -248,15 +302,23 @@ function addProgType(nom, des, listSemaine, listSeance) {
         if (xhr.status === 200) {
             var msg = xhr.responseXML.getElementsByTagName("message");
             if (msg[0].firstChild.nodeValue !== "") {
-                var txt = "</br></br><div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: ";
-                txt += "Vous avec bien créé un nouveau programme.</h2></div>";
-                txt += "</br><a href=\"index.html\">Retourner à la page d'accueil</a>";
-                document.getElementById("body").innerHTML = txt;
+                sleep(1000);
+                location.reload(true);
             }
         }
     };
     xhr.send();
+
 }
+
+/*
+ * method for delete the empty error message when keyup
+ */
+function suppMsgEmptyDes() {
+    var eltmsgError = document.getElementById("msgErrorDes");
+    eltmsgError.innerHTML = "";
+}
+
 
 /*
  * function for add events .
@@ -283,5 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
     activer_btn();
     // event for check the information of prog type before add the information in data base
     document.getElementById("btn_addProg").addEventListener("click", confirmerCreerProgType);
-//    document.
+    // event for check the name of programme type and delete empty error message 
+    document.getElementById("nomProg").addEventListener("keyup", checkNom);
+    // event for delete empty error message of description
+    document.getElementById("descriptionProg").addEventListener("keyup", suppMsgEmptyDes);
 });

@@ -17,9 +17,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="js/bootstrap-select.min.js"></script>
         <style>
-            .champs_erreur{font-size: 1em; color: red;}
+            .champs_erreur{font-size: 1em; color: #a94442;}
             .champs_seance{margin: 30px;}
-            .listexo{border: 2px;}
+            .listexo{border: 1px solid #f0ad4e; width: 250px;list-style-type: none;display: none;}
+            .listexo li:hover{background-color:#f0ad4e;}
+            .listexo li{margin: 0; padding: 0;}
         </style>
         <title>Création d'une séance</title>
     </head>
@@ -45,14 +47,14 @@
             <h1>Création d'une séance</h1>
             <div class="champs_seance">
                 Nom:
-                <input id="nomSeance" type="text">
+                <input id="nomSeance" class="form-control" type="text">
                 Description :
-                <input id="desc" type="text">
+                <input id="desc" class="form-control" type="text">
             </div>
 
             <div class="shadow-none p-4 mb-4 bg-light">
                 <div class="exoBox">
-                    <input type="text" placeholder="Saisissez le nom d'exercice" width="100"/>
+                    <input type="text" placeholder="Saisissez le nom d'exercice"/>
                     <div class="champs_erreur"></div>
                     <ul class="listexo">
                     </ul>
@@ -82,8 +84,8 @@
                     <input type="number" step="5" min="0">
                     <div class="champs_erreur"></div>
                     <br/>
-                    <input type="submit" value="Ajouter" class="btn_ajouter">
-                    <input type="submit" value="Supprimer" class="btn_supprimer">
+                    <input type="submit" value="Ajouter" class="btn_ajouter btn btn-outline-warning">
+                    <input type="submit" value="Supprimer" class="btn_supprimer btn btn-outline-danger">
                 </div>
             </div>
             <button type="button" id="btn_valider" class="btn btn-outline-warning">

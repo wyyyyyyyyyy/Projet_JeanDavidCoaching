@@ -43,7 +43,7 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://etu-web2.ut-capitole.fr:3306/db_21405117_2</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_21405117_2</property>
     <property name="hibernate.connection.username">21405117</property>
     <property name="hibernate.connection.password">P00M37</property>
     <!-- Parseur HQL -->
