@@ -224,8 +224,8 @@ function confirmerCreerProgType() {
             champSeanceOK = false;
         } else {
             listSemaine.push(children[0].value);
-            listSeance.push(children[1].value);
-            var elt = document.getElementById(children[1].value).innerHTML;
+            listSeance.push(children[1].value);           
+            var elt = children[1].options[children[1].selectedIndex].text;
             listSeanceNom.push(elt);
         }
     }
@@ -233,7 +233,7 @@ function confirmerCreerProgType() {
     for (var x = 0; x < listSemaine.length; x++) {
         txt += "<p>NumSem: " + listSemaine[x] + "</P>";
         txt += "<p>OrdreSeance " + (x + 1);
-        txt += "; NomSeance: " + listSeanceNom[x] + "</P>";
+        txt += " NomSeance: " + listSeanceNom[x] + "</P>";
     }
 
     // Display a confirmation box
@@ -244,7 +244,7 @@ function confirmerCreerProgType() {
         this.setAttribute("data-target", "#exampleModal");
         
         // when click valider
-        $("#verifier").on("click", function () {
+        $(document).on("click","#verifier", function () {
             document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
             document.getElementById("verifier").disabled = true;
             addProgType(nom.value, des.value, listSemaine, listSeance);
