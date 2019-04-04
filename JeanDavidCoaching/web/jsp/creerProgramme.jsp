@@ -52,18 +52,17 @@
                 <%--Zone for add the description --%> 
                 <label for="descriptionProg"><strong>Description :</strong></label>
                 <div id="msgErrorDes"></div>
-                <textarea id="descriptionProg" placeholder="Saisissez la description de programme:objectif, profils......" class="form-control"></textarea>
+                <textarea id="descriptionProg" placeholder="Saisissez la description de programme: objectif, profils......" class="form-control"></textarea>
                 </br>
 
                 <p><strong>Ajoutez les séances :</strong><p/>            
                 <!--Zone for add the seance -->                      
                 <div class="shadow-none p-4 mb-4 bg-light">                   
-                    Numero de semaine :
-                    <input type="number" min="1" /> 
-                    Choisissez une séance :
+                    <!--<input type="number" min="1" /> --> 
+                    <p></p>Choisissez une séance :
                     <select class="col-md-2"><option></option></select>
                     <input type="button" class="btn btn-outline-warning"  value="Chercher"/>
-                    </br>
+                    <p></p>
                     <div></div>
                     <input type="button" class="btn btn-outline-warning"  value="Ajouter une séance"/>
                     <input type="button" class="btn btn-outline-danger"  value="Supprimer cette séance"/>
