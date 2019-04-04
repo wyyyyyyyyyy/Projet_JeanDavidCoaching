@@ -194,7 +194,7 @@ function enregistrerSeance() {
             texter += nomSeance + " - codeSeance : " + codeSeance;
             texter += "</strong> a bien été créée</div>";
             document.getElementById("erreur").innerHTML = texter;
-            enregistrerExo(codeSeance);            
+            enregistrerExo(codeSeance);
             sleep(5000);
             location.reload();
         }
@@ -232,7 +232,7 @@ function enregistrerExo(codeSeance) {
     }
 }
 
-function modal(){
+function modal() {
     document.getElementById("modal").innerHTML = "En cours d'enregistrer";
     document.getElementById("verifier").disabled = "true";
 }
@@ -244,7 +244,7 @@ function valider() {
         this.setAttribute("data-target", "#exampleModal");
         document.getElementById("verifier").addEventListener("click", enregistrerSeance);
         document.getElementById("verifier").addEventListener("click", modal);
-        
+
     }
 }
 
@@ -258,11 +258,66 @@ function sleep(numberMillis) {
     }
 }
 
+/*
+ * check if coach add the same name of seance type.
+ * use servlet: ServletCheckNameSeanType.
+ * @returns {undefined}
+ */
+function checkNom() {
+    /*--initialisation--*/
+    // zone: message of check nom existe
+    var eltDivMsgCheck = document.getElementById("msgCheckNom");
+    eltDivMsgCheck.innerHTML = "";
+    suppMsgEmpty();
+    document.getElementById("btn_valider").disabled = false;
+
+    // verifier le nom de programme type saisie
+    var name = encodeURIComponent(document.getElementById("nomSeance").value);
+    if (name !== "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "ServletCheckNameSeanType?nom=" + name, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var msg = xhr.responseXML.getElementById("msg").childNodes[0].nodeValue;
+
+                // affichier les messages
+                var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nom déjà existe.</div>";
+                var correctMsg = "<div class=\'alert alert-success alert-dismissible\'>" +
+                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
+                        "</button>Nouveau Nom.</div>";
+
+                if (msg === "existe") {
+                    eltDivMsgCheck.innerHTML = correctMsg;
+                    document.getElementById("btn_valider").disabled = false;
+                } else {
+                    eltDivMsgCheck.innerHTML = errorMsg;
+                    document.getElementById("btn_valider").disabled = true;
+                }
+            }
+        }
+        xhr.send();
+    }
+}
+
+/*
+ * method for delete the empty error message when keyup in the <input> nom or description.
+ */
+function suppMsgEmpty() {
+    var eltmsgError = document.getElementById("erreur");
+    eltmsgError.innerHTML = "";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementsByClassName("exoBox")[0].children[0].addEventListener("keyup", rechercheExo);
     document.getElementsByClassName("exoBox")[0].children[0].addEventListener("click", rechercheExo);
     document.getElementsByClassName("btn_ajouter")[0].addEventListener("click", ajouterExo);
     document.getElementById("btn_valider").addEventListener("click", valider);
     activer_btn();
+    // event for check the name of seance type and delete empty error message
+    document.getElementById("nomSeance").addEventListener("keyup", checkNom);
+    // event for delete empty error message of description
+    document.getElementById("desc").addEventListener("keyup", suppMsgEmpty);
 });
 
