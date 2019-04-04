@@ -69,21 +69,22 @@ public class ServletAddProgType extends HttpServlet {
             /*----- get parameters -----*/
             String nom = request.getParameter("nom");
             String des = request.getParameter("des");
-            String[] listSemaineString = request.getParameter("listSemaine").split(",");
+//            String[] listSemaineString = request.getParameter("listSemaine").split(",");
             String[] listSeanceString = request.getParameter("listSeance").split(",");
 
             /*----- Creation d'un programme type -----*/
             int codept = Bd.creerProgType(nom, des);
 
             /*----- Association -----*/
-            if (listSemaineString.length == listSeanceString.length) {
-                for (int i = 0; i < listSemaineString.length; i++) {
-                    int numSem =  Integer.parseInt(listSemaineString[i]);
+//            if (listSemaineString.length == listSeanceString.length) {
+                for (int i = 0; i < listSeanceString.length; i++) {
+//                    int numSem =  Integer.parseInt(listSemaineString[i]);
+                    int numSem = 1;
                     int codest = Integer.parseInt(listSeanceString[i]);
                     Bd.ajouterPredefiniProg(numSem, codest, i, codept);
                     out.print("Vous avez bien créé un nouveau programme");
                 }
-            }
+//            }
             /*----- Fin Hibernate -----*/
 //            out.print("<msg>ok</msg>");
             out.print("</message>");
