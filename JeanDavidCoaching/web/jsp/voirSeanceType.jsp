@@ -58,7 +58,7 @@
         <!--Zone for display the information of exercise types -->
         <div id="zoneExoType"></div>
         <!--END Zone for display the information of exercise types -->
-        <li><a href="ServletFindETbySTCode?codest=1">xml</a></li>
+
     </body>
 </html>
 <!--script: js page -->
