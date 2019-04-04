@@ -58,7 +58,7 @@ public class ServletFindSeanceType extends HttpServlet {
             /*----- Hibernate -----*/
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction t = session.beginTransaction();
-            String sql = "from Seancetype ";
+            String sql = "from Seancetype s order by s.noms ";
             List<Seancetype> lstS = (List<Seancetype>) session.createQuery(sql).list();
 
             /*----- Ecriture de la page XML -----*/
