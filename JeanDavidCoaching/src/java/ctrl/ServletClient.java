@@ -53,7 +53,7 @@ public class ServletClient extends HttpServlet {
             
             out.println("<liste_client>");
             try {
-                List<Client> l_client = Bd.lireClient();
+                List<Client> l_client = Bd.clientNoProgramme();
                 for (int i = 0; i < l_client.size(); i++) {
                     
                     out.println("<client>");
