@@ -93,14 +93,6 @@
             </div>
         </div>   
 
-        <!-- Small modal -->
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                   Message: Vous avec bien créé un nouveau programme.
-                </div>
-            </div>
-        </div>
         <!-- Scripts -->
         <script type="text/JavaScript" src="js/jsCreerProg.js"></script>
 
