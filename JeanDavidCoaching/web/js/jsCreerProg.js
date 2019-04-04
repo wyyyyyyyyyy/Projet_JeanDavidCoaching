@@ -9,7 +9,6 @@
  * @returns {undefined}
  */
 function checkNom() {
-    var nomExiste = false;
     /*--initialisation--*/
     // zone: message of check nom existe; message of champ empty
     var eltDivMsgCheck = document.getElementById("checkNomMsg");
@@ -38,7 +37,6 @@ function checkNom() {
                 if (msg === "existe") {
                     eltDivMsgCheck.innerHTML = correctMsg;
                     document.getElementById("btn_addProg").disabled = false;
-                    nomExiste = true;
                 } else {
                     eltDivMsgCheck.innerHTML = errorMsg;
                     document.getElementById("btn_addProg").disabled = true;
@@ -46,7 +44,6 @@ function checkNom() {
             }
         }
         xhr.send();
-        return nomExiste;
     }
 }
 
@@ -66,7 +63,8 @@ function afficherSeanceType() {
             var txt = "<option value=\"\">---------</option> ";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
-                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " + childlstS[1].firstChild.nodeValue + "</option>";
+                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " 
+                        + childlstS[1].firstChild.nodeValue + "</option>";
             }
             div.children[1].innerHTML = txt;
         }
@@ -186,6 +184,7 @@ function confirmerCreerProgType() {
     var ordre = divs.length;
     var listSemaine = [];
     var listSeance = [];
+    var listSeanceNom =[];
 
     // Check: nom prog type 
     if (nom.value === "" || nom.value === null) {
@@ -225,40 +224,30 @@ function confirmerCreerProgType() {
             champSeanceOK = false;
         } else {
             listSemaine.push(children[0].value);
-            listSeance.push(children[1].value);
+            listSeance.push(children[1].value);           
+            var elt = children[1].options[children[1].selectedIndex].text;
+            listSeanceNom.push(elt);
         }
     }
 
     for (var x = 0; x < listSemaine.length; x++) {
         txt += "<p>NumSem: " + listSemaine[x] + "</P>";
         txt += "<p>OrdreSeance " + (x + 1);
-        txt += "    CodeSeance: " + listSeance[x] + "</P>";
+        txt += " NomSeance: " + listSeanceNom[x] + "</P>";
     }
 
     // Display a confirmation box
     if (champSeanceOK === true && champNomDesOK === true) {
+        // afficher modal
         document.getElementById("zonetext").innerHTML = txt;
         this.setAttribute("data-toggle", "modal");
         this.setAttribute("data-target", "#exampleModal");
+        
         // when click valider
-//        $(document).on("click","#verifier",function(){  
-        $("#verifier").on("click", function () {
-//            this.setAttribute("data-dismiss", "#exampleModal");
-
-//            document.getElementById("verifier").disabled = "true";
+        $(document).on("click","#verifier", function () {
             document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
             document.getElementById("verifier").disabled = true;
             addProgType(nom.value, des.value, listSemaine, listSeance);
-
-
-//            this.setAttribute("data-dismiss", "#exampleModal");
-
-//            if (msgOK === true) {
-//                var txt = "<div class=\"shadow-none p-4 mb-4 bg-light\"><h2>Message: " +
-//                        "Vous avec bien créé un nouveau programme.</h2></div>";
-//                document.getElementById("msgCreateOK").innerHTML = txt;
-//            }
-
         });
     }
     activer_btn();
@@ -272,9 +261,7 @@ function sleep(numberMillis) {
         now = new Date();
         if (now.getTime() > exitTime)
             return;
-
     }
-
 }
 
 /*
