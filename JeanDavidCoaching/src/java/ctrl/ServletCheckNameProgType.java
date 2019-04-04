@@ -17,7 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
+ * check if the name of programme type is already in data base.
  * @author GS63VR
  */
 public class ServletCheckNameProgType extends HttpServlet {
@@ -82,9 +82,7 @@ public class ServletCheckNameProgType extends HttpServlet {
             }
             out.print("</message>");
             t.commit();
-//            System.exit(0);
         }
-
     }
 
     /**
