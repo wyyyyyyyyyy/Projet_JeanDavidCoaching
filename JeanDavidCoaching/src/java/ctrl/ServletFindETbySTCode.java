@@ -42,7 +42,7 @@ public class ServletFindETbySTCode extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletFindETbySTCode</title>");            
+            out.println("<title>Servlet ServletFindETbySTCode</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletFindETbySTCode at " + request.getContextPath() + "</h1>");
@@ -69,78 +69,53 @@ public class ServletFindETbySTCode extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             out.println("<?xml version=\"1.0\"?>");
             out.println("<SeanceType>");
-       
+
             int codest = Integer.parseInt(request.getParameter("codest"));
 
             /*----- Hibernate -----*/
             SessionFactory sf = HibernateUtil.getSessionFactory();
             Session session = sf.getCurrentSession();
             Transaction t = session.beginTransaction();
-               out.println("SeanceType");
-                    String sql_getLstExo = "select et from Exercicetype et, Predefinirexo pe where pe.exercicetype.codeet = et.codeet and pe.seancetype.codest =" + codest;
-                    List<Exercicetype> lst_Exo = (List<Exercicetype>) session.createQuery(sql_getLstExo).list();
-                    for (Exercicetype et : lst_Exo) {
 
-                        out.println("<ExerciceType>");
+            String sql_getLstExo = "select et from Exercicetype et, Predefinirexo pe where pe.exercicetype.codeet = et.codeet and pe.seancetype.codest =" + codest;
+            List<Exercicetype> lst_Exo = (List<Exercicetype>) session.createQuery(sql_getLstExo).list();
+            for (Exercicetype et : lst_Exo) {
 
-                        out.println("<CodeExerciceType>" + et.getCodeet()+ "</CodeExerciceType>");
+                out.println("<ExerciceType>");
 
-                        out.println("<NomExerciceType>");
-                        out.println(et.getNomet());
-                        out.println("</NomExerciceType>");
+                out.println("<CodeExerciceType>" + et.getCodeet() + "</CodeExerciceType>");
+                out.println("<NomExerciceType>" + et.getNomet() + "</NomExerciceType>");
+                out.println("<DescriptionExerciceType>" + et.getDescriptione() + "</DescriptionExerciceType>");
+                out.println("<ObjectifExerciceType>" + et.getObjectif() + "</ObjectifExerciceType>");
+                out.println("<TipsExerciceType>" + et.getTipsexo() + "</TipsExerciceType>");
+                out.println("<TipsrepExerciceType>" + et.getTipsrep() + "</TipsrepExerciceType>");
+                out.println("<MaterielExerciceType>" + et.getMateriel() + "</MaterielExerciceType>");
 
-                        out.println("<DescriptionExerciceType>" + et.getDescriptione() + "</DescriptionExerciceType>");
+                String sql_getLstPExo = "select pe from Predefinirexo pe where pe.exercicetype.codeet =" + et.getCodeet() + " and pe.seancetype.codest =" + codest + " order by pe.id.ordree asc";
+                List<Predefinirexo> lst_pExo = (List<Predefinirexo>) session.createQuery(sql_getLstPExo).list();
 
-                        out.print("<ObjectifExerciceType>");
-                        out.print(et.getObjectif());
-                        out.print("</ObjectifExerciceType>");
+                out.println("<OrdreExo>"+lst_pExo.get(0).getId().getOrdree()+"</OrdreExo>");
 
-                        out.print("<TipsExerciceType>");
-                        out.print(et.getTipsexo());
-                        out.print("</TipsExerciceType>");
+                out.print("<NombreDeRep>"+lst_pExo.get(0).getNbrep()+"</NombreDeRep>");
 
-                        out.print("<TipsrepExerciceType>");
-                        out.print(et.getTipsrep());
-                        out.print("</TipsrepExerciceType>");
+                out.print("<Nbserie>"+lst_pExo.get(0).getNbserie()+"</Nbserie>");
 
-                        out.print("<MaterielExerciceType>");
-                        out.print(et.getMateriel());
-                        out.print("</MaterielExerciceType>");
+                out.print("<Tempsexo>"+lst_pExo.get(0).getTempsexo()+"</Tempsexo>");
 
-                        String sql_getLstPExo = "select pe from Predefinirexo pe where pe.exercicetype.codeet =" + et.getCodeet() + " and pe.seancetype.codest =" + codest+ " order by pe.id.ordree asc";
-                        List<Predefinirexo> lst_pExo = (List<Predefinirexo>) session.createQuery(sql_getLstPExo).list();
+                out.print("<TempsreposSerie>");
+                out.print(lst_pExo.get(0).getTempsreposserie());
+                out.print("</TempsreposSerie>");
 
-                        out.print("<OrdreExo>");
-                        out.print(lst_pExo.get(0).getId().getOrdree());
-                        out.print("</OrdreExo>");
-                        
-                        out.print("<NombreDeRep>");
-                        out.print(lst_pExo.get(0).getNbrep());
-                        out.print("</NombreDeRep>");
+                out.print("<TempsReposExo>");
+                out.print(lst_pExo.get(0).getTempsreposexo());
+                out.print("</TempsReposExo>");
 
-                        out.print("<Nbserie>");
-                        out.print(lst_pExo.get(0).getNbserie());
-                        out.print("</Nbserie>");
-                        
-                        out.print("<Tempsexo>");
-                        out.print(lst_pExo.get(0).getTempsexo());
-                        out.print("</Tempsexo>");
-                        
-                        out.print("<TempsreposSerie>");
-                        out.print(lst_pExo.get(0).getTempsreposserie());
-                        out.print("</TempsreposSerie>");
-                        
-                        
-                        out.print("<TempsReposExo>");
-                        out.print(lst_pExo.get(0).getTempsreposexo());
-                        out.print("</TempsReposExo>");
+                out.print("</ExerciceType>");
+            }
 
-                        out.print("</ExerciceType>");
-                    }
-
-                    out.println("</SeanceType>");
-                    t.commit();
-                }     
+            out.println("</SeanceType>");
+            t.commit();
+        }
     }
 
     /**
