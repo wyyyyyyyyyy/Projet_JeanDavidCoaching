@@ -13,8 +13,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -72,8 +76,6 @@ public class Bd {
      * @param s
      * @return
      */
-
-
     //Méthodes
     //Méthode de connexion avec la base de données
     private static void connexion() throws ClassNotFoundException, SQLException {
@@ -240,5 +242,31 @@ public class Bd {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
+    }
+
+    public static List<Client> clientNoProgramme() throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        //initialiser les list des variables
+        ArrayList<Integer> codeS = new ArrayList<Integer>();
+        ArrayList<Integer> codeCli = new ArrayList<Integer>();
+        ArrayList<Client> l_cli = new ArrayList<Client>();
+        //select seance(en cours) in resultatSeance
+        codeS = (ArrayList<Integer>) session.createQuery("select r.seance.codes from Resultatseance r ").list();
+        //select code client en cours
+        Query q_prog = session.createQuery("select distinct p.client.codecli "
+                + "from Programme p, Seance s "
+                + "where p.codep = s.programme.codep "
+                + "and s.codes not in(:codes)");
+        q_prog.setParameterList("codes", codeS);
+        codeCli = (ArrayList<Integer>) q_prog.list();
+
+        //select client ayant pas programme en cours
+        Query q_cli = session.createQuery("from Client c "
+                + "where c.codecli not in(:codecli)");
+        q_cli.setParameterList("codecli", codeCli);
+        l_cli = (ArrayList<Client>) q_cli.list();
+
+        return l_cli;
     }
 }
