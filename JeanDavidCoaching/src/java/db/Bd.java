@@ -67,6 +67,7 @@ public class Bd {
 
         String hql = "select et.nomet from Exercicetype et";
         List l_exType = session.createQuery(hql).list();
+        t.commit();
         return l_exType;
     }
 
@@ -192,35 +193,11 @@ public class Bd {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
         List<Programmetype> lprogrammetype = (List<Programmetype>) session.createQuery("from Programmetype ").list();
+        t.commit();
         return lprogrammetype;
     }
 
-//    public static void affecterProgrammeClient(Client client, Coach coach, Programmetype programmetype)
-//    {
-////        Programme programme1 = new Programme(client, coach, programmetype);
-////        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-////        Transaction t = session.beginTransaction();
-////        
-////        session.save(programme1);
-////        session.getTransaction().commit();
-////        session.close();    
-//        
-//    }
     public static Integer affecterProgrammeClient(int codecli, int codept) throws Exception {
-//        String sql ="Insert into PROGRAMME(Codept, Codecli) values (?,?)";
-//        PreparedStatement st;
-//        int nb;
-//        try {
-//            st = Bd.cx.prepareStatement(sql);          
-//            st.setInt(2, codecli);
-//            st.setInt(1, codept);          
-//            nb = st.executeUpdate();          
-//            st.close();     
-//        }
-//        catch (SQLException sqle){
-//            throw new Exception("Probleme d'enregistrement -"+sqle.getMessage());
-//        }
-//        return nb;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
 
@@ -238,10 +215,6 @@ public class Bd {
         t.commit();
         session.close();
         return prog.getCodep();
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
     }
 
     public static List<Client> clientNoProgramme() throws SQLException, ClassNotFoundException {
@@ -266,7 +239,12 @@ public class Bd {
                 + "where c.codecli not in(:codecli)");
         q_cli.setParameterList("codecli", codeCli);
         l_cli = (ArrayList<Client>) q_cli.list();
-
+        t.commit();
         return l_cli;
+    }
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+//        ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
+
     }
 }
