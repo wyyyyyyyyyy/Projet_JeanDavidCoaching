@@ -59,12 +59,14 @@ public class ServletClient extends HttpServlet {
                     out.println("<client>");
                     out.println("<codeClient>"+l_client.get(i).getCodecli()+"</codeClient>");
                     out.println("<nomClient>" + l_client.get(i).getNomcli() + "</nomClient>");
+                    out.println("<prenomClient>" + l_client.get(i).getPrenomcli() + "</prenomClient>");
                     out.println("</client>");     
                 }
             } catch (ClassNotFoundException | SQLException ex) {
                 out.println("<client>");
                 out.print("<codeClient>"+ ex.getMessage()+"</codeClient>");
                 out.print("<nomClient>Erreur - " + ex.getMessage() + "</nomClient>");
+                out.print("<prenomClient>" + ex.getMessage() + "</prenomClient>");
                 out.println("</client>");
             }
             out.println("</liste_client>");
@@ -95,3 +97,6 @@ public class ServletClient extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+
