@@ -75,7 +75,7 @@ public class ServletCheckNameSeanType extends HttpServlet {
             Transaction t = session.beginTransaction();
             String sql = "from Seancetype s where s.noms=\"" + nom + "\"";
             List<Seancetype> l = session.createQuery(sql).list();
-            if (l.isEmpty()) {
+            if (!l.isEmpty()) {
                 out.print("existe");
             }else{
                  out.print("no");
