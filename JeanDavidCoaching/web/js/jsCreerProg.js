@@ -16,7 +16,6 @@ function checkNom() {
     eltDivMsgCheck.innerHTML = "";
     eltmsgErrorNom.innerHTML = "";
     document.getElementById("btn_addProg").disabled = false;
-
     // verifier le nom de programme type saisie
     var name = encodeURIComponent(document.getElementById("nomProg").value);
     if (name !== "") {
@@ -45,6 +44,7 @@ function checkNom() {
         }
         xhr.send();
     }
+    activer_btn();
 }
 
 /*
@@ -59,11 +59,11 @@ function afficherSeanceType() {
         if (xhr.status === 200) {
             var lstS = xhr.responseXML.getElementsByTagName("list_ST");
             var childrenlstS = lstS[0].children;
-            console.log(childrenlstS.length);
+
             var txt = "<option value=\"\">---------</option> ";
             for (var i = 0; i < childrenlstS.length; i++) {
                 var childlstS = childrenlstS[i].children;
-                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> " 
+                txt += "<option value=\"" + childlstS[0].firstChild.nodeValue + "\"> "
                         + childlstS[1].firstChild.nodeValue + "</option>";
             }
             div.children[1].innerHTML = txt;
@@ -96,7 +96,7 @@ function rechercheObjSeanceType() {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 var lstObjST = xhr.responseXML.getElementsByTagName("objST");
-                console.log(lstObjST.length);
+
                 var txt = "";
                 if (lstObjST.length !== 0) {
                     var childlstObjST = lstObjST[0].children;
@@ -107,9 +107,7 @@ function rechercheObjSeanceType() {
         };
         xhr.send();
     }
-
     activer_btn();
-
 }
 
 /**
@@ -145,12 +143,12 @@ function activer_btn() {
     var ordre = divs.length;
     for (var i = 0; i < ordre; i++) {
         var children = divs[i].children;
-        if (children.length === 8) {
+        console.log(children.length);
+        if (children.length > 7) {
             //delete the error message
             divs[i].addEventListener("click", suppMsgErrorForSeance);
         } else {
-            // button ajouter prog disabled
-            document.getElementById("btn_addProg").disabled = false;
+            divs[i].removeEventListener("click", suppMsgErrorForSeance);
             // event for find the description of a seance type
             children[1].addEventListener("change", rechercheObjSeanceType);
             // button for find the seance types
@@ -175,16 +173,17 @@ function activer_btn() {
  */
 function confirmerCreerProgType() {
     var txt = "";
-    var champNomDesOK = true;
+    var champNomOK = true;
+    var champDesOK = true;
     var champSeanceOK = true;
     // recuperer leselements
     var nom = document.getElementById("nomProg");
     var des = document.getElementById("descriptionProg");
     var divs = document.getElementsByClassName("shadow-none p-4 mb-4 bg-light");
     var ordre = divs.length;
-    var listSemaine = [];
+//    var listSemaine = [];
     var listSeance = [];
-    var listSeanceNom =[];
+    var listSeanceNom = [];
 
     // Check: nom prog type 
     if (nom.value === "" || nom.value === null) {
@@ -193,11 +192,11 @@ function confirmerCreerProgType() {
                 "</button><strong>Attention! Champ " +
                 "Nom de programme est vide</strong></div>";
         document.getElementById("msgErrorNom").innerHTML = errorNom;
-        document.getElementById("btn_addProg").disabled = true;
-        champNomDesOK = false;
+        champNomOK = false;
     } else {
         txt += "<p>Nom de programme type: " + nom.value + "</P>";
     }
+
     // Check: description prog type
     if (des.value === "" || des.value === null) {
         var errorDes = "<div class=\'alert alert-danger alert-dismissible\'>" +
@@ -205,8 +204,7 @@ function confirmerCreerProgType() {
                 "</button><strong>Attention! Champ " +
                 "Description de programme est vide</strong></div>";
         document.getElementById("msgErrorDes").innerHTML = errorDes;
-        document.getElementById("btn_addProg").disabled = true;
-        champNomDesOK = false;
+        champDesOK = false;
     } else {
         txt += "<p>Description de programme type: " + des.value + "</P>";
     }
@@ -220,37 +218,28 @@ function confirmerCreerProgType() {
                     "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
                     "</button><strong>Attention!</strong> Champ est vide</div>";
             divs[i].insertAdjacentHTML("beforeend", errorChamp);
-            document.getElementById("btn_addProg").disabled = true;
             champSeanceOK = false;
         } else {
-            listSemaine.push(children[0].value);
-            listSeance.push(children[1].value);           
+//            listSemaine.push(children[0].value);
+            listSeance.push(children[1].value);
             var elt = children[1].options[children[1].selectedIndex].text;
             listSeanceNom.push(elt);
         }
     }
 
-    for (var x = 0; x < listSemaine.length; x++) {
-        txt += "<p>NumSem: " + listSemaine[x] + "</P>";
-        txt += "<p>OrdreSeance " + (x + 1);
-        txt += " NomSeance: " + listSeanceNom[x] + "</P>";
+    for (var x = 0; x < listSeance.length; x++) {
+        txt += "<p>Ordre: " + (x + 1) + " Nom de Seance: "
+                + listSeanceNom[x] + "</P>";
     }
 
     // Display a confirmation box
-    if (champSeanceOK === true && champNomDesOK === true) {
-        // afficher modal
-        document.getElementById("zonetext").innerHTML = txt;
-        this.setAttribute("data-toggle", "modal");
-        this.setAttribute("data-target", "#exampleModal");
-        
-        // when click valider
-        $(document).on("click","#verifier", function () {
-            document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
-            document.getElementById("verifier").disabled = true;
-            addProgType(nom.value, des.value, listSemaine, listSeance);
-        });
+    if (champSeanceOK === true && champDesOK === true && champNomOK === true) {
+        activer_btn();
+        return txt;
+    } else {
+        activer_btn();
+        return "buok";
     }
-    activer_btn();
 }
 
 function sleep(numberMillis) {
@@ -274,16 +263,43 @@ function suppMsgErrorForSeance() {
     activer_btn();
 }
 
+function valider() {
+    var txt = confirmerCreerProgType();
+
+    if (txt !== "buok") {
+        // afficher modal
+        document.getElementById("zonetext").innerHTML = txt;
+        this.setAttribute("data-toggle", "modal");
+        this.setAttribute("data-target", "#exampleModal");
+        document.getElementById("verifier").addEventListener("click", addProgType);
+    }
+}
+
 /*
  * method for add a new prog type in data base.
  * use servlet: ServletAddProgType
  * @returns {undefined}
  */
-function addProgType(nom, des, listSemaine, listSeance) {
+function addProgType() {
+    // changer le contenue de modal
+    document.getElementById("verifier").innerHTML = "En cours d'enregistrer";
+    document.getElementById("verifier").disabled = true;
+    // récupérer les données 
+    var nom = document.getElementById("nomProg").value;
+    var des = document.getElementById("descriptionProg").value;
+    var divs = document.getElementsByClassName("shadow-none p-4 mb-4 bg-light");
+    var ordre = divs.length;
+//    var listSemaine = [];
+    var listSeance = [];
+    for (var i = 0; i < ordre; i++) {
+        var children = divs[i].children;
+//        listSemaine.push(children[0].value);
+        listSeance.push(children[1].value);
+    }
+
+    // http request
     var xhr = new XMLHttpRequest();
-    // parametres
-    var url = "ServletAddProgType?nom=" + nom + "&des=" + des + "&listSemaine="
-            + listSemaine + "&listSeance=" + listSeance;
+    var url = "ServletAddProgType?nom=" + nom + "&des=" + des + "&listSeance=" + listSeance;
     xhr.open("GET", url, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -295,7 +311,6 @@ function addProgType(nom, des, listSemaine, listSeance) {
         }
     };
     xhr.send();
-
 }
 
 /*
@@ -304,6 +319,7 @@ function addProgType(nom, des, listSemaine, listSeance) {
 function suppMsgEmptyDes() {
     var eltmsgError = document.getElementById("msgErrorDes");
     eltmsgError.innerHTML = "";
+    activer_btn();
 }
 
 
@@ -328,10 +344,10 @@ document.addEventListener("DOMContentLoaded", () => {
     childrenDiv[5].addEventListener("click", addDivForAddST);
     // event for button of delete a zone 
     childrenDiv[6].addEventListener("click", suppDivForAddST);
-    // verifier les buttons
+    // activer les evenements 
     activer_btn();
     // event for check the information of prog type before add the information in data base
-    document.getElementById("btn_addProg").addEventListener("click", confirmerCreerProgType);
+    document.getElementById("btn_addProg").addEventListener("click", valider);
     // event for check the name of programme type and delete empty error message 
     document.getElementById("nomProg").addEventListener("keyup", checkNom);
     // event for delete empty error message of description
