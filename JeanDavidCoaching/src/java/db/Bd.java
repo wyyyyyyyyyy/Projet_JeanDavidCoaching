@@ -93,16 +93,15 @@ public class Bd {
             throw new SQLException("connexion() : Problème de connexion à la base de données - " + ex.getMessage());
         }
     }
-
     public static List<Exercicetype> lireExerciceType(String nom) throws SQLException, ClassNotFoundException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
         List<Exercicetype> l = (List<Exercicetype>) session.createQuery(
                 "from Exercicetype "
-                + "where NomET like '%" + nom + "%'").list();
+                + "where NomET like '%" + nom + "%' "
+                + "order by NomET").list();
         t.commit();
         return l;
-
     }
 
     public static int creerSeanceType(String nomSeance, String desc) {
@@ -178,12 +177,12 @@ public class Bd {
         return lclient;
     }
 
-    public static ArrayList<String> lireObjectifs(String nomClient) throws ClassNotFoundException, SQLException {
+	public static ArrayList<String> lireObjectifs(int codeclient) throws ClassNotFoundException, SQLException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
         ArrayList<String> lobjectif = (ArrayList<String>) session.createQuery("select c.objectif "
                 + "from Client as c "
-                + "where c.nomcli='" + nomClient + "'").list();
+                + "where c.codecli='" + codeclient + "'").list();
         session.close();
         return lobjectif;
     }
@@ -240,10 +239,32 @@ public class Bd {
         return prog.getCodep();
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ajouterExoType(20, 3, 1, 10, 3, 0, 30, 60);
-    }
+	    /**
+     * fonction pour vérifier que le mail et le mdp appartiennent à un
+     * utilisateur
+     *
+     * @param mail
+     * @param mdp
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static Client VerifConnexionUtilisateur(String mail, String mdp) throws ClassNotFoundException, SQLException {
 
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        List<Client> client = (List<Client>) session.createQuery("from Client "
+                + "where mailcli='" + mail + "' and mdpcli='" + mdp + "'").list();
+        t.commit();
+        if (!client.isEmpty()) {
+           // System.out.println("Connexion ok");
+            return client.get(0);
+        } else {
+            //System.out.println("Connexion pas ok");
+            return null;
+        }
+
+    }
     public static List<Client> clientNoProgramme() throws SQLException, ClassNotFoundException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
@@ -266,7 +287,38 @@ public class Bd {
                 + "where c.codecli not in(:codecli)");
         q_cli.setParameterList("codecli", codeCli);
         l_cli = (ArrayList<Client>) q_cli.list();
+        t.commit();
 
         return l_cli;
+    }
+    
+    public static List<Resultatseance> seanceBilan(int codecli) throws SQLException, ClassNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        
+        List<Resultatseance> l_seance = new ArrayList<Resultatseance>();
+        Query q_seanceBilan= session.createQuery("select res from Programme p, Seance s, Resultatseance res, Seancetype st "
+                + "where p.client.codecli = " + codecli
+                + " and p.codep = s.programme.codep "
+                + "and s.seancetype.codest = st.codest "
+                + "and st.noms = '" + "Seance Bilan' "
+                + "order by s.ordres");
+        l_seance = (ArrayList<Resultatseance>) q_seanceBilan.list();
+        t.commit();
+
+        return l_seance;
+    }
+    
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        List<Client> l_cli = clientNoProgramme();
+        for(Client c :l_cli){
+            System.out.println(c.getNomcli());
+        }
+        
+        List<Resultatseance> l_seance = seanceBilan(1);
+        System.out.println(l_seance.size());
+        for(int i = 0; i<l_seance.size();i++){
+            System.out.println(l_seance.get(i).getCoderesseance());
+        }
     }
 }
