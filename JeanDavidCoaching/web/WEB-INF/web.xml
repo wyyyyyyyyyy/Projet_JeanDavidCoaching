@@ -104,6 +104,30 @@
         <servlet-name>ServletFindETbySTCode</servlet-name>
         <servlet-class>ctrl.ServletFindETbySTCode</servlet-class>
     </servlet>
+	<servlet>
+        <servlet-name>accueilCoaching</servlet-name>
+        <jsp-file>/jsp/accueilCoaching.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>accueilProgramme</servlet-name>
+        <jsp-file>/jsp/accueilProgramme.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>connexion</servlet-name>
+        <jsp-file>/jsp/connexion.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>profilUtilisateur</servlet-name>
+        <jsp-file>/jsp/profilUtilisateur.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletConnexion</servlet-name>
+        <servlet-class>ctrl.ServletConnexion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletDeconnexion</servlet-name>
+        <jsp-file>/jsp/deconnexion.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListCtrlPrg</servlet-name>
         <url-pattern>/ListCtrlPrg</url-pattern>
@@ -139,6 +163,10 @@
     <servlet>
         <servlet-name>TimeLineProg</servlet-name>
         <jsp-file>/jsp/TimeLineProg.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletVerifExo</servlet-name>
+        <servlet-class>ctrl.ServletVerifExo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletRecherche</servlet-name>
@@ -264,7 +292,35 @@
         <servlet-name>ServletFindETbySTCode</servlet-name>
         <url-pattern>/ServletFindETbySTCode</url-pattern>
     </servlet-mapping>
-    <session-config>
+    <servlet-mapping>
+        <servlet-name>accueilCoaching</servlet-name>
+        <url-pattern>/accueilCoaching</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accueilProgramme</servlet-name>
+        <url-pattern>/accueilProgramme</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVerifExo</servlet-name>
+        <url-pattern>/ServletVerifExo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>connexion</servlet-name>
+        <url-pattern>/connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profilUtilisateur</servlet-name>
+        <url-pattern>/profilUtilisateur</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletConnexion</servlet-name>
+        <url-pattern>/ServletConnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletDeconnexion</servlet-name>
+        <url-pattern>/deconnexion</url-pattern>
+    </servlet-mapping>
+	<session-config>
         <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
