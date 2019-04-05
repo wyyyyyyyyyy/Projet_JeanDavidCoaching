@@ -54,9 +54,10 @@ public class ServletObjectif extends HttpServlet {
             out.println("<?xml version=\"1.0\"?>");
             out.print("<liste_objectifsclient>");
             String nomclient = request.getParameter("nomClient");
+            int codeclient = Integer.parseInt(request.getParameter("codeClient"));
             
            try {
-                ArrayList<String> l_objectif = Bd.lireObjectifs(nomclient);
+                ArrayList<String> l_objectif = Bd.lireObjectifs(codeclient);
                 for(int i=0; i<l_objectif.size();i++){
                     //out.println("<nomClient>" + l_client.get(i).getNomcli() + "</nomClient>");
                     out.print("<objectifsClient>" + l_objectif.get(i) + "</objectifsClient>");
