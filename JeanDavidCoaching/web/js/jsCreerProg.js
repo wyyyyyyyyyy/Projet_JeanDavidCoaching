@@ -235,11 +235,12 @@ function confirmerCreerProgType() {
     // Display a confirmation box
     if (champSeanceOK === true && champDesOK === true && champNomOK === true) {
         activer_btn();
-        return txt;
     } else {
         activer_btn();
-        return "buok";
+        txt = "buok";
     }
+    console.log(txt);
+    return txt;
 }
 
 function sleep(numberMillis) {
@@ -267,12 +268,18 @@ function valider() {
     var txt = confirmerCreerProgType();
 
     if (txt !== "buok") {
+        console.log(111111);
         // afficher modal
         document.getElementById("zonetext").innerHTML = txt;
         this.setAttribute("data-toggle", "modal");
         this.setAttribute("data-target", "#exampleModal");
         document.getElementById("verifier").addEventListener("click", addProgType);
     }
+}
+
+function suppModal(){
+    document.getElementById("btn_addProg").removeAttribute("data-toggle", "modal");
+    document.getElementById("btn_addProg").removeAttribute("data-target", "#exampleModal");
 }
 
 /*
@@ -352,4 +359,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("nomProg").addEventListener("keyup", checkNom);
     // event for delete empty error message of description
     document.getElementById("descriptionProg").addEventListener("keyup", suppMsgEmptyDes);
+    document.getElementById("btn_annuler").addEventListener("click",suppModal);
 });
