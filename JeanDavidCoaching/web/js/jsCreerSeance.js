@@ -26,7 +26,6 @@ function rechercheExo() {
                 l_champs[2].innerHTML = txt;
                 l_champs[2].style.display = "block";
                 var list = document.getElementsByClassName("exo");
-                console.log(list.length);
                 for (var i = 0; i < list.length; i++) {
                     list[i].addEventListener("click", choisirExo);
                 }
@@ -90,9 +89,44 @@ function supprimerExo() {
     activer_btn();
 }
 
+/*
+ * check if coach add the same name of seance type.
+ * use servlet: ServletCheckNameSeanType.
+ * @returns {undefined}
+ */
+function checkNom(){
+    var nomSeance = document.getElementById("nomSeance").value;
+    if(nomSeance !== ""){
+         var xhr = new XMLHttpRequest();
+            xhr.open("GET", "ServletCheckNameSeanType?nom=" + nomSeance, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var msg = xhr.responseXML.getElementById("msg").childNodes[0].nodeValue;
+
+                    // affichier les messages
+                    var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
+                            "Nom déjà existe.</div>";
+
+                    if (msg === "existe") {
+                        document.getElementById("msgCheckNom").innerHTML = errorMsg;                        
+                    } else {
+                        document.getElementById("msgCheckNom").innerHTML = "";
+                        
+                    }
+                }
+            };
+            xhr.send();
+    }
+               
+}
+
 function verifier() {
     var exoBox = document.getElementsByClassName("exoBox");
     var resultat = true;
+
+    // verifier le redondance de nom
+
+
     for (var i = 0; i < exoBox.length; i++) {
         //recuperer des donnes des champs
         var nomSeance = document.getElementById("nomSeance").value;
@@ -116,7 +150,11 @@ function verifier() {
 
         //virifier
         if (nomSeance !== "" && desc !== "") {
-            v_seance = true;
+
+            var eltDivMsgCheck = document.getElementById("msgCheckNom").innerHTML;
+            if(eltDivMsgCheck ===""){
+                v_seance = true;
+            }
             document.getElementById("erreur").innerHTML = "";
         } else if (nomSeance === "" && desc !== "") {
             document.getElementById("erreur").innerHTML = "<div class=\'alert alert-danger alert-dismissible\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;</button><strong>Attention! Champ nom séance est vide</strong></div>";
@@ -125,7 +163,6 @@ function verifier() {
         } else {
             document.getElementById("erreur").innerHTML = "<div class=\'alert alert-danger alert-dismissible\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;</button><strong>Attention! Le nom et la déscription de séance sont obligatoires</strong></div>";
         }
-
         if (codeET !== null && listExo === 0 && nomET !== "") {
             v_codeET = true;
             details[1].innerHTML = "";
@@ -259,54 +296,17 @@ function sleep(numberMillis) {
 }
 
 /*
- * check if coach add the same name of seance type.
- * use servlet: ServletCheckNameSeanType.
- * @returns {undefined}
- */
-function checkNom() {
-    /*--initialisation--*/
-    // zone: message of check nom existe
-    var eltDivMsgCheck = document.getElementById("msgCheckNom");
-    eltDivMsgCheck.innerHTML = "";
-    suppMsgEmpty();
-    document.getElementById("btn_valider").disabled = false;
-
-    // verifier le nom de programme type saisie
-    var name = encodeURIComponent(document.getElementById("nomSeance").value);
-    if (name !== "") {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "ServletCheckNameSeanType?nom=" + name, true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                var msg = xhr.responseXML.getElementById("msg").childNodes[0].nodeValue;
-
-                // affichier les messages
-                var errorMsg = "<div class=\'alert alert-danger alert-dismissible\'>" +
-                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
-                        "</button>Nom déjà existe.</div>";
-                var correctMsg = "<div class=\'alert alert-success alert-dismissible\'>" +
-                        "<button type=\'button\' class=\'close\' data-dismiss=\'alert\'>&times;" +
-                        "</button>Nouveau Nom.</div>";
-
-                if (msg === "existe") {
-                    eltDivMsgCheck.innerHTML = correctMsg;
-                    document.getElementById("btn_valider").disabled = false;
-                } else {
-                    eltDivMsgCheck.innerHTML = errorMsg;
-                    document.getElementById("btn_valider").disabled = true;
-                }
-            }
-        }
-        xhr.send();
-    }
-}
-
-/*
  * method for delete the empty error message when keyup in the <input> nom or description.
  */
 function suppMsgEmpty() {
     var eltmsgError = document.getElementById("erreur");
     eltmsgError.innerHTML = "";
+    var eltDivMsgCheck = document.getElementById("msgCheckNom");
+    eltDivMsgCheck.innerHTML = "";
+}
+function suppModal(){
+    document.getElementById("btn_valider").removeAttribute("data-toggle", "modal");
+    document.getElementById("btn_valider").removeAttribute("data-target", "#exampleModal");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -316,8 +316,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn_valider").addEventListener("click", valider);
     activer_btn();
     // event for check the name of seance type and delete empty error message
-    document.getElementById("nomSeance").addEventListener("keyup", checkNom);
     // event for delete empty error message of description
     document.getElementById("desc").addEventListener("keyup", suppMsgEmpty);
+    document.getElementById("retour").addEventListener("click", suppModal);
+    document.getElementById("nomSeance").addEventListener("keyup",checkNom);
 });
 
