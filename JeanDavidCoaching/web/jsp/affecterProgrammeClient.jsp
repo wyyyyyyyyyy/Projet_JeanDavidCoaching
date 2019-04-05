@@ -26,32 +26,51 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="creerSeance">Créer une séance</a>
+                        <a class="nav-link" href="accueilCoach.html">Accueil Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                        <a class="nav-link" href="accueilCoaching">Espace coaching</a>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav>  
         <br>
         <div>
             <h1>Affectation d'un programme à un client</h1><br/>
-            <h2>Liste des clients :</h2>
-            <div class="input-group"><select id="nomClient" class="custom-select"><option>----------------</option></select>
-                <!--input id="bt_clients" class="btn btn-outline-secondary" type="submit" value="Afficher les clients" /--></div>
-            <br>
-            <div class="p-3 mb-2 bg-light text-dark"><h3>Objectifs</h3>
-                <blockquote class="blockquote" id="objectifs"></blockquote>
-                <br/></div>
-            <h2>Liste des programmes :</h2>
-            <div class="input-group"><select id="nomProgrammetype" class="custom-select"><option>----------</option></select>
-                <!--input id="bt_programmetype" class="btn btn-outline-secondary" type="submit" value="Afficher les programmes"/--></div>
+            <div class="row">
+                <div class="col">
+                    <h2>Vos clients :</h2>
+                    <div class="input-group col"><select id="nomClient" class="custom-select"><option>----------------</option>
+                        </select>
+                        <!--input id="bt_clients" class="btn btn-outline-secondary" type="submit" value="Afficher les clients" /-->
+                    </div>
+                    <br>
+                    <div class="p-3 mb-2 bg-light text-dark"><h3>Objectifs</h3>
+                        <blockquote class="blockquote" id="objectifs"></blockquote>
+                        <br/>
+                    </div>
+                </div>
+                <div class="col">
+                    <h2>Vos programmes :</h2>
+                    <div class="input-group col"><select id="nomProgrammetype" class="custom-select"><option>----------</option>
+                        </select>
+                        <!--input id="bt_programmetype" class="btn btn-outline-secondary" type="submit" value="Afficher les programmes"/-->
+                    </div>
+                </div>
+            </div>
             <br/>
+            <div>
             <input id="bt_affectation" type="submit" class="btn btn-outline-warning btn-lg col-md-2 center-block" value="Affecter"/>
-            <!--a href ="ServletClient">Test</a-->
-        </div>
-        <script type="text/JavaScript" src="js/affecterProCliJS.js"></script>
+            </div>
+            <br>
+            <div>
+            <a class="btn btn-warning" type="submit" href="javascript:history.go(-1)">Retour</a>
+            </div>
+
+            <script type="text/JavaScript" src="js/affecterProCliJS.js"></script>
 
     </body>
 </html>
+
+
+

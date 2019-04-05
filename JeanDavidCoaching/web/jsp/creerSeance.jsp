@@ -34,10 +34,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="creerSeance">Créer une séance</a>
+                        <a class="nav-link" href="accueilCoach.html">Accueil Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                        <a class="nav-link" href="accueilProgramme">Espace programmes</a>
                     </li>
                 </ul>
             </div>
@@ -93,27 +93,34 @@
                 Valider
             </button>
         </div>
+    </div>
+    <br/>
+    <div class="container">
+        <a class="btn btn-warning" type="submit" href="javascript:history.go(-1)">Retour</a>
+        <a class="btn btn-warning" type="submit" href="#">Visualiser les séances</a>
+    </div>
+ 
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Valider</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="modal">
-                        Voulez-vous enregistrer cette séance maintenant ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
-                        <button type="button" class="btn btn-primary" id="verifier">Oui</button>
-                    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Valider</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal">
+                    Voulez-vous enregistrer cette séance maintenant ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                    <button type="button" class="btn btn-primary" id="verifier">Oui</button>
                 </div>
             </div>
         </div>
-        <!-- Scripts -->
-        <script type="text/JavaScript" src="js/jsCreerSeance.js"></script>
-    </body>
+    </div>
+    <!-- Scripts -->
+    <script type="text/JavaScript" src="js/jsCreerSeance.js"></script>
+</body>
 </html>

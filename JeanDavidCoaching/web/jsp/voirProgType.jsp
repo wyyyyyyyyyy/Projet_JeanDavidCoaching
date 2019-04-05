@@ -33,27 +33,21 @@
     %>
     <body>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <!-- Brand -->
             <a class="navbar-brand" href="/JeanDavidCoaching">Jean David Coaching</a>
-
-            <!-- Toggler/collapsibe Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-
                     <li class="nav-item">
-                        <a class="nav-link" href="creerSeance">Créer une seance</a>
+                        <a class="nav-link" href="accueilCoach.html">Accueil Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
-                    </li> 
+                        <a class="nav-link" href="accueilProgramme">Espace programmes</a>
+                    </li>
                 </ul>
-            </div> 
-        </nav> 
+            </div>
+        </nav>  
         <!--liiiist-->   
 
 
@@ -77,6 +71,12 @@
             </div>
   
                 <div id="prog"></div>
+                <br><br>
+                <div>
+            </br>
+            <a class="btn btn-warning" type="submit" href="javascript:history.go(-1)">Retour</a>
+            <a class="btn btn-warning" type="submit" href="creerProgramme">Créer un programme</a>
+        </div>
                     
                     
                     
