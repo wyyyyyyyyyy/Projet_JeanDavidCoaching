@@ -23,7 +23,7 @@ function l_clients()
             for (var i = 0; i < l_client.length; i++)
             {
                 var nodes = l_client[i].children;
-                    txt += "<option value="+nodes[0].firstChild.nodeValue+">" + nodes[1].firstChild.nodeValue + "</option>";
+                    txt += "<option value="+nodes[0].firstChild.nodeValue+">" + nodes[1].firstChild.nodeValue +" "+ nodes[2].firstChild.nodeValue + "</option>";
 
                 
                 
@@ -44,7 +44,7 @@ function l_objectifs()
     
     var codecli = elt.options[elt.selectedIndex].value;
 
-    xhr.open("GET", "ServletObjectif?nomClient=" + nomCli);
+    xhr.open("GET", "ServletObjectif?codeClient=" + codecli);
 
     xhr.onload = function ()
     {
@@ -120,5 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("bt_affectation").addEventListener("click",affectation);
 
 });
+
+
 
 

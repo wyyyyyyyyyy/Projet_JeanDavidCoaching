@@ -13,34 +13,19 @@ function creerExer()
     var tip = encodeURIComponent(document.getElementById("tipExo").value);
     var materiel = encodeURIComponent(document.getElementById("materielExo").value);
     var media = encodeURIComponent(document.getElementById("mediaExo").value);
-    var route = "img/exo/"+media;
-
 
     var xhr = new XMLHttpRequest();
 
     var url = "ServletCreExo?nom=" + nom + "&objectif=" + objectif + "&description=" + description
-            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + route;
-    //var test = "ServletCreExo?nom=a&objectif=b&description=c&tipRep=d&tip=e&materiel=f&media=g"
+            + "&tipRep=" + tipRep + "&tip=" + tip + "&materiel=" + materiel + "&media=" + media;
     xhr.open("GET", url, true);
-    alert(url);
-
-    //alert(nom+objectif+description+tipRep+tip+materiel+media);
-    //alert("hello");
+//    alert(url);
 
     xhr.onload = function ()
     {
         if (xhr.status === 200)
         {
-            alert("ok");
-//            var texte = "<p class=\"choisir\">" + nom + "</p>";
-//
-//            //récupère le composant HTML à mettre à jour
-//            var elt = document.getElementById("exoCre");
-//
-//            var e_div = document.createElement("div");
-//            e_div.innerHTML = texte;
-//            elt.insertBefore(e_div, elt.lastElementChild);
-//            clean();
+            $.alert("L'exercice est déjà enregistré.", "Succès");
             document.getElementById("nomExo").value = "";
             document.getElementById("objectifExo").value = "";
             document.getElementById("descriptionExo").value = "";
@@ -49,38 +34,11 @@ function creerExer()
             document.getElementById("materielExo").value = "";
             document.getElementById("mediaExo").value = "";
             document.getElementById("preview").style.display = "none";
-            listeExo();
-//            var choix = document.querySelectorAll(".choisir");
-//            for (var i = 0; i < choix.length; i++)
-//            {
-//                choix[i].addEventListener("click", afficherInfo);
-//            }
         }
     };
     xhr.send();
 }
 
-//function afficherInfo()
-//{
-//    var nom = this.firstChild.nodeValue;
-//    //alert(nom);
-//    var xhr = new XMLHttpRequest();
-//    var url = "ServletExoTypeInfo?nom=" + nom;
-//    xhr.open("GET", url, true);
-//    xhr.onload = function ()
-//    {
-//        if (xhr.status === 200)
-//        {
-//            var l_ET = xhr.responseXML.getElementsByTagName("ET");
-//            for (var i = 0; i < l_ET.length; i++)
-//            {
-//                alert(l_ET[i].firstChild.nodeValue);
-//            }
-//
-//        }
-//    };
-//    xhr.send();
-//}
 
 function listeExo()
 {
@@ -98,23 +56,55 @@ function listeExo()
             }
             var elt = document.getElementById("lexo");
             elt.innerHTML = txt;
-
-//            var choix = document.getElementsByClassName("exo");
-//            console.log(choix.length);
-//            for (var i = 0; i < choix.length; i++)
-//            {
-//                choix[i].addEventListener("click", afficherInfo);
-//            }
         }
     };
     xhr.send();
 }
 
+function processKey()
+{
+    var nom = document.getElementById("saisie").value;
+    var elt = document.getElementById("zoneaff");
+    if (nom === "")
+    {
+        elt.style.display = "none";
+    } else
+    {
+        // Objet XMLHttpRequest.
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "ServletRecherche?nomExo=" + nom);
+        xhr.onload = function ()
+        {
+            // Si la requête http s'est bien passée.
+            if (xhr.status === 200)
+            {
+                // récupère la répose du serveur
+                var rep = xhr.responseXML.getElementsByTagName("Exercice");
+                var txt = "";
+                for (var i = 0; i < rep.length; i++) {
+                    var exercice = rep[i].children;
+                    var code = exercice[0].firstChild.nodeValue;
+                    var nom = exercice[1].firstChild.nodeValue;
+                    txt += "<div class=\"exo\" value=\"" + code + "\" id=\"" + code + "\">" + nom + "</div>";
+                }
+                elt.style.display = "block";
+                elt.innerHTML = txt;
+
+                var choix = document.querySelectorAll(".exo");
+                for (var i = 0; i < choix.length; i++)
+                {
+                    choix[i].addEventListener("click", selectEvent);
+                }
+            }
+        };
+        xhr.send();
+    }
+}
 
 function selectEvent()
 {
-    codeExo = $('#lexo').val();
-    alert(codeExo);
+    var codeExo = this.getAttribute("value");
+//    alert(codeExo);
 
     var xhr = new XMLHttpRequest();
     var url = "ServletExoTypeInfo?codeExo=" + codeExo;
@@ -137,7 +127,7 @@ function selectEvent()
                 var media = exercice[7].firstChild.nodeValue;
 
                 $("#numExo2").html(code);
-//                document.getElementById("numExo2").style.display="none";
+                document.getElementById("numExo2").style.display = "none";
 
                 document.getElementById("nomExo2").value = nom;
                 document.getElementById("objectifExo2").value = objectif;
@@ -147,6 +137,9 @@ function selectEvent()
                 document.getElementById("materielExo2").value = materiel;
                 document.getElementById("mediaExo2").value = media;
                 document.getElementById("preview2").style.display = "none";
+                document.getElementById("saisie").value = "";
+                document.getElementById("zoneaff").style.display = "none";
+
             }
         }
     };
@@ -157,7 +150,7 @@ function selectEvent()
 function modifierExer()
 {
     var id = $("#numExo2").html();
-    alert(id);
+//    alert(id);
     var nom = encodeURIComponent(document.getElementById("nomExo2").value);
     var objectif = encodeURIComponent(document.getElementById("objectifExo2").value);
     var description = encodeURIComponent(document.getElementById("descriptionExo2").value);
@@ -171,12 +164,12 @@ function modifierExer()
             + "&description=" + description + "&tipRep=" + tipRep + "&tip="
             + tip + "&materiel=" + materiel + "&media=" + media;
     xhr.open("GET", url, true);
-    alert(url);
+//    alert(url);
     xhr.onload = function ()
     {
         if (xhr.status === 200)
         {
-            alert("ok");
+            $.alert("L'exercice est déjà modifié.", "Succès");
             $("#numExo2").html("");
             document.getElementById("nomExo2").value = "";
             document.getElementById("objectifExo2").value = "";
@@ -186,7 +179,6 @@ function modifierExer()
             document.getElementById("materielExo2").value = "";
             document.getElementById("mediaExo2").value = "";
             document.getElementById("preview2").style.display = "none";
-            listeExo();
         }
     };
     xhr.send();
@@ -195,7 +187,7 @@ function modifierExer()
 function supprimerExer()
 {
     var id = $("#numExo2").html();
-    alert(id);
+//    alert(id);
     var xhr = new XMLHttpRequest();
     var url = "ServletSupExo?id=" + id;
     xhr.open("GET", url, true);
@@ -203,7 +195,7 @@ function supprimerExer()
     {
         if (xhr.status === 200)
         {
-            alert("ok");
+            $.alert("L'exercice est déjà supprimé.", "Succès");
             $("#numExo2").html("");
             document.getElementById("nomExo2").value = "";
             document.getElementById("objectifExo2").value = "";
@@ -211,9 +203,8 @@ function supprimerExer()
             document.getElementById("tipRepExo2").value = "";
             document.getElementById("tipExo2").value = "";
             document.getElementById("materielExo2").value = "";
-            document.getElementById("mediaExo2").value = "";           
+            document.getElementById("mediaExo2").value = "";
             document.getElementById("preview2").style.display = "none";
-            listeExo();
         }
     };
     xhr.send();
@@ -221,25 +212,136 @@ function supprimerExer()
 
 function imgPreview()
 {
-     var media = document.getElementById("mediaExo").value;
-     var route = "img/exo/"+media;
-     alert(route);
-     document.getElementById("preview").src=route;
-     document.getElementById("preview").style.display = "";
+    var media = document.getElementById("mediaExo").value;
+//    alert(media);
+    document.getElementById("preview").src = media;
+    document.getElementById("preview").style.display = "";
 }
 
 function imgPreview2()
 {
-     var media = document.getElementById("mediaExo2").value;
-     alert(media);
-     document.getElementById("preview2").src=media;
-     document.getElementById("preview2").style.display = "";
+    var media = document.getElementById("mediaExo2").value;
+//    alert(media);
+    document.getElementById("preview2").src = media;
+    document.getElementById("preview2").style.display = "";
 }
 
-window.addEventListener("load", listeExo, false);
+function verifierExoCre()
+{
+    var nom = encodeURIComponent(document.getElementById("nomExo").value);
+    var objectif = encodeURIComponent(document.getElementById("objectifExo").value);
+    var description = encodeURIComponent(document.getElementById("descriptionExo").value);
+    var tipRep = encodeURIComponent(document.getElementById("tipRepExo").value);
+    var tip = encodeURIComponent(document.getElementById("tipExo").value);
+    var materiel = encodeURIComponent(document.getElementById("materielExo").value);
+    var media = encodeURIComponent(document.getElementById("mediaExo").value);
+
+    var notice = document.getElementById("notice");
+    notice.style.color = "#F00";
+
+    var xhr = new XMLHttpRequest();
+    var url = "ServletVerifExo?nomExo=" + nom;
+    xhr.open("GET", url, true);
+    xhr.onload = function ()
+    {
+        if (xhr.status === 200)
+        {
+            var exist = xhr.responseXML.getElementsByTagName("verifier")[0].firstChild.nodeValue;
+
+            if (nom === "") {
+                notice.innerHTML = "* Veuillez saisir le nom d'exercice";
+            } else if (exist === "true") {
+                notice.innerHTML = "* Le nom existe déjà";
+            } else if (objectif === "") {
+                notice.innerHTML = "* Veuillez saisir l'objectif d'exercice";
+            } else if (description === "") {
+                notice.innerHTML = "* Veuillez saisir la description d'exercice";
+            } else if (tipRep === "") {
+                notice.innerHTML = "* Veuillez saisir les tips de répétition d'exercice";
+            } else if (tip === "") {
+                notice.innerHTML = "* Veuillez saisir les tips d'exercice";
+            } else if (materiel === "") {
+                notice.innerHTML = "* Veuillez saisir les matériels d'exercice";
+            } else if (media === "") {
+                notice.innerHTML = "* Veuillez saisir le lien de l'image d'exercice";
+            } else {
+                $("#notice").empty();
+                $.confirm({
+                    title: 'Confirmation',
+                    content: 'Voulez-vous enregistrer cet exercice ?',
+                    buttons: {
+                        Oui: function () {
+                            creerExer();
+                        },
+                        Non: function () {}
+                    }
+                });
+            }
+        }
+    };
+    xhr.send();
+}
+
+function verifierExoMod()
+{
+    var objectif = encodeURIComponent(document.getElementById("objectifExo2").value);
+    var description = encodeURIComponent(document.getElementById("descriptionExo2").value);
+    var tipRep = encodeURIComponent(document.getElementById("tipRepExo2").value);
+    var tip = encodeURIComponent(document.getElementById("tipExo2").value);
+    var materiel = encodeURIComponent(document.getElementById("materielExo2").value);
+    var media = encodeURIComponent(document.getElementById("mediaExo2").value);
+
+    var notice = document.getElementById("notice2");
+    notice.style.color = "#F00";
+
+    if (objectif === "") {
+        notice.innerHTML = "* Veuillez saisir l'objectif d'exercice";
+    } else if (description === "") {
+        notice.innerHTML = "* Veuillez saisir la description d'exercice";
+    } else if (tipRep === "") {
+        notice.innerHTML = "* Veuillez saisir les tips de répétition d'exercice";
+    } else if (tip === "") {
+        notice.innerHTML = "* Veuillez saisir les tips d'exercice";
+    } else if (materiel === "") {
+        notice.innerHTML = "Veuillez saisir les matériels d'exercice";
+    } else if (media === "") {
+        notice.innerHTML = "* Veuillez saisir le lien de l'image d'exercice";
+    } else {
+        $("#notice2").empty();
+        $.confirm({
+            title: 'Modification',
+            content: 'Voulez-vous modifier cet exercice ?',
+            buttons: {
+                Oui: function () {
+                    modifierExer();
+                },
+                Non: function () {}
+            }
+        });
+    }
+
+}
+
+function confirmerSup()
+{
+    $.confirm({
+        title: 'Suppression',
+        content: 'Voulez-vous supprimer cet exercice ?',
+        buttons: {
+            Oui: function () {
+                supprimerExer();
+            },
+            Non: function () {}
+        }
+    });
+}
+
+window.addEventListener("load", processKey, false);
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn").addEventListener("click", creerExer);
-    document.getElementById("btnM").addEventListener("click", modifierExer);
-    document.getElementById("btnS").addEventListener("click", supprimerExer);
-});
+    document.getElementById("btn").addEventListener("click", verifierExoCre);
+    document.getElementById("btnM").addEventListener("click", verifierExoMod);
+    document.getElementById("btnS").addEventListener("click", confirmerSup);
+    document.getElementById("saisie").addEventListener("keyup", processKey);
+}
+);
 

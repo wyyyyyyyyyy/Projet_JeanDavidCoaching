@@ -26,13 +26,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="creerProgramme">Créer un programme</a>
+                        <a class="nav-link" href="accueilCoach.html">Accueil Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="creerSeance">Créer une séance</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="creerExercice">Créer un exercice</a>
+                        <a class="nav-link" href="accueilProgramme">Espace programmes</a>
                     </li>
                 </ul>
             </div>
@@ -52,26 +49,26 @@
                 <%--Zone for add the description --%> 
                 <label for="descriptionProg"><strong>Description :</strong></label>
                 <div id="msgErrorDes"></div>
-                <textarea id="descriptionProg" placeholder="Saisissez la description de programme:objectif, profils......" class="form-control"></textarea>
+                <textarea id="descriptionProg" placeholder="Saisissez la description de programme: objectif, profils......" class="form-control"></textarea>
                 </br>
 
                 <p><strong>Ajoutez les séances :</strong><p/>            
                 <!--Zone for add the seance -->                      
                 <div class="shadow-none p-4 mb-4 bg-light">                   
-                    Numero de semaine :
-                    <input type="number" min="1" /> 
-                    Choisissez une séance :
+                    <!--<input type="number" min="1" /> --> 
+                    <p></p>Choisissez une séance :
                     <select class="col-md-2"><option></option></select>
                     <input type="button" class="btn btn-outline-warning"  value="Chercher"/>
-                    </br>
+                    <p></p>
                     <div></div>
                     <input type="button" class="btn btn-outline-warning"  value="Ajouter une séance"/>
                     <input type="button" class="btn btn-outline-danger"  value="Supprimer cette séance"/>
                 </div>                       
-                <!-- Fin Zone for add the seance -->                
+                <!-- Fin Zone for add the seance -->               
             </div>
             <button id="btn_addProg" class="btn btn-outline-warning" type="button">Ajouter Programme </button>
-            </br></br><a href="index.html">Retourner à la page d'accueil</a>
+            </br></br><a class="btn btn-warning" type="submit" href="javascript:history.go(-1)">Retour</a>
+            <a class="btn btn-warning" type="submit" href="ServletvoirListePrgType">Visualiser les programmess</a>
         </div>
 
         <!--confirmation box --> 
@@ -93,14 +90,6 @@
             </div>
         </div>   
 
-        <!-- Small modal -->
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                   Message: Vous avec bien créé un nouveau programme.
-                </div>
-            </div>
-        </div>
         <!-- Scripts -->
         <script type="text/JavaScript" src="js/jsCreerProg.js"></script>
 
