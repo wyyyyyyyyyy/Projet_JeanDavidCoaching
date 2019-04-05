@@ -114,7 +114,7 @@
                     Voulez-vous enregistrer cette séance maintenant ?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="retour">Retour</button>
                     <button type="button" class="btn btn-primary" id="verifier">Oui</button>
                 </div>
             </div>
